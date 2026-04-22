@@ -295,18 +295,11 @@ function selectProc(name, url){
   if(url && url!=='null'){
     extBtn.href=url;
     extBtn.style.display='inline-flex';
+    window.open(url, '_blank');
     body.innerHTML=`
-      <div style="width:100%;height:100%;display:flex;flex-direction:column;">
-        <iframe src="${url}" title="${name}" style="flex:1;width:100%;border:none;display:block;"
-          onerror="this.style.display='none';document.getElementById('pdf-fallback').style.display='flex'">
-        </iframe>
-        <div id="pdf-fallback" style="display:none;flex-direction:column;align-items:center;gap:12px;padding:2rem;text-align:center;color:var(--text2);max-width:380px;margin:auto">
-          <div class="icon-wrap"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
-          <h3 style="font-size:14px;font-weight:600;color:var(--text)">${name}</h3>
-          <p style="font-size:12.5px;line-height:1.6">Dokumentet kunne ikke vises her. Det kan kreve VPN eller sykehusets interne nettverk. Åpne lenken direkte i nettleseren.</p>
-          <div class="url-box">${url}</div>
-          <button class="copy-btn" onclick="copyUrl('${url}',this)">Kopier lenke</button>
-        </div>
+      <div class="empty-state">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M14 6h13l11 11v25H14V6z"/><path d="M27 6v11h11"/><line x1="19" y1="22" x2="35" y2="22"/><line x1="19" y1="28" x2="35" y2="28"/><line x1="19" y1="34" x2="29" y2="34"/></svg>
+        <p><strong>${name}</strong><br>ble åpnet i en ny fane</p>
       </div>`;
   } else {
     extBtn.style.display='none';

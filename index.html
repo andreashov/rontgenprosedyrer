@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="no" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bildediagnostikk – Sykehuset Østfold</title>
+<link rel="icon" type="image/x-icon" href="https://andreashov.github.io/rontgenprosedyrer/favicon/favicon.ico">
+<link rel="icon" type="image/svg+xml" href="https://andreashov.github.io/rontgenprosedyrer/favicon/favicon.svg">
+<link rel="icon" type="image/png" sizes="96x96" href="https://andreashov.github.io/rontgenprosedyrer/favicon/favicon-96x96.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://andreashov.github.io/rontgenprosedyrer/favicon/apple-touch-icon.png">
+<link rel="manifest" href="https://andreashov.github.io/rontgenprosedyrer/favicon/site.webmanifest">
+<style>
+:root{
+  --bg:#f0f4f9;--surface:#fff;--surface2:#f7f9fc;--border:#dde3ec;
+  --text:#0d1b2e;--text2:#4a5a72;--text3:#8a97aa;
+  --accent:#1a4f8a;--accent-light:#dbeafe;--dot-empty:#c8d4e3;
+  --mark-bg:#fef08a;--shadow:0 1px 4px rgba(0,0,0,.07);
+}
+[data-theme="dark"]{
+  --bg:#0c1520;--surface:#111e2e;--surface2:#162030;--border:#1e3045;
+  --text:#e8edf5;--text2:#94a8c0;--text3:#4a6070;
+  --accent:#4a9de0;--accent-light:#1a2d45;--dot-empty:#2a3d52;
+  --mark-bg:#78530a;--shadow:0 1px 6px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);height:100vh;display:flex;flex-direction:column;overflow:hidden;max-width:480px;margin:0 auto;width:100%}
+
+/* TOPBAR */
+.topbar{display:flex;align-items:center;gap:10px;padding:0 12px;height:44px;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0}
+.logo-wrap{display:flex;align-items:center;gap:7px}
+.logo-text{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.04em;text-transform:uppercase}
+.logo-sub{font-size:8px;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;margin-top:1px}
+.topbar-right{margin-left:auto}
+.theme-btn{width:30px;height:30px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2)}
+.theme-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* FIXED HEADER */
+.fixed-header{flex-shrink:0;background:var(--surface);border-bottom:1px solid var(--border)}
+
+/* MODALITET BAR */
+.modalitet-bar{display:flex;gap:4px;padding:7px 10px;border-bottom:1px solid var(--border)}
+.mod-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:8px;border:1.5px solid var(--border);background:var(--surface2);cursor:pointer;transition:all .15s;flex:1;min-width:0;height:64px;overflow:hidden;position:relative;padding:0}
+.mod-btn:hover{border-color:var(--accent)}
+.mod-btn.on{border-color:var(--accent);box-shadow:0 2px 8px rgba(26,79,138,.3)}
+.mod-img-wrap{position:absolute;inset:0}
+.mod-img{width:100%;height:100%;object-fit:contain;object-position:center;display:block;image-rendering:auto;opacity:.9;transition:opacity .15s}
+.mod-btn.on .mod-img{opacity:1}
+.mod-label{display:none}
+
+/* SUB TABS */
+.sub-tabs{display:flex;border-bottom:1px solid var(--border);padding:0 10px;background:var(--surface2)}
+.sub-tab{padding:8px 12px;font-size:11px;font-weight:600;color:var(--text3);border:none;background:transparent;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;white-space:nowrap}
+.sub-tab.on{color:var(--accent);border-bottom-color:var(--accent)}
+
+/* PT TABS */
+.pt-tabs-bar{display:flex;gap:5px;padding:7px 10px;border-bottom:1px solid var(--border);background:var(--surface)}
+.ptab{flex:1;padding:7px 0;border-radius:7px;border:1.5px solid var(--border);background:var(--surface2);font-size:11px;font-weight:600;color:var(--text3);cursor:pointer;transition:all .15s;text-align:center}
+.ptab:hover{border-color:var(--accent);color:var(--accent)}
+.ptab.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.ptab.ptab-barn.on{background:#c0507a;border-color:#c0507a;}
+
+/* SEARCH */
+.search-bar{padding:7px 10px;border-bottom:1px solid var(--border);background:var(--surface)}
+.search-wrap{position:relative}
+.search-wrap input{width:100%;padding:7px 10px 7px 32px;border-radius:7px;border:1.5px solid var(--border);background:var(--surface2);font-size:16px;color:var(--text);outline:none;height:34px}
+.search-wrap input::placeholder{color:var(--text3);font-size:13px}
+.search-wrap input:focus{border-color:var(--accent)}
+.sico{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:13px;height:13px;stroke:var(--text3);fill:none;stroke-width:2;pointer-events:none}
+
+/* SCROLL AREA */
+.scroll-content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.scroll-content::-webkit-scrollbar{width:3px}
+.scroll-content::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+
+/* PANEL SECTIONS */
+.panel-section{display:none;flex-direction:column;flex:1;overflow:hidden}
+.panel-section.active{display:flex}
+
+/* CATEGORY GRID */
+.cat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px}
+.cat-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 10px;cursor:pointer;transition:all .15s;display:flex;flex-direction:column;gap:4px;min-height:64px;position:relative;overflow:hidden}
+.cat-card:hover{background:var(--accent-light);border-color:var(--accent)}
+.cat-card-bar{position:absolute;top:0;left:0;right:0;height:3px;border-radius:10px 10px 0 0}
+.cat-card-label{font-size:12px;font-weight:700;color:var(--text);line-height:1.3;margin-top:4px}
+.cat-card-count{font-size:10px;color:var(--text3)}
+
+/* PROC LIST */
+.proc-view{display:none;flex-direction:column;flex:1;overflow:hidden}
+.proc-view.active{display:flex}
+.back-bar{display:flex;align-items:center;gap:8px;padding:8px 10px;border-bottom:1px solid var(--border);background:var(--surface2);flex-shrink:0}
+.back-btn{display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:7px;border:1px solid var(--border);background:var(--surface);font-size:11px;font-weight:600;color:var(--text2);cursor:pointer}
+.back-btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.5}
+.back-cat-name{font-size:12px;font-weight:700;color:var(--text);flex:1}
+.prow{display:flex;align-items:center;gap:8px;padding:10px 12px;cursor:pointer;transition:background .1s;border-bottom:1px solid var(--border);min-height:44px}
+.prow:hover{background:var(--surface2)}
+.prow.active{background:var(--accent-light)}
+.pname{font-size:13px;color:var(--text2);flex:1;line-height:1.35}
+.prow.active .pname{color:var(--accent);font-weight:600}
+.has-link{width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;opacity:.7}
+.no-link{width:5px;height:5px;border-radius:50%;background:var(--dot-empty);flex-shrink:0}
+.no-results{padding:2rem 10px;text-align:center;font-size:13px;color:var(--text3)}
+
+/* LOGGBØKER GRID */
+.logg-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px}
+.lab-card{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:14px 10px;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;text-align:center;min-height:52px}
+.lab-card:hover{background:var(--accent-light);border-color:var(--accent)}
+.lab-card-name{font-size:13px;font-weight:700;color:var(--text)}
+
+/* COMING SOON */
+.coming-soon{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:var(--text3);padding:2rem;text-align:center}
+.coming-soon svg{opacity:.35;stroke:var(--text3)}
+.coming-soon h2{font-size:15px;font-weight:600;color:var(--text2)}
+.coming-soon p{font-size:12px;line-height:1.6;max-width:260px}
+
+/* MOBILE: full height scroll */
+@media(max-width:640px){
+  body{height:auto;min-height:100vh;overflow:auto;max-width:100%}
+  .panel-section.active{min-height:200px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo-wrap">
+    <svg width="26" height="26" viewBox="0 0 34 34" fill="none">
+      <circle cx="8" cy="8" r="5.5" fill="#5bb3e8"/>
+      <circle cx="22" cy="8" r="4.5" fill="#5bb3e8" opacity=".6"/>
+      <circle cx="8" cy="22" r="4.5" fill="#1a4f8a"/>
+      <circle cx="22" cy="22" r="3.5" fill="#1a4f8a" opacity=".7"/>
+    </svg>
+    <div>
+      <div class="logo-text">Sykehuset Østfold</div>
+      <div class="logo-sub">Bildediagnostikk</div>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <button class="theme-btn" onclick="toggleTheme()">
+      <svg id="theme-ico" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    </button>
+  </div>
+</div>
+
+<div class="fixed-header">
+  <!-- MODALITET BAR -->
+  <div class="modalitet-bar">
+    <button class="mod-btn on" onclick="setMod('rg',this)">
+      <div class="mod-img-wrap"><img class="mod-img" src="https://andreashov.github.io/rontgenprosedyrer/modalitet-symbol/røntgen.png" onerror="this.style.display='none'" alt=""></div>
+      <span class="mod-label">Røntgen</span>
+    </button>
+    <button class="mod-btn" onclick="setMod('ct',this)">
+      <div class="mod-img-wrap"><img class="mod-img" src="https://andreashov.github.io/rontgenprosedyrer/modalitet-symbol/ct.png" onerror="this.style.display='none'" alt=""></div>
+      <span class="mod-label">CT</span>
+    </button>
+    <button class="mod-btn" onclick="setMod('ul',this)">
+      <div class="mod-img-wrap"><img class="mod-img" src="https://andreashov.github.io/rontgenprosedyrer/modalitet-symbol/ultralyd.png" onerror="this.style.display='none'" alt=""></div>
+      <span class="mod-label">Ultralyd</span>
+    </button>
+    <button class="mod-btn" onclick="setMod('gj',this)">
+      <div class="mod-img-wrap"><img class="mod-img" src="https://andreashov.github.io/rontgenprosedyrer/modalitet-symbol/gjennomlysning.png" onerror="this.style.display='none'" alt=""></div>
+      <span class="mod-label">Gjennom-<br>lysning</span>
+    </button>
+    <button class="mod-btn" onclick="setMod('an',this)">
+      <div class="mod-img-wrap"><img class="mod-img" src="https://andreashov.github.io/rontgenprosedyrer/modalitet-symbol/angio.png" onerror="this.style.display='none'" alt=""></div>
+      <span class="mod-label">Angiografi</span>
+    </button>
+  </div>
+
+  <!-- SUB TABS – én per modalitet, kun én vises om gangen -->
+  <div id="sub-tabs-rg" class="sub-tabs">
+    <button class="sub-tab on" onclick="setSubTab('pros',this)">📋 Prosedyrer</button>
+    <button class="sub-tab" onclick="setSubTab('logg',this)">📒 Loggbøker</button>
+  </div>
+  <div id="sub-tabs-ct" class="sub-tabs" style="display:none">
+    <button class="sub-tab on" onclick="setSubTab('prot',this)">📑 Protokoller</button>
+    <button class="sub-tab" onclick="setSubTab('pros',this)">📋 Prosedyrer</button>
+    <button class="sub-tab" onclick="setSubTab('logg',this)">📒 Loggbøker</button>
+  </div>
+  <div id="sub-tabs-other" class="sub-tabs" style="display:none">
+    <button class="sub-tab on" onclick="setSubTab('pros',this)">📋 Prosedyrer</button>
+    <button class="sub-tab" onclick="setSubTab('logg',this)">📒 Loggbøker</button>
+  </div>
+
+  <!-- PT TABS (for rg prosedyrer) -->
+  <div class="pt-tabs-bar" id="pt-tabs-bar" style="display:none">
+    <button class="ptab on" onclick="setPt('voksen',this)">👤 Voksen</button>
+    <button class="ptab ptab-barn" onclick="setPt('barn',this)">🧒 Barn</button>
+    <button class="ptab" onclick="setPt('annet',this)">📁 Annet</button>
+  </div>
+
+  <!-- PT TABS (for ct protokoller) -->
+  <div class="pt-tabs-bar" id="prot-pt-tabs-bar">
+    <button class="ptab on" id="prot-ptab-voksen" onclick="setProtPt('voksen',this)">👤 Voksen</button>
+    <button class="ptab ptab-barn" id="prot-ptab-barn" onclick="setProtPt('barn',this)">🧒 Barn</button>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-bar" id="search-bar">
+    <div class="search-wrap">
+      <svg class="sico" viewBox="0 0 16 16"><circle cx="6.5" cy="6.5" r="4.5"/><line x1="10.5" y1="10.5" x2="14" y2="14"/></svg>
+      <input type="text" id="q" placeholder="Søk…" oninput="onSearch()">
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT AREA -->
+<div style="display:flex;flex-direction:column;flex:1;overflow:hidden">
+
+  <!-- PROSEDYRER -->
+  <div class="panel-section active" id="section-pros">
+    <div id="cat-grid-view" class="scroll-content">
+      <div class="cat-grid" id="cat-grid"></div>
+    </div>
+    <div class="proc-view" id="proc-view">
+      <div class="back-bar">
+        <button class="back-btn" onclick="goBack()">
+          <svg viewBox="0 0 16 16"><polyline points="10,4 6,8 10,12"/></svg>Tilbake
+        </button>
+        <span class="back-cat-name" id="back-cat-name"></span>
+      </div>
+      <div class="scroll-content"><div id="proc-list"></div></div>
+    </div>
+  </div>
+
+  <!-- LOGGBØKER – RG -->
+  <div class="panel-section" id="section-logg-rg">
+    <div class="scroll-content">
+      <div class="logg-grid" id="logg-grid-rg"></div>
+    </div>
+  </div>
+
+  <!-- LOGGBØKER – andre modaliteter (tom inntil videre) -->
+  <div class="panel-section" id="section-logg-other">
+    <div class="coming-soon">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke-width="1.4" stroke-linecap="round"><rect x="8" y="6" width="32" height="36" rx="3"/><line x1="16" y1="18" x2="32" y2="18"/><line x1="16" y1="24" x2="32" y2="24"/><line x1="16" y1="30" x2="24" y2="30"/></svg>
+      <h2>Loggbøker</h2>
+      <p>Loggbøker for denne modaliteten legges inn senere.</p>
+    </div>
+  </div>
+
+  <!-- PROTOKOLLER (CT) -->
+  <div class="panel-section" id="section-prot">
+    <div id="prot-grid-view" class="scroll-content">
+      <div class="cat-grid" id="prot-grid"></div>
+    </div>
+    <div class="proc-view" id="prot-proc-view">
+      <div class="back-bar">
+        <button class="back-btn" onclick="goBackProt()">
+          <svg viewBox="0 0 16 16"><polyline points="10,4 6,8 10,12"/></svg>Tilbake
+        </button>
+        <span class="back-cat-name" id="prot-back-cat-name"></span>
+      </div>
+      <div class="scroll-content"><div id="prot-proc-list"></div></div>
+    </div>
+  </div>
+
+  <!-- COMING SOON (pros for ul/gj/an) -->
+  <div class="panel-section" id="section-soon">
+    <div class="coming-soon">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke-width="1.4" stroke-linecap="round"><circle cx="24" cy="24" r="20"/><line x1="24" y1="15" x2="24" y2="25"/><circle cx="24" cy="32" r="1.5" fill="currentColor"/></svg>
+      <h2 id="soon-title">Kommer snart</h2>
+      <p id="soon-text">Innhold under utarbeidelse.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const RG_CATS=[
+  {id:'caput',label:'Caput',color:'#1a4f8a',pt:'voksen',procs:[
+    {name:'RG Caput / RG Orbita ved spørsmål om fremmedlegeme',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17197.pdf'}
+  ]},
+  {id:'thorax-v',label:'Thorax / Abdomen',color:'#2563a8',pt:'voksen',procs:[
+    {name:'RG Thorax / Cor',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK14399.pdf'},
+    {name:'RG Costa',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04179.pdf'},
+    {name:'RG Sternum / sternoclavicularledd',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04188.pdf'},
+    {name:'RG Abdomen',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK14398.pdf'},
+    {name:'Oro-anal transittid (OATT) måling med pellets',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK12435.pdf'},
+    {name:'RG Urinveier',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK25005.pdf'},
+    {name:'RG Shuntoversikt Caput / Thorax / abdomen',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17262.pdf'}
+  ]},
+  {id:'columna-v',label:'Columna',color:'#1e6fa0',pt:'voksen',procs:[
+    {name:'RG Cervicalcolumna',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04167.pdf'},
+    {name:'RG Thoracalcolumna',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04168.pdf'},
+    {name:'RG Lumbosacralcolumna',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04169.pdf'},
+    {name:'RG Ileosacralledd',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04176.pdf'},
+    {name:'RG Os Sacrum / Os Coccygis',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04177.pdf'},
+    {name:'RG Scoliosemåling LAB 4 Moss',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK25941.pdf'},
+    {name:'RG Scoliosemåling LAB 3 Moss',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK53606.pdf'}
+  ]},
+  {id:'bekken-v',label:'Bekken',color:'#156d8a',pt:'voksen',procs:[
+    {name:'RG Bekken',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04225.pdf'},
+    {name:'RG Hofte',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04226.pdf'},
+    {name:'RG Aksemåling underekstremiteter LAB 4 Moss',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK48247.pdf'},
+    {name:'RG Aksemåling underekstremiteter LAB 3 Moss',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK53607.pdf'},
+    {name:'RG Benlengdemåling LAB 4 Moss',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK20356.pdf'},
+    {name:'RG Benlengdemåling LAB 3 Moss',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK53605.pdf'}
+  ]},
+  {id:'over-v',label:'Overekstremitet',color:'#0f5975',pt:'voksen',procs:[
+    {name:'RG Skulder',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04212.pdf'},
+    {name:'RG Scapula',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04213.pdf'},
+    {name:'RG Clavicula',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04214.pdf'},
+    {name:'RG Acromio-clavicularledd',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04215.pdf'},
+    {name:'RG Humerus',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04216.pdf'},
+    {name:'RG Albue',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04219.pdf'},
+    {name:'RG Underarm',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04220.pdf'},
+    {name:'RG Håndledd',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04221.pdf'},
+    {name:'RG Os scaphoideum',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04222.pdf'},
+    {name:'RG Hånd',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04223.pdf'},
+    {name:'RG Fingre',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04224.pdf'}
+  ]},
+  {id:'under-v',label:'Underekstremitet',color:'#1a4f8a',pt:'voksen',procs:[
+    {name:'RG Femur',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04227.pdf'},
+    {name:'RG Kne',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04228.pdf'},
+    {name:'RG Legg',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04229.pdf'},
+    {name:'RG Ankel',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04230.pdf'},
+    {name:'RG Calcaneus',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04231.pdf'},
+    {name:'RG Fot / tær',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04232.pdf'}
+  ]},
+  {id:'thorax-b',label:'Thorax / Abdomen',color:'#0f7a5a',pt:'barn',procs:[
+    {name:'RG Epipharynx barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK14308.pdf'},
+    {name:'RG Thorax / Abdomen på nyfødtintensiv (NFI)',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK12260.pdf'},
+    {name:'RG Thorax barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK14414.pdf'},
+    {name:'RG Abdomen barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK18596.pdf'},
+    {name:'RG Tarmpassasje på barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK26576.pdf'}
+  ]},
+  {id:'columna-b',label:'Columna',color:'#1a6870',pt:'barn',procs:[
+    {name:'RG Cervicalcolumna av barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17956.pdf'},
+    {name:'RG Thoracalcolumna av barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK49424.pdf'},
+    {name:'RG Lumbosacralcolumna av barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK49425.pdf'},
+    {name:'RG Os Sacrum / Os Coccygis av barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK49426.pdf'}
+  ]},
+  {id:'bekken-b',label:'Bekken',color:'#0e7a55',pt:'barn',procs:[
+    {name:'RG Bekken og hofter av barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17958.pdf'}
+  ]},
+  {id:'over-b',label:'Overekstremitet',color:'#1a7a4a',pt:'barn',procs:[
+    {name:'RG Skulder av barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17950.pdf'},
+    {name:'RG Clavicula av barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17952.pdf'},
+    {name:'RG Humerus barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK47990.pdf'},
+    {name:'RG Albue av barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17953.pdf'},
+    {name:'RG Underarm av barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17977.pdf'},
+    {name:'RG Håndledd barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK48348.pdf'},
+    {name:'RG Hånd, fingre, skjelettalder av barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17954.pdf'}
+  ]},
+  {id:'under-b',label:'Underekstremitet',color:'#0f6b5a',pt:'barn',procs:[
+    {name:'RG Femur barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK47991.pdf'},
+    {name:'RG Kne av barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17959.pdf'},
+    {name:'RG Legg barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK47992.pdf'},
+    {name:'RG Ankel barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17960.pdf'},
+    {name:'RG Fot barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK18166.pdf'}
+  ]},
+  {id:'spesial',label:'Spesialundersøkelser',color:'#157a60',pt:'barn',procs:[
+    {name:'RG Undersøkelse ved mistanke om barnemishandel / plutselig spedbarnsdød',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK16285.pdf'},
+    {name:'RG ved Skjelettdysplasier på barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK16286.pdf'},
+    {name:'RG Totalskjelett ved dødfødsel/abort',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17202.pdf'}
+  ]},
+  {id:'annet-div',label:'Annet',color:'#5a4f8a',pt:'annet',procs:[
+    {name:'Granskning eller flagging av ortopediske kontrollbilder',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK42987.pdf'},
+    {name:'Konstanskontroll Lab 4, 6 og 7',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK50556.pdf'},
+    {name:'Henging av konvensjonelle røntgenbilder i PACS',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK42983.pdf'},
+    {name:'BoneView - Kunstig intelligens på akutt skjelettrøntgen',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK53175.pdf'}
+  ]}
+];
+
+const RG_LABS=[
+  {name:'Lab 4',url:'https://hsorhf.sharepoint.com/:w:/r/sites/SHF-O-461010BildediagnostikkAkuttKalnes/_layouts/15/Doc.aspx?sourcedoc=%7B780AFDDC-BA02-483E-9558-0FFA0A00C2EB%7D&file=LOGGBOK%20LAB%204.docx&action=default&mobileredirect=true'},
+  {name:'Transportabel 2',url:'https://hsorhf.sharepoint.com/:w:/r/sites/SHF-O-461010BildediagnostikkAkuttKalnes/_layouts/15/Doc.aspx?sourcedoc=%7B8A8BD90B-4F3F-458B-85DA-29BBBAB184A5%7D&file=LOGGBOK%20TRANSPORTABELT%202.docx&action=default&mobileredirect=true'},
+  {name:'Lab 6',url:'https://hsorhf.sharepoint.com/:w:/r/sites/SHF-O-461010BildediagnostikkAkuttKalnes/_layouts/15/Doc.aspx?sourcedoc=%7B5F8BC542-D898-4F64-83F1-FE17A14005DC%7D&file=LOGGBOK%20LAB%206.docx&action=default&mobileredirect=true'},
+  {name:'Transportabel 3',url:'https://hsorhf.sharepoint.com/:w:/r/sites/SHF-O-461010BildediagnostikkAkuttKalnes/_layouts/15/Doc.aspx?sourcedoc=%7B1D402204-E145-472F-A71C-22B79BE00FA2%7D&file=LOGGBOK%20TRANSPORTABELT%203.docx&action=default&mobileredirect=true'},
+  {name:'Lab 7',url:'https://hsorhf.sharepoint.com/:w:/r/sites/SHF-O-461010BildediagnostikkAkuttKalnes/_layouts/15/Doc.aspx?sourcedoc=%7B39A87826-9A24-4233-8DEB-F0EC5DDDA673%7D&file=LOGGBOK%20LAB%207.docx&action=default&mobileredirect=true'},
+  {name:'Transportabel 4',url:'https://hsorhf.sharepoint.com/:w:/r/sites/SHF-O-461010BildediagnostikkAkuttKalnes/_layouts/15/Doc.aspx?sourcedoc=%7B4E2EF88B-4AF1-4805-AD0A-AF7BF2826A4D%7D&file=LOGGBOK%20TRANSPORTABELT%204.docx&action=default&mobileredirect=true'}
+];
+
+const CT_PROT={
+  voksen:[
+    {id:'prot-caput',label:'Caput',procs:[]},
+    {id:'prot-collum',label:'Collum',procs:[]},
+    {id:'prot-thorax',label:'Thorax',procs:[]},
+    {id:'prot-abdomen',label:'Abdomen',procs:[]},
+    {id:'prot-skjelett',label:'Skjelett',procs:[]},
+    {id:'prot-angio',label:'Angio',procs:[]}
+  ],
+  barn:[
+    {id:'prot-barn-caput',label:'Caput',procs:[]},
+    {id:'prot-barn-collum',label:'Collum',procs:[]},
+    {id:'prot-barn-thorax',label:'Thorax',procs:[]},
+    {id:'prot-barn-abdomen',label:'Abdomen',procs:[]},
+    {id:'prot-barn-skjelett',label:'Skjelett',procs:[]},
+    {id:'prot-barn-angio',label:'Angio',procs:[]}
+  ]
+};
+let activeMod='rg', pt='voksen', activeCatId=null, activeProc=null;
+
+// ── THEME ─────────────────────────────────────────────────────────────────
+const root=document.documentElement;
+root.setAttribute('data-theme',localStorage.getItem('so-theme')||'dark');
+updateThemeIcon(root.getAttribute('data-theme'));
+function toggleTheme(){
+  const next=root.getAttribute('data-theme')==='light'?'dark':'light';
+  root.setAttribute('data-theme',next); localStorage.setItem('so-theme',next); updateThemeIcon(next);
+}
+function updateThemeIcon(t){
+  document.getElementById('theme-ico').innerHTML=t==='dark'
+    ?'<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>'
+    :'<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>';
+}
+
+// ── SECTIONS ──────────────────────────────────────────────────────────────
+function showSection(id){
+  document.querySelectorAll('.panel-section').forEach(s=>s.classList.remove('active'));
+  const el=document.getElementById('section-'+id);
+  if(el) el.classList.add('active');
+}
+
+function showPtSearch(show){
+  document.getElementById('pt-tabs-bar').style.display=show?'flex':'none';
+  if(activeMod==='ct') document.getElementById('prot-pt-tabs-bar').style.display='flex';
+  else document.getElementById('prot-pt-tabs-bar').style.display='none';
+}
+function showSearchOnly(){}
+function showProtPtSearch(){
+  document.getElementById('pt-tabs-bar').style.display='none';
+  document.getElementById('prot-pt-tabs-bar').style.display='flex';
+}
+
+// ── MODALITET ─────────────────────────────────────────────────────────────
+function setMod(mod, btn){
+  activeMod=mod;
+  document.querySelectorAll('.mod-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  // Hide all sub-tab bars
+  ['rg','ct','other'].forEach(id=>document.getElementById('sub-tabs-'+id).style.display='none');
+
+  if(mod==='rg'){
+    document.getElementById('sub-tabs-rg').style.display='flex';
+    // Reset to prosedyrer tab
+    const tabs=document.querySelectorAll('#sub-tabs-rg .sub-tab');
+    tabs.forEach(t=>t.classList.remove('on')); tabs[0].classList.add('on');
+    activeCatId=null; activeProc=null;
+    document.getElementById('q').value='';
+    showPtSearch(true);
+    showSection('pros');
+    renderCatGrid(); showCatView();
+  } else if(mod==='ct'){
+    document.getElementById('sub-tabs-ct').style.display='flex';
+    const tabs=document.querySelectorAll('#sub-tabs-ct .sub-tab');
+    tabs.forEach(t=>t.classList.remove('on')); tabs[0].classList.add('on');
+    showPtSearch(false);
+    showSection('prot');
+  } else {
+    document.getElementById('sub-tabs-other').style.display='flex';
+    const tabs=document.querySelectorAll('#sub-tabs-other .sub-tab');
+    tabs.forEach(t=>t.classList.remove('on')); tabs[0].classList.add('on');
+    const labels={ul:'Ultralyd',gj:'Gjennomlysning',an:'Angiografi'};
+    document.getElementById('soon-title').textContent=labels[mod];
+    document.getElementById('soon-text').textContent=`Prosedyrer for ${labels[mod]} legges inn senere.`;
+    showPtSearch(false);
+    showSection('soon');
+  }
+}
+
+// ── SUB TABS ──────────────────────────────────────────────────────────────
+function setSubTab(tab, btn){
+  const activeBar=['rg','ct','other'].find(id=>document.getElementById('sub-tabs-'+id).style.display!=='none');
+  if(activeBar){
+    document.querySelectorAll('#sub-tabs-'+activeBar+' .sub-tab').forEach(t=>t.classList.remove('on'));
+    btn.classList.add('on');
+  }
+  document.getElementById('q').value='';
+
+  if(tab==='pros'){
+    if(activeMod==='rg'){
+      showPtSearch(true);
+      activeCatId=null; activeProc=null;
+      renderCatGrid(); showCatView();
+      showSection('pros');
+    } else if(activeMod==='ct'){
+      showProtPtSearch();
+      showSection('prot');
+    } else {
+      showPtSearch(false);
+      showSection('soon');
+    }
+  } else if(tab==='logg'){
+    if(activeMod==='ct'){
+      showProtPtSearch();
+    } else {
+      showPtSearch(false);
+    }
+    if(activeMod==='rg') showSection('logg-rg');
+    else showSection('logg-other');
+  } else if(tab==='prot'){
+    showProtPtSearch();
+    showSection('prot');
+  }
+}
+
+// ── PT TABS ───────────────────────────────────────────────────────────────
+function setPt(val, btn){
+  pt=val; activeCatId=null; activeProc=null;
+  document.getElementById('q').value='';
+  document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+
+  if(val==='annet'){
+    const cat=RG_CATS.find(c=>c.id==='annet-div');
+    if(cat){
+      activeCatId=cat.id;
+      document.getElementById('back-cat-name').textContent='Annet';
+      document.querySelector('.back-bar').style.display='none';
+      renderProcList(cat.procs,'');
+      showProcView();
+    }
+  } else {
+    document.querySelector('.back-bar').style.display='flex';
+    renderCatGrid();
+    showCatView();
+  }
+}
+
+function renderCatGrid(){
+  const cats=RG_CATS.filter(c=>c.pt===pt && c.pt!=='annet');
+  document.getElementById('cat-grid').innerHTML=cats.map(c=>`
+    <div class="cat-card" onclick="openCat('${c.id}')">
+      <div class="cat-card-bar" style="background:var(--accent)"></div>
+      <div class="cat-card-label">${c.label}</div>
+      <div class="cat-card-count">${c.procs.length} prosedyrer</div>
+    </div>`).join('');
+  showCatView();
+}
+
+function openCat(id){
+  activeCatId=id;
+  const cat=RG_CATS.find(c=>c.id===id);
+  if(!cat) return;
+  document.getElementById('back-cat-name').textContent=cat.label;
+  renderProcList(cat.procs,'');
+  showProcView();
+}
+
+function showCatView(){
+  document.getElementById('cat-grid-view').style.display='block';
+  document.getElementById('proc-view').classList.remove('active');
+}
+function showProcView(){
+  document.getElementById('cat-grid-view').style.display='none';
+  document.getElementById('proc-view').classList.add('active');
+}
+
+function goBack(){
+  if(pt==='annet'){ return; }
+  activeCatId=null; activeProc=null;
+  document.getElementById('q').value='';
+  renderCatGrid(); showCatView();
+}
+
+function renderProcList(procs, q){
+  document.getElementById('proc-list').innerHTML=procs.length
+    ? procs.map(p=>{
+        const isAct=activeProc===p.name;
+        const nm=p.name.replace(/'/g,"\\'");
+        const ur=p.url||'null';
+        return `<div class="prow${isAct?' active':''}" onclick="selectProc('${nm}','${ur}')">
+          <span class="${p.url?'has-link':'no-link'}"></span>
+          <span class="pname">${q?hl(p.name,q):p.name}</span>
+        </div>`;
+      }).join('')
+    : `<div class="no-results">Ingen treff</div>`;
+}
+
+function selectProc(name, url){
+  activeProc=name;
+  if(url&&url!=='null') window.open(url,'_blank');
+  if(activeCatId){
+    const cat=RG_CATS.find(c=>c.id===activeCatId);
+    if(cat) renderProcList(cat.procs,'');
+  }
+}
+
+function onSearch(){
+  const q=document.getElementById('q').value.trim();
+  if(!q){
+    if(activeMod==='rg'){
+      renderCatGrid(); showCatView();
+    } else {
+      // CT prot/pros search cleared – back to coming soon for that tab
+      showSection('prot');
+    }
+    document.querySelector('.back-btn').onclick=goBack;
+    return;
+  }
+
+  // Determine which data to search
+  let results=[];
+  if(activeMod==='rg'){
+    // Search ALL pts (voksen, barn, annet)
+    results=RG_CATS.flatMap(c=>c.procs).filter(p=>p.name.toLowerCase().includes(q.toLowerCase()));
+  } else if(activeMod==='ct'){
+    // CT: search is over empty dataset for now – ready for future content
+    results=[];
+  }
+
+  document.getElementById('back-cat-name').textContent='Søkeresultater';
+  document.querySelector('.back-bar').style.display='flex';
+  renderProcList(results, q);
+  showProcView();
+  showSection('pros');
+
+  document.querySelector('.back-btn').onclick=()=>{
+    document.getElementById('q').value='';
+    document.querySelector('.back-btn').onclick=goBack;
+    if(activeMod==='rg'){ renderCatGrid(); showCatView(); }
+    else { showSection('prot'); }
+  };
+}
+
+function hl(t,q){
+  const i=t.toLowerCase().indexOf(q.toLowerCase());
+  if(i<0) return t;
+  return t.slice(0,i)+`<mark style="background:var(--mark-bg);border-radius:2px;padding:0 1px">`+t.slice(i,i+q.length)+'</mark>'+t.slice(i+q.length);
+}
+
+// ── CT PROTOKOLLER ────────────────────────────────────────────────────────
+function setProtPt(val, btn){
+  protPt=val; activeProtId=null;
+  document.querySelectorAll('#prot-pt-tabs-bar .ptab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderProtGrid();
+}
+
+function renderProtGrid(){
+  const cats=CT_PROT[protPt];
+  document.getElementById('prot-grid').innerHTML=cats.map(c=>`
+    <div class="cat-card" onclick="openProt('${c.id}')">
+      <div class="cat-card-bar" style="background:var(--accent)"></div>
+      <div class="cat-card-label">${c.label}</div>
+      <div class="cat-card-count">${c.procs.length>0?c.procs.length+' protokoller':'Legges inn senere'}</div>
+    </div>`).join('');
+  document.getElementById('prot-grid-view').style.display='block';
+  document.getElementById('prot-proc-view').classList.remove('active');
+}
+
+function openProt(id){
+  activeProtId=id;
+  const cat=[...CT_PROT.voksen,...CT_PROT.barn].find(c=>c.id===id);
+  if(!cat) return;
+  document.getElementById('prot-back-cat-name').textContent=cat.label;
+  const list=document.getElementById('prot-proc-list');
+  if(cat.procs.length){
+    list.innerHTML=cat.procs.map(p=>`
+      <div class="prow" onclick="window.open('${p.url}','_blank')">
+        <span class="has-link"></span>
+        <span class="pname">${p.name}</span>
+      </div>`).join('');
+  } else {
+    list.innerHTML=`<div class="no-results">Protokoller for ${cat.label} legges inn senere.</div>`;
+  }
+  document.getElementById('prot-grid-view').style.display='none';
+  document.getElementById('prot-proc-view').classList.add('active');
+}
+
+function goBackProt(){
+  activeProtId=null;
+  renderProtGrid();
+}
+document.getElementById('logg-grid-rg').innerHTML=RG_LABS.map(l=>`
+  <div class="lab-card" onclick="window.open('${l.url}','_blank')">
+    <div class="lab-card-name">${l.name}</div>
+  </div>`).join('');
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+showPtSearch(true);
+renderCatGrid();
+</script>
+</body>
+</html>

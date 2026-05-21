@@ -1949,7 +1949,18 @@
       ]
     }
   ],
-  "an_cats": [],
+  "an_cats": [
+    {
+      "id": "cat-1779390196701",
+      "label": "Ny kategori",
+      "procs": [
+        {
+          "name": "Jjj",
+          "url": "https://www.tv2.no/"
+        }
+      ]
+    }
+  ],
   "ct_cats": [
     {
       "id": "cat-1779390034606",

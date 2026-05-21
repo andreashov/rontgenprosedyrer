@@ -1928,7 +1928,28 @@
   "ul_cats": [],
   "gj_cats": [],
   "an_cats": [],
-  "ct_cats": [],
+  "ct_cats": [
+    {
+      "id": "cat-1779390034606",
+      "label": "Kategori ",
+      "procs": [
+        {
+          "name": "VG",
+          "url": "https://www.vg.no/"
+        }
+      ]
+    },
+    {
+      "id": "cat-1779390082816",
+      "label": "",
+      "procs": [
+        {
+          "name": "TV2",
+          "url": "https://www.tv2.no/"
+        }
+      ]
+    }
+  ],
   "ct_labs": [],
   "ul_labs": [],
   "gj_labs": [],

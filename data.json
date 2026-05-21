@@ -1947,6 +1947,10 @@
     {
       "name": "Test",
       "url": "https://tvguide.vg.no/"
+    },
+    {
+      "name": "Vg",
+      "url": "https://www.vg.no/"
     }
   ]
 }

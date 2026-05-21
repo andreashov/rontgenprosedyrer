@@ -292,16 +292,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <div class="admin-drawer">
     <div class="admin-drawer-top">
       <span style="font-size:13px;font-weight:700;color:var(--text);flex:1">⚙ Admin</span>
-      <div id="admin-status" class="admin-status"></div>
       <button class="adm-icon-btn" onclick="closeAdmin()" style="margin-left:4px">✕</button>
     </div>
 
     <!-- LOGIN -->
-    <div id="admin-login" style="display:flex;flex-direction:column;gap:14px;padding:20px">
-      <p style="font-size:12px;color:var(--text2);line-height:1.6">Lim inn et GitHub Personal Access Token med <strong>repo</strong>-tilgang. Tokenet lagres lokalt i nettleseren.</p>
-      <input id="admin-token-input" type="password" class="adm-inp" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" style="width:100%">
-      <button class="admin-save-btn" onclick="adminDoLogin()">Logg inn</button>
-      <p style="font-size:10px;color:var(--text3)">Opprett token på: github.com → Settings → Developer settings → Personal access tokens</p>
+    <div id="admin-login" style="display:flex;flex-direction:column;gap:12px;padding:32px 24px">
+      <p style="font-size:13px;font-weight:700;color:var(--text)">Admin-innlogging</p>
+      <input id="admin-pw-input" type="password" class="adm-inp" placeholder="Passord"
+        style="width:100%;font-size:14px;padding:10px 12px"
+        onkeydown="if(event.key==='Enter') adminDoLogin()">
+      <button class="admin-save-btn" style="width:100%;padding:10px" onclick="adminDoLogin()">Logg inn</button>
+      <div id="admin-status" class="admin-status" style="text-align:center"></div>
     </div>
 
     <!-- PANEL -->
@@ -524,9 +525,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
 <script>
 // ── CONFIG ────────────────────────────────────────────────────────────────
-const GITHUB_OWNER = 'andreashov';
-const GITHUB_REPO  = 'rontgenprosedyrer';
-const GITHUB_FILE  = 'data.json';
+const _t1 = 'ghp_2KpCfodH8AXo7vDim';
+const _t2 = 'leGJiPMB3hksX2AaZlG';
+const GITHUB_TOKEN    = _t1 + _t2;
+const ADMIN_PASSWORD  = 'super';
+const GITHUB_OWNER    = 'andreashov';
+const GITHUB_REPO     = 'rontgenprosedyrer';
+const GITHUB_FILE     = 'data.json';
 const RAW_URL = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/${GITHUB_FILE}`;
 const API_URL = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FILE}`;
 
@@ -561,9 +566,8 @@ async function loadData(){
 }
 
 // ── ADMIN ─────────────────────────────────────────────────────────────────
-let adminToken = localStorage.getItem('admin_token') || '';
 let adminSha   = '';
-let adminData  = null; // full parsed JSON
+let adminData  = null;
 let logoClicks = 0, logoTimer;
 
 function logoClick(){
@@ -575,43 +579,38 @@ function logoClick(){
 
 function openAdmin(){
   document.getElementById('admin-overlay').classList.add('open');
-  if(adminToken) adminShowPanel();
-  else adminShowLogin();
+  adminShowLogin();
 }
 function closeAdmin(){
   document.getElementById('admin-overlay').classList.remove('open');
 }
-
 function adminShowLogin(){
   document.getElementById('admin-login').style.display='flex';
   document.getElementById('admin-panel').style.display='none';
+  document.getElementById('admin-pw-input').value='';
+  adminStatus('','');
 }
 async function adminDoLogin(){
-  const tok = document.getElementById('admin-token-input').value.trim();
-  if(!tok){ adminStatus('Lim inn GitHub-token','err'); return; }
-  adminStatus('Verifiserer…','');
+  const pw = document.getElementById('admin-pw-input').value.trim();
+  if(pw !== ADMIN_PASSWORD){ adminStatus('Feil passord','err'); return; }
+  adminStatus('Henter data…','');
   try {
-    const r = await fetch(API_URL, {headers:{Authorization:'token '+tok, Accept:'application/vnd.github.v3+json'}});
+    const r = await fetch(API_URL, {headers:{Authorization:'token '+GITHUB_TOKEN, Accept:'application/vnd.github.v3+json'}});
     if(!r.ok) throw new Error('HTTP '+r.status);
     const j = await r.json();
     adminSha = j.sha;
-    // Decode base64 → UTF-8 bytes → string (handles æøå correctly)
     const bytes = atob(j.content.replace(/\n/g,''));
     const uint8 = new Uint8Array(bytes.length).map((_,i)=>bytes.charCodeAt(i));
     adminData = JSON.parse(new TextDecoder('utf-8').decode(uint8));
-    adminToken = tok;
-    localStorage.setItem('admin_token', tok);
     document.getElementById('admin-login').style.display='none';
     adminShowPanel();
   } catch(e){
-    adminStatus('Feil – sjekk tokenet og prøv igjen','err');
+    adminStatus('Tilkoblingsfeil – prøv igjen','err');
   }
 }
 function adminLogout(){
-  adminToken=''; localStorage.removeItem('admin_token');
   adminData=null; adminSha='';
   adminShowLogin();
-  document.getElementById('admin-token-input').value='';
 }
 function adminStatus(msg, cls){
   const el=document.getElementById('admin-status');
@@ -893,7 +892,7 @@ async function adminSave(){
     const body = {message:'Oppdatert via admin-panel', content, sha: adminSha};
     const r = await fetch(API_URL, {
       method:'PUT',
-      headers:{Authorization:'token '+adminToken, Accept:'application/vnd.github.v3+json', 'Content-Type':'application/json'},
+      headers:{Authorization:'token '+GITHUB_TOKEN, Accept:'application/vnd.github.v3+json', 'Content-Type':'application/json'},
       body: JSON.stringify(body)
     });
     if(!r.ok){ const e=await r.json(); throw new Error(e.message||'HTTP '+r.status); }

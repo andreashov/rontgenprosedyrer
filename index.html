@@ -156,9 +156,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .drawer-close{width:30px;height:30px;border-radius:7px;border:1px solid var(--border);background:var(--surface);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2)}
 .drawer-close svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5}
 .contact-search{padding:8px 12px;border-bottom:1px solid var(--border);flex-shrink:0;background:var(--surface)}
-.contact-search input{width:100%;padding:7px 10px 7px 32px;border-radius:7px;border:1.5px solid var(--border);background:var(--surface2);font-size:16px;color:var(--text);outline:none;height:34px}
+.contact-search input{width:100%;padding:7px 10px 7px 38px;border-radius:7px;border:1.5px solid var(--border);background:var(--surface2);font-size:16px;color:var(--text);outline:none;height:34px}
 .contact-search input:focus{border-color:var(--accent)}
-.contact-search .sico{left:22px}
+.contact-search .sico{left:12px;width:15px;height:15px}
 
 /* TWO COLUMN LAYOUT */
 .contact-cols{display:flex;flex:1;overflow:hidden;gap:0}
@@ -216,7 +216,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <div class="contact-col">
         <div class="col-header">
           <div class="col-header-bar" style="background:#1a4f8a"></div>
-          <span class="col-header-label">Intern avdeling</span>
+          <span class="col-header-label">Bildediagnostikk</span>
         </div>
         <div class="contact-scroll" id="contact-scroll-intern"></div>
       </div>
@@ -371,110 +371,96 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 // ── CONTACT DATA ──────────────────────────────────────────────────────────
 // Each entry: {name, role, nums:[{num, label}]}
 const INTERN_GROUPS=[
-  {group:'Vakt / Viktige',color:'#1a4f8a',entries:[
-    {name:'Radiolog Vaktrom',role:'U-etasje',nums:[{num:'69 86 80 17',label:''}]},
-    {name:'Radiolog Vakttelefon',role:'2. etg',nums:[{num:'96 09 09 43',label:''}]},
-    {name:'Radiograf Vakttelefon',role:'2. etg',nums:[{num:'96 09 09 44',label:''}]},
-    {name:'Radiograf Stuetelefon',role:'2. etg',nums:[{num:'41 70 88 88',label:''}]},
-    {name:'RØD BEREDSKAPSTLF',role:'',nums:[{num:'69 86 88 97',label:''},{num:'69 86 82 98',label:'Eksp. 2. etg'}]},
-    {name:'Radiograf Calling',role:'',nums:[{num:'22600',label:''}]},
-    {name:'Radiolog Calling',role:'',nums:[{num:'22601',label:''}]},
+  {group:'Røntgen Kalnes',color:'#1a4f8a',entries:[
+    {name:'Radiograf Vaktansvarlig',role:'',nums:[{num:'96 09 09 44',label:''}]},
+    {name:'Radiograf Stuetelefon',role:'',nums:[{num:'41 70 88 88',label:''}]},
+    {name:'LAB 4',role:'',nums:[{num:'69 86 88 34',label:''}]},
+    {name:'LAB 5 – Gjennomlysning',role:'',nums:[{num:'69 86 88 22',label:''}]},
+    {name:'LAB 6',role:'',nums:[{num:'69 86 88 59',label:''}]},
+    {name:'LAB 7',role:'',nums:[{num:'69 86 88 61',label:''}]},
+    {name:'Gjennomlysning mobiltelefon',role:'',nums:[{num:'96 09 04 42',label:''}]},
+    {name:'Pauserom 2. etg',role:'',nums:[{num:'69 86 88 52',label:''}]},
+    {name:'Beredskapstelefon',role:'',nums:[{num:'91 00 20 37',label:''}]},
   ]},
-  {group:'Lab / Røntgen',color:'#1a4f8a',entries:[
-    {name:'LAB 4',role:'Skjelett/Thorax Pol – 1. etg',nums:[{num:'69 86 88 34',label:''}]},
-    {name:'LAB 5',role:'Gjennomlysning – 2. etg',nums:[{num:'69 86 88 22',label:''}]},
-    {name:'LAB 6',role:'Skjelett/Thorax Akutt – 2. etg',nums:[{num:'69 86 88 59',label:''}]},
-    {name:'LAB 7',role:'Skjelett/Thorax Akutt – 2. etg',nums:[{num:'69 86 88 61',label:''}]},
-    {name:'Gransking Røntgen',role:'Radiolog – 2. etg',nums:[{num:'69 86 88 56',label:''}]},
-  ]},
-  {group:'CT',color:'#1e6fa0',entries:[
-    {name:'CT Radiograf',role:'2. etg',nums:[{num:'41 70 83 62',label:''}]},
-    {name:'CT 1',role:'Akutt – 2. etg',nums:[{num:'69 86 88 53',label:''}]},
-    {name:'CT 2',role:'Akutt – 2. etg',nums:[{num:'69 86 88 54',label:''}]},
-    {name:'CT 3',role:'Poliklinikk og CT-Biopsi – 1. etg',nums:[{num:'69 86 88 06',label:''}]},
-    {name:'CT Helpdesk',role:'Radiolog – 2. etg',nums:[{num:'41 70 83 55',label:''}]},
-    {name:'Booking CT',role:'',nums:[{num:'69 86 54 57',label:''}]},
+  {group:'CT Kalnes',color:'#1e6fa0',entries:[
+    {name:'CT Radiograf',role:'',nums:[{num:'41 70 83 62',label:''}]},
+    {name:'CT 1 Kalnes',role:'',nums:[{num:'69 86 88 53',label:''}]},
+    {name:'CT 2 Kalnes',role:'',nums:[{num:'69 86 88 54',label:''}]},
+    {name:'CT 3 Kalnes',role:'',nums:[{num:'69 86 88 06',label:''}]},
     {name:'CT3 mobiltelefon',role:'',nums:[{num:'96 09 04 41',label:''}]},
   ]},
-  {group:'Angio / Intervensjon',color:'#0f5975',entries:[
-    {name:'ANGIO Radiograf',role:'2. etg',nums:[{num:'41 70 83 63',label:''}]},
-    {name:'ANGIOLAB',role:'2. etg',nums:[{num:'69 86 88 57',label:''}]},
-    {name:'Intervensjonsvakt',role:'Radiolog – 2. etg',nums:[{num:'96 09 04 43',label:''}]},
+  {group:'Ultralyd Kalnes',color:'#156d8a',entries:[
+    {name:'Ultralyd radiograf',role:'',nums:[{num:'41 70 83 64',label:''}]},
+    {name:'Ultralyd akuttmottak',role:'',nums:[{num:'96 09 04 45',label:''}]},
+    {name:'ULTRALYD 1',role:'',nums:[{num:'69 86 88 55',label:''}]},
+    {name:'ULTRALYD 2',role:'',nums:[{num:'69 86 88 35',label:''}]},
+    {name:'ULTRALYD 3',role:'',nums:[{num:'69 86 88 38',label:''}]},
   ]},
-  {group:'Ultralyd',color:'#156d8a',entries:[
-    {name:'ULTRALYD Radiograf',role:'2. etg',nums:[{num:'41 70 83 64',label:''}]},
-    {name:'ULTRALYD Akuttmottak',role:'Mobil – 2. etg',nums:[{num:'96 09 04 45',label:''}]},
-    {name:'ULTRALYD 1',role:'Akutt og Intervensjon – 2. etg',nums:[{num:'69 86 88 55',label:''}]},
-    {name:'ULTRALYD 2 og 3',role:'Poliklinikk – 1. etg',nums:[{num:'69 86 88 35',label:'Pol'},{num:'69 86 88 38',label:''}]},
-    {name:'Booking Ultralyd',role:'',nums:[{num:'69 86 54 54',label:''}]},
+  {group:'Angio Kalnes',color:'#0f5975',entries:[
+    {name:'Radiograf angio',role:'',nums:[{num:'41 70 83 63',label:''}]},
+    {name:'Angiolab',role:'',nums:[{num:'69 86 88 57',label:''}]},
   ]},
-  {group:'MR',color:'#0f7a5a',entries:[
-    {name:'MR Radiograf',role:'1. etg',nums:[{num:'96 09 04 40',label:''}]},
-    {name:'MR Kalnes',role:'1. etg',nums:[{num:'69 86 88 37',label:''}]},
-    {name:'MR Helpdesk',role:'Radiolog – 1. etg',nums:[{num:'41 70 83 56',label:''}]},
+  {group:'MR Kalnes',color:'#0f7a5a',entries:[
+    {name:'MR Radiograf',role:'',nums:[{num:'96 09 04 40',label:''}]},
+    {name:'MR Kalnes',role:'',nums:[{num:'69 86 88 37',label:''}]},
   ]},
-  {group:'Ekspedisjon',color:'#5a4f8a',entries:[
-    {name:'Ekspedisjon Poliklinikk',role:'1. etg',nums:[{num:'69 86 88 40',label:''}]},
-    {name:'Ekspedisjon Akutt',role:'3. etg',nums:[{num:'69 86 88 51',label:''}]},
+  {group:'Radiolog',color:'#993556',entries:[
+    {name:'Primærvakt radiologi',role:'',nums:[{num:'96 09 09 43',label:''}]},
+    {name:'Vaktrom',role:'',nums:[{num:'69 86 80 17',label:''}]},
+    {name:'Røntgen granskning',role:'',nums:[{num:'69 86 88 56',label:''}]},
+    {name:'CT Helpdesk',role:'',nums:[{num:'41 70 83 55',label:''}]},
+    {name:'MR Helpdesk',role:'',nums:[{num:'41 70 83 56',label:''}]},
+    {name:'Intervensjonsvakt',role:'',nums:[{num:'96 09 04 43',label:''}]},
+    {name:'Nukleær',role:'',nums:[{num:'41 70 83 58',label:''}]},
+    {name:'Nukleær granskning',role:'',nums:[{num:'69 86 88 42',label:''}]},
+    {name:'BDS',role:'',nums:[{num:'41 70 83 53',label:''}]},
+  ]},
+  {group:'Kontor',color:'#5a4f8a',entries:[
+    {name:'Ekspedisjon Kalnes pol',role:'1. etg',nums:[{num:'69 86 88 40',label:''}]},
+    {name:'Ekspedisjon Kalnes akutt',role:'2. etg',nums:[{num:'69 86 88 51',label:''}]},
+    {name:'Ekspedisjon Moss',role:'',nums:[{num:'69 86 66 00',label:''},{num:'69 86 66 01',label:''}]},
     {name:'Telerad / CD-brenning',role:'Man–fre 08–21, Lør 08–15:30, Søn 09–16:30',nums:[{num:'69 86 82 98',label:''}]},
-    {name:'Beate sitt kontor',role:'',nums:[{num:'69 86 88 62',label:''}]},
+    {name:'Telefonslusa Grålum',role:'',nums:[{num:'69 86 53 30',label:''}]},
+    {name:'CD-brenning Grålum',role:'',nums:[{num:'69 86 54 38',label:''}]},
+    {name:'CT akutt Grålum (booking)',role:'',nums:[{num:'69 86 54 57',label:''}]},
+    {name:'CT Grålum',role:'',nums:[{num:'69 86 54 39',label:''}]},
+    {name:'Ultralyd Grålum (booking)',role:'',nums:[{num:'69 86 54 54',label:''}]},
+    {name:'Røntgen Grålum',role:'',nums:[{num:'69 86 54 53',label:''}]},
+    {name:'MR Grålum',role:'',nums:[{num:'69 86 54 58',label:''}]},
+    {name:'Henvisninger Grålum',role:'',nums:[{num:'69 86 54 52',label:''}]},
+    {name:'Skriving Grålum',role:'',nums:[{num:'69 86 54 50',label:''}]},
+    {name:'BDS',role:'',nums:[{num:'69 86 80 93',label:''}]},
   ]},
-  {group:'Nukleær',color:'#854F0B',entries:[
-    {name:'Ekspedisjon Nukleær / CD',role:'1. etg',nums:[{num:'69 86 88 41',label:''}]},
-    {name:'PET CT / SPECT CT',role:'Nukleær',nums:[{num:'69 86 88 11',label:''}]},
-    {name:'Radiolog Nukleær',role:'',nums:[{num:'41 70 83 58',label:''}]},
-    {name:'Gransking Nukleær',role:'',nums:[{num:'69 86 88 42',label:''}]},
-    {name:'Injeksjonsrom 1',role:'Nukleær',nums:[{num:'69 86 88 12',label:''}]},
-    {name:'Injeksjonsrom 2',role:'Nukleær',nums:[{num:'69 86 88 09',label:''}]},
-    {name:'Seksjonsleder Nukleær',role:'',nums:[{num:'69 86 88 25',label:''},{num:'69 86 88 26',label:''}]},
-    {name:'Cecilie Strømø',role:'Seksjonsleder Nukleær/BDS',nums:[{num:'93 09 75 87',label:''}]},
-  ]},
-  {group:'BDS / Screening',color:'#993556',entries:[
-    {name:'Ekspedisjon BDS',role:'',nums:[{num:'69 86 80 93',label:''}]},
-    {name:'Mammografiscreening',role:'',nums:[{num:'69 86 81 70',label:''}]},
-    {name:'Arbeidsrom Mammografiscreening',role:'',nums:[{num:'69 86 88 03',label:''}]},
-    {name:'Radiolog BDS',role:'',nums:[{num:'41 70 83 53',label:''}]},
-    {name:'Radiograf BDS',role:'',nums:[{num:'96 09 04 38',label:''}]},
-    {name:'Sekretær BDS',role:'',nums:[{num:'96 09 04 34',label:''}]},
-  ]},
-  {group:'Grålum',color:'#1e6fa0',entries:[
-    {name:'Telefonslusa',role:'Grålum',nums:[{num:'69 86 53 30',label:''}]},
-    {name:'CD-brenning',role:'Grålum',nums:[{num:'69 86 54 38',label:''}]},
-    {name:'CT Akutt',role:'Grålum',nums:[{num:'69 86 54 57',label:''}]},
-    {name:'CT',role:'Grålum',nums:[{num:'69 86 54 39',label:''}]},
-    {name:'Ultralyd',role:'Grålum',nums:[{num:'69 86 54 54',label:''}]},
-    {name:'Røntgen / Generell',role:'Grålum',nums:[{num:'69 86 54 53',label:''}]},
-    {name:'Henvisninger',role:'Grålum',nums:[{num:'69 86 54 52',label:''}]},
-    {name:'Skriving',role:'Grålum',nums:[{num:'69 86 54 50',label:''}]},
-    {name:'MR',role:'Grålum',nums:[{num:'69 86 54 58',label:''}]},
+  {group:'Ledere',color:'#3C3489',entries:[
+    {name:'Eivind Reitan',role:'Avdelingssjef',nums:[{num:'90 95 74 59',label:''}]},
+    {name:'Beate Mangseth',role:'Seksjonsleder akutt',nums:[{num:'69 86 88 62',label:''},{num:'95 06 40 64',label:'Mobil'}]},
+    {name:'Markus A. Jaworski',role:'Assisterende seksjonsleder akutt',nums:[{num:'97 400 200',label:''}]},
+    {name:'Veslemøy Bøhn',role:'Driftskoordinator akutt',nums:[{num:'91 71 58 70',label:''}]},
+    {name:'Christin Larsen',role:'Seksjonsleder kontor',nums:[{num:'99 01 95 69',label:''}]},
+    {name:'Cecilie Strømø',role:'Seksjonsleder nukleær og BDS',nums:[{num:'69 86 88 25',label:''},{num:'69 86 88 26',label:''},{num:'93 09 75 87',label:'Mobil'}]},
   ]},
   {group:'Moss',color:'#156d8a',entries:[
-    {name:'Ekspedisjon',role:'Moss',nums:[{num:'69 86 66 00',label:''},{num:'69 86 66 01',label:''}]},
-    {name:'MR',role:'Moss',nums:[{num:'69 86 66 28',label:''}]},
+    {name:'Røntgen',role:'Moss',nums:[{num:'69 86 66 13',label:''}]},
     {name:'CT 1',role:'Moss',nums:[{num:'69 86 66 07',label:''}]},
     {name:'CT 2',role:'Moss',nums:[{num:'69 86 66 12',label:''}]},
     {name:'Ultralyd',role:'Moss',nums:[{num:'69 86 66 09',label:''}]},
-    {name:'Røntgen',role:'Moss',nums:[{num:'69 86 66 13',label:''}]},
+    {name:'MR',role:'Moss',nums:[{num:'69 86 66 28',label:''}]},
   ]},
-  {group:'Ledelse / Kontor',color:'#5a4f8a',entries:[
-    {name:'Beate Mangseth',role:'Seksjonsleder',nums:[{num:'69 86 88 62',label:''},{num:'95 06 40 64',label:'Mobil'}]},
-    {name:'Markus A. Jaworski',role:'Ass. Seksjonsleder',nums:[{num:'97 400 200',label:''}]},
-    {name:'Eivind Reitan',role:'Avd. sjef',nums:[{num:'90 95 74 59',label:''}]},
-    {name:'Veslemøy Bøhn',role:'Driftskoordinator',nums:[{num:'91 71 58 70',label:''}]},
-    {name:'Kari-Anne Bekken',role:'Helsesekretær',nums:[{num:'91 36 37 65',label:''}]},
-    {name:'Christin Larsen',role:'Seksjonsleder Kontor',nums:[{num:'99 01 95 69',label:''}]},
+  {group:'Nukleærmedisin',color:'#854F0B',entries:[
+    {name:'PET CT – SPECT CT',role:'Nukleær',nums:[{num:'69 86 88 11',label:''}]},
+    {name:'Injeksjonsrom 1',role:'Nukleær',nums:[{num:'69 86 88 12',label:''}]},
+    {name:'Injeksjonsrom 2',role:'Nukleær',nums:[{num:'69 86 88 09',label:''}]},
   ]},
-  {group:'Diverse / Teknisk',color:'#3C3489',entries:[
-    {name:'Teamleder',role:'Tvillingtelefon',nums:[{num:'41 70 83 60',label:'1'},{num:'41 70 83 61',label:'2'}]},
-    {name:'Pauserom 2. etg',role:'Kalnes',nums:[{num:'69 86 88 52',label:''}]},
-    {name:'Gjennomlysning mobil',role:'',nums:[{num:'96 09 04 42',label:''}]},
-    {name:'Beredskapstelefon',role:'Beredskapskort',nums:[{num:'91 00 20 37',label:''}]},
-    {name:'Sykehuspartner / IT',role:'Døgnåpen',nums:[{num:'32 23 53 30',label:''}]},
-    {name:'Sentralbord',role:'',nums:[{num:'69 86 00 00',label:''}]},
-    {name:'Pasientreiser',role:'',nums:[{num:'05515',label:''}]},
-    {name:'Telefax Kalnes 1. etg',role:'',nums:[{num:'69 86 48 83',label:''}]},
-    {name:'Telefax Kalnes Akutt 2. etg',role:'',nums:[{num:'69 86 48 51',label:''}]},
-    {name:'Telefax Grålum',role:'',nums:[{num:'69 14 09 63',label:''}]},
+  {group:'BDS / Screening',color:'#993556',entries:[
+    {name:'Mammografiscreening',role:'',nums:[{num:'69 86 81 70',label:''}]},
+    {name:'Arbeidsrom Mammografiscreening',role:'',nums:[{num:'69 86 88 03',label:''}]},
+    {name:'Radiograf BDS',role:'',nums:[{num:'96 09 04 38',label:''}]},
+    {name:'Sekretær BDS',role:'',nums:[{num:'96 09 04 34',label:''}]},
+  ]},
+  {group:'Telefaks',color:'#4a5a72',entries:[
+    {name:'Kalnes ekspedisjon',role:'1. etg',nums:[{num:'69 86 48 83',label:''}]},
+    {name:'Kalnes ekspedisjon akutt',role:'2. etg',nums:[{num:'69 86 48 51',label:''}]},
+    {name:'Telefaks Grålum',role:'',nums:[{num:'69 14 09 63',label:''}]},
   ]},
 ];
 
@@ -613,19 +599,27 @@ function renderContacts(q){
 
 function toggleGroup(group, prefix){
   const map=prefix==='intern-'?openGroupsIntern:openGroupsOther;
-  map[group]=!map[group];
-  const isOpen=map[group];
   const scrollId=prefix==='intern-'?'contact-scroll-intern':'contact-scroll-other';
   const scroll=document.getElementById(scrollId);
-  const headers=[...scroll.querySelectorAll('.contact-group-header')];
-  headers.forEach(h=>{
-    const lbl=h.querySelector('.contact-group-label')?.textContent;
-    if(lbl===group){
-      h.querySelector('.contact-group-arr')?.classList.toggle('open',isOpen);
-      const rows=h.nextElementSibling;
-      if(rows) rows.style.maxHeight=isOpen?'9999px':'0';
-    }
-  });
+  const isCurrentlyOpen=map[group];
+
+  // Close all groups in this column first
+  Object.keys(map).forEach(g=>map[g]=false);
+  scroll.querySelectorAll('.contact-group-arr').forEach(a=>a.classList.remove('open'));
+  scroll.querySelectorAll('.contact-rows').forEach(r=>r.style.maxHeight='0');
+
+  // Open clicked group if it was closed
+  if(!isCurrentlyOpen){
+    map[group]=true;
+    const headers=[...scroll.querySelectorAll('.contact-group-header')];
+    headers.forEach(h=>{
+      if(h.querySelector('.contact-group-label')?.textContent===group){
+        h.querySelector('.contact-group-arr')?.classList.add('open');
+        const rows=h.nextElementSibling;
+        if(rows) rows.style.maxHeight='9999px';
+      }
+    });
+  }
 }
 
 // ── PROSEDYRE DATA ────────────────────────────────────────────────────────
@@ -771,9 +765,11 @@ function toggleTheme(){
   root.setAttribute('data-theme',next); localStorage.setItem('so-theme',next); updateThemeIcon(next);
 }
 function updateThemeIcon(t){
-  document.getElementById('theme-ico').innerHTML=t==='dark'
-    ?'<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>'
-    :'<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>';
+  const sun=document.getElementById('theme-sun');
+  const moon=document.getElementById('theme-moon');
+  if(!sun||!moon) return;
+  sun.classList.toggle('active-light', t==='light');
+  moon.classList.toggle('active-dark', t==='dark');
 }
 
 // ── HELPERS ───────────────────────────────────────────────────────────────

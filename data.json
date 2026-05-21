@@ -1986,5 +1986,10 @@
   "ct_labs": [],
   "ul_labs": [],
   "gj_labs": [],
-  "an_labs": []
+  "an_labs": [
+    {
+      "name": "Loggtest",
+      "url": "https://www.tv2.no/"
+    }
+  ]
 }

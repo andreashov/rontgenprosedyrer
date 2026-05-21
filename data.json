@@ -1047,7 +1047,7 @@
       "color": "#0f7a5a",
       "entries": [
         {
-          "name": "NyfÃÂ¸dtintensiv",
+          "name": "Nyfødtintensiv",
           "role": "03G03",
           "nums": [
             {
@@ -1062,7 +1062,7 @@
         },
         {
           "name": "Barne- og ungdomsavdelingen",
-          "role": "",
+          "role": "03CU1",
           "nums": [
             {
               "num": "69 86 30 52",
@@ -1075,7 +1075,7 @@
           ]
         },
         {
-          "name": "Barn og ungdom Ã¢ÂÂ poliklinikk",
+          "name": "Barn og ungdom - Poliklinikk",
           "role": "03CU1",
           "nums": [
             {
@@ -1085,7 +1085,7 @@
           ]
         },
         {
-          "name": "FÃÂ¸de og barsel",
+          "name": "Føde og barsel",
           "role": "03E03",
           "nums": [
             {
@@ -1095,7 +1095,7 @@
           ]
         },
         {
-          "name": "Jordmor Ã¢ÂÂ telefonvakt",
+          "name": "Jordmor - Telefonvakt",
           "role": "",
           "nums": [
             {
@@ -1105,7 +1105,7 @@
           ]
         },
         {
-          "name": "Føde og barsel Gynekologi",
+          "name": "Føde og barsel - Gynekologi",
           "role": "03C03",
           "nums": [
             {

@@ -1430,7 +1430,7 @@
         },
         {
           "name": "Senter for laboratoriemedisin",
-          "role": "PrÃÂ¸vesvar",
+          "role": "Prøvesvar",
           "nums": [
             {
               "num": "69 86 84 10",
@@ -1440,7 +1440,7 @@
         },
         {
           "name": "Sykehuspartner",
-          "role": "DÃÂ¸gnÃÂ¥pen",
+          "role": "Døgnåpen",
           "nums": [
             {
               "num": "32 23 53 30",

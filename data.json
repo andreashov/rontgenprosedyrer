@@ -1869,12 +1869,7 @@
       {
         "id": "prot-collum",
         "label": "Collum",
-        "procs": [
-          {
-            "name": "TV2",
-            "url": "https://www.tv2.no/"
-          }
-        ]
+        "procs": []
       },
       {
         "id": "prot-thorax",

@@ -1925,50 +1925,12 @@
       }
     ]
   },
-  "ul_cats": [
-    {
-      "id": "cat-1779390160617",
-      "label": "Test",
-      "procs": [
-        {
-          "name": "Tv",
-          "url": "https://www.tv2.no/"
-        }
-      ]
-    }
-  ],
-  "gj_cats": [
-    {
-      "id": "cat-1779390180086",
-      "label": "Test",
-      "procs": [
-        {
-          "name": "Test",
-          "url": "https://www.tv2.no/"
-        }
-      ]
-    }
-  ],
-  "an_cats": [
-    {
-      "id": "cat-1779390196701",
-      "label": "Ny kategori",
-      "procs": [
-        {
-          "name": "Jjj",
-          "url": "https://www.tv2.no/"
-        }
-      ]
-    }
-  ],
+  "ul_cats": [],
+  "gj_cats": [],
+  "an_cats": [],
   "ct_cats": [],
   "ct_labs": [],
   "ul_labs": [],
   "gj_labs": [],
-  "an_labs": [
-    {
-      "name": "Loggtest",
-      "url": "https://www.tv2.no/"
-    }
-  ]
+  "an_labs": []
 }

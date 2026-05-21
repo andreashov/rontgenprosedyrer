@@ -989,7 +989,7 @@
           ]
         },
         {
-          "name": "Døgnområde 9 Ã¢ÂÂ Gastro / Nyre",
+          "name": "Døgnområde 9 - Gastro / Nyre",
           "role": "03C04",
           "nums": [
             {
@@ -1003,7 +1003,7 @@
           ]
         },
         {
-          "name": "Døgnområde 9 Ã¢ÂÂ Geriatri / Endokrin",
+          "name": "Døgnområde 9 - Geriatri / Endokrin",
           "role": "03C04-2",
           "nums": [
             {
@@ -1017,7 +1017,7 @@
           ]
         },
         {
-          "name": "Døgnområde 10 Ã¢ÂÂ Kreft",
+          "name": "Døgnområde 10 - Kreft",
           "role": "03A04",
           "nums": [
             {
@@ -1031,7 +1031,7 @@
           ]
         },
         {
-          "name": "Døgnområde 11 Ã¢ÂÂ Akuttmedisin",
+          "name": "Døgnområde 11 - Akuttmedisin",
           "role": "",
           "nums": [
             {

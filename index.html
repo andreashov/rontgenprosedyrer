@@ -67,6 +67,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 [data-theme="light"] .theme-icon-sun{opacity:1;transform:translate(-50%,-50%) rotate(0deg) scale(1)}
 [data-theme="light"] .theme-icon-moon{opacity:0;transform:translate(-50%,-50%) rotate(25deg) scale(.7)}
 
+@media(prefers-reduced-motion:no-preference){
+  ::view-transition-old(root){ animation:none; }
+  ::view-transition-new(root){ animation:none; }
+}
+
 /* FIXED HEADER */
 .fixed-header{flex-shrink:0;background:var(--surface);border-bottom:1px solid var(--border)}
 
@@ -232,7 +237,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <div class="contact-backdrop" onclick="closeContacts()"></div>
   <div class="contact-drawer">
     <div class="drawer-top">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14z"/></svg>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="7" y="2" width="10" height="20" rx="2.5"/>
+        <circle cx="12" cy="18.5" r="1" fill="var(--accent)" stroke="none"/>
+      </svg>
       <span class="drawer-title">Telefonnummer</span>
       <button class="drawer-close" onclick="closeContacts()">
         <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -824,36 +832,24 @@ const root=document.documentElement;
 root.setAttribute('data-theme',localStorage.getItem('so-theme')||'dark');
 updateThemeIcon(root.getAttribute('data-theme'));
 function toggleTheme(){
-  const current=root.getAttribute('data-theme');
-  const next=current==='light'?'dark':'light';
-  const newBg=next==='dark'?'#0c1520':'#f0f4f9';
-
+  const next=root.getAttribute('data-theme')==='light'?'dark':'light';
   const btn=document.querySelector('.btn-theme');
   const rect=btn.getBoundingClientRect();
-  const x=Math.round(rect.left+rect.width/2);
-  const y=Math.round(rect.top+rect.height/2);
+  const x=rect.left+rect.width/2;
+  const y=rect.top+rect.height/2;
+  const maxR=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
 
-  const ripple=document.createElement('div');
-  ripple.style.cssText=`position:fixed;inset:0;z-index:9999;pointer-events:none;
-    background:${newBg};
-    clip-path:circle(0px at ${x}px ${y}px);
-    transition:clip-path 0.55s cubic-bezier(0.4,0,0.15,1);`;
-  document.body.appendChild(ripple);
+  const apply=()=>{ root.setAttribute('data-theme',next); localStorage.setItem('so-theme',next); };
 
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{
-    ripple.style.clipPath=`circle(200vmax at ${x}px ${y}px)`;
-  }));
+  if(!document.startViewTransition){ apply(); return; }
 
-  setTimeout(()=>{
-    root.setAttribute('data-theme',next);
-    localStorage.setItem('so-theme',next);
-  },220);
-
-  setTimeout(()=>{
-    ripple.style.transition='opacity 0.18s ease';
-    ripple.style.opacity='0';
-    setTimeout(()=>ripple.remove(),200);
-  },560);
+  const t=document.startViewTransition(apply);
+  t.ready.then(()=>{
+    document.documentElement.animate(
+      {clipPath:[`circle(0px at ${x}px ${y}px)`,`circle(${maxR}px at ${x}px ${y}px)`]},
+      {duration:600,easing:'cubic-bezier(0.22,1,0.36,1)',pseudoElement:'::view-transition-new(root)'}
+    );
+  });
 }
 function updateThemeIcon(t){
   // handled purely via CSS data-theme attribute now

@@ -232,23 +232,36 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .admin-drawer{position:fixed;top:0;bottom:0;left:50%;width:100%;max-width:480px;transform:translateX(-50%) translateX(100%);background:var(--surface);display:flex;flex-direction:column;transition:transform .28s cubic-bezier(.2,.8,.3,1);box-shadow:-4px 0 24px rgba(0,0,0,.2);visibility:hidden}
 .admin-overlay.open .admin-drawer{transform:translateX(-50%) translateX(0);visibility:visible;transition:transform .28s cubic-bezier(.2,.8,.3,1),visibility 0s}
 .admin-drawer-top{display:flex;align-items:center;gap:8px;padding:0 12px;height:48px;background:var(--surface2);border-bottom:1px solid var(--border);flex-shrink:0}
-.admin-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--surface2);flex-shrink:0;overflow-x:auto}
-.admin-tab{flex:1;padding:9px 4px;border:none;background:transparent;font-size:10px;font-weight:700;color:var(--text3);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
-.admin-tab.on{color:var(--accent);border-bottom-color:var(--accent)}
-.admin-content{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:10px}
+/* Sidebar layout */
+.admin-layout{display:flex;flex:1;overflow:hidden}
+.admin-nav{width:136px;flex-shrink:0;overflow-y:auto;border-right:1px solid var(--border);background:var(--bg);padding:6px 0}
+.admin-nav-section{font-size:9px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--text3);padding:12px 10px 4px;user-select:none}
+.admin-nav-item{display:block;width:100%;text-align:left;border:none;background:transparent;padding:7px 10px 7px 12px;font-size:11px;color:var(--text2);cursor:pointer;border-left:2px solid transparent;transition:background .1s,color .1s,border-color .1s;line-height:1.3}
+.admin-nav-item:hover{background:var(--surface2);color:var(--text)}
+.admin-nav-item.on{background:var(--accent-light);color:var(--accent);border-left-color:var(--accent);font-weight:700}
+.admin-content{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:8px}
 .admin-bottom{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-top:1px solid var(--border);background:var(--surface2);flex-shrink:0;gap:8px}
 .admin-save-btn{padding:8px 14px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-size:12px;font-weight:700;cursor:pointer;transition:filter .15s}
-.admin-save-btn:hover{filter:brightness(1.12)}
+.admin-save-btn:hover{filter:brightness(1.1)}
 .admin-save-btn:disabled{opacity:.5;cursor:default}
 .adm-logout-btn{padding:7px 12px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text2);font-size:11px;font-weight:600;cursor:pointer}
 .admin-status{font-size:11px;font-weight:600;color:var(--text3)}.admin-status.ok{color:#0f7a5a}.admin-status.err{color:#c0392b}
-.adm-group{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:7px}
-.adm-group-head{display:flex;align-items:center;gap:7px;margin-bottom:2px}
-.adm-group-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.adm-entry{background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:8px;display:flex;flex-direction:column;gap:5px}
+/* Content elements */
+.adm-toolbar{display:flex;align-items:center;gap:6px;margin-bottom:2px}
+.adm-toolbar-title{font-size:12px;font-weight:700;color:var(--text);flex:1}
+.adm-sort-btn{padding:3px 8px;border-radius:5px;border:1px solid var(--border);background:var(--surface2);color:var(--text2);font-size:10px;font-weight:600;cursor:pointer}
+.adm-sort-btn:hover{border-color:var(--accent);color:var(--accent)}
+.adm-group{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:8px;display:flex;flex-direction:column;gap:6px;transition:opacity .15s}
+.adm-group.drag-over{border-color:var(--accent);background:var(--accent-light)}
+.adm-group-head{display:flex;align-items:center;gap:6px}
+.adm-group-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.adm-drag-handle{cursor:grab;color:var(--text3);font-size:14px;padding:0 2px;flex-shrink:0;line-height:1;user-select:none}
+.adm-drag-handle:active{cursor:grabbing}
+.adm-entry{background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:7px;display:flex;flex-direction:column;gap:5px;transition:opacity .15s}
+.adm-entry.drag-over{border-color:var(--accent)}
 .adm-entry-row{display:flex;align-items:center;gap:5px}
 .adm-num-row{display:flex;align-items:center;gap:5px;padding-left:8px}
-.adm-inp{flex:1;padding:5px 8px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:11px;min-width:0}
+.adm-inp{flex:1;padding:5px 7px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:11px;min-width:0}
 .adm-inp:focus{outline:none;border-color:var(--accent)}
 .adm-inp-sm{max-width:80px;flex:none}
 .adm-inp-url{font-size:10px}
@@ -256,8 +269,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .adm-icon-btn{width:26px;height:26px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text3);cursor:pointer;font-size:11px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
 .adm-del:hover{background:#fde8e8;border-color:#e57373;color:#c0392b}
 .adm-add-btn{padding:4px 10px;border-radius:6px;border:1px dashed var(--border);background:transparent;color:var(--accent);font-size:11px;font-weight:600;cursor:pointer;text-align:left}
-.adm-add-group-btn{padding:8px;border-radius:8px;border:1px dashed var(--accent);background:var(--accent-light);color:var(--accent);font-size:12px;font-weight:700;cursor:pointer;text-align:center}
-.adm-section-head{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);padding:6px 2px 2px;margin-top:4px;border-bottom:1px solid var(--border)}
+.adm-add-group-btn{padding:7px;border-radius:8px;border:1px dashed var(--accent);background:var(--accent-light);color:var(--accent);font-size:11px;font-weight:700;cursor:pointer;text-align:center}
+.adm-section-head{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);padding:4px 2px 2px;border-bottom:1px solid var(--border)}
 
 @media(max-width:640px){
   body{height:auto;min-height:100vh;overflow:auto;max-width:100%}
@@ -296,19 +309,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
     <!-- PANEL -->
     <div id="admin-panel" style="display:none;flex-direction:column;flex:1;overflow:hidden">
-      <div class="admin-tabs">
-        <button class="admin-tab on" data-tab="intern" onclick="adminSetTab('intern')">TLF Bildediagnostikk</button>
-        <button class="admin-tab" data-tab="other" onclick="adminSetTab('other')">TLF Sykehuset øvrig</button>
-        <button class="admin-tab" data-tab="rg" onclick="adminSetTab('rg')">RG</button>
-        <button class="admin-tab" data-tab="ct" onclick="adminSetTab('ct')">CT</button>
-        <button class="admin-tab" data-tab="ul" onclick="adminSetTab('ul')">Ultralyd</button>
-        <button class="admin-tab" data-tab="gj" onclick="adminSetTab('gj')">Gjennomlysning</button>
-        <button class="admin-tab" data-tab="an" onclick="adminSetTab('an')">Angio</button>
+      <div class="admin-layout">
+        <nav class="admin-nav" id="admin-nav"></nav>
+        <div id="admin-content" class="admin-content"></div>
       </div>
-      <div id="admin-content" class="admin-content"></div>
       <div class="admin-bottom">
         <button class="adm-logout-btn" onclick="adminLogout()">Logg ut</button>
-        <button id="admin-save-btn2" class="admin-save-btn" onclick="adminSave()">💾 Lagre til GitHub</button>
+        <button class="admin-save-btn" onclick="adminSave()">💾 Lagre til GitHub</button>
       </div>
     </div>
   </div>
@@ -608,53 +615,62 @@ function adminStatus(msg, cls){
   el.textContent=msg; el.className='admin-status '+(cls||'');
 }
 
+
+// ── ADMIN NAV ─────────────────────────────────────────────────────────────
+const ADMIN_NAV = [
+  { section: 'Telefoni', items: [
+    { label: 'Bildediagnostikk', view: 'intern' },
+    { label: 'Sykehuset øvrig',  view: 'other'  }
+  ]},
+  { section: 'Røntgen', items: [
+    { label: 'Prosedyrer', view: 'rg_cats' },
+    { label: 'Loggbøker',  view: 'rg_labs' }
+  ]},
+  { section: 'CT', items: [
+    { label: 'Prosedyrer',           view: 'ct_cats'        },
+    { label: 'Protokoller – Voksen', view: 'ct_prot_voksen' },
+    { label: 'Protokoller – Barn',   view: 'ct_prot_barn'   },
+    { label: 'Loggbøker',            view: 'ct_labs'        }
+  ]},
+  { section: 'Ultralyd', items: [
+    { label: 'Prosedyrer', view: 'ul_cats' },
+    { label: 'Loggbøker',  view: 'ul_labs' }
+  ]},
+  { section: 'Gjennomlysning', items: [
+    { label: 'Prosedyrer', view: 'gj_cats' },
+    { label: 'Loggbøker',  view: 'gj_labs' }
+  ]},
+  { section: 'Angio', items: [
+    { label: 'Prosedyrer', view: 'an_cats' },
+    { label: 'Loggbøker',  view: 'an_labs' }
+  ]}
+];
+let adminView = 'intern';
+
+function buildAdminNav(){
+  const nav = document.getElementById('admin-nav');
+  nav.innerHTML = ADMIN_NAV.map(s=>
+    `<div class="admin-nav-section">${s.section}</div>` +
+    s.items.map(i=>
+      `<button class="admin-nav-item${i.view===adminView?' on':''}" onclick="adminSetView('${i.view}')">${i.label}</button>`
+    ).join('')
+  ).join('');
+}
+function adminSetView(v){ adminView=v; buildAdminNav(); adminRender(); }
 function adminShowPanel(){
   document.getElementById('admin-login').style.display='none';
   document.getElementById('admin-panel').style.display='flex';
-  adminRender();
+  buildAdminNav(); adminRender();
 }
-function adminSetTab(t){
-  adminTab=t;
-  document.querySelectorAll('.admin-tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));
-  adminRender();
-}
-
 function adminRender(){
-  const out = document.getElementById('admin-content');
-  if(adminTab==='intern') { out.innerHTML = adminRenderGroups(adminData.intern_groups,'intern'); return; }
-  if(adminTab==='other')  { out.innerHTML = adminRenderGroups(adminData.other_groups,'other');  return; }
-
-  // Modality tabs: show sections stacked vertically
-  const sections = {
-    rg: [
-      {title:'Prosedyrer', key:'rg_cats',  pt:['voksen','barn','annet']},
-      {title:'Loggbøker',  key:'rg_labs',  labs:true}
-    ],
-    ct: [
-      {title:'Prosedyrer',           key:'ct_cats',       pt:[]},
-      {title:'Protokoller – Voksen', key:'ct_prot_voksen',pt:[]},
-      {title:'Protokoller – Barn',   key:'ct_prot_barn',  pt:[]},
-      {title:'Loggbøker',            key:'ct_labs',       labs:true}
-    ],
-    ul: [
-      {title:'Prosedyrer', key:'ul_cats', pt:[]},
-      {title:'Loggbøker',  key:'ul_labs', labs:true}
-    ],
-    gj: [
-      {title:'Prosedyrer', key:'gj_cats', pt:[]},
-      {title:'Loggbøker',  key:'gj_labs', labs:true}
-    ],
-    an: [
-      {title:'Prosedyrer', key:'an_cats', pt:[]},
-      {title:'Loggbøker',  key:'an_labs', labs:true}
-    ]
-  }[adminTab];
-
-  out.innerHTML = sections.map(s=>
-    `<div class="adm-section-head">${s.title}</div>` +
-    (s.labs ? adminRenderLabList(s.key) : adminRenderCatList(s.key, s.pt))
-  ).join('');
+  const out=document.getElementById('admin-content');
+  const labViews={rg_labs:1,ct_labs:1,ul_labs:1,gj_labs:1,an_labs:1};
+  const catPt={rg_cats:['voksen','barn','annet']};
+  if(adminView==='intern'||adminView==='other') out.innerHTML=adminRenderGroups(adminView);
+  else if(labViews[adminView]) out.innerHTML=adminRenderLabList(adminView);
+  else out.innerHTML=adminRenderCatList(adminView, catPt[adminView]||[]);
 }
+
 
 // ── ADMIN: PROSEDYRER ─────────────────────────────────────────────────────
 function getArr(key){
@@ -675,12 +691,21 @@ function getArr(key){
   return map[key] ? map[key]() : [];
 }
 
+// ── ADMIN: CATEGORIES (Prosedyrer / Protokoller) ──────────────────────────
 function adminRenderCatList(key, ptOptions){
-  const cats = getArr(key);
-  const hasPt = ptOptions && ptOptions.length > 0;
-  return cats.map((c,ci)=>`
-    <div class="adm-group">
+  const cats=getArr(key), hasPt=ptOptions&&ptOptions.length>0;
+  const toolbar=`<div class="adm-toolbar">
+    <span class="adm-toolbar-title">${cats.length} kategorier</span>
+    <button class="adm-sort-btn" onclick="sortAlpha('${key}','label')">A→Z</button>
+  </div>`;
+  return toolbar + cats.map((c,ci)=>`
+    <div class="adm-group" draggable="true"
+      ondragstart="dragStart(event,'cat','${key}',${ci})"
+      ondragover="dragOver(event)"
+      ondrop="dragDrop(event,'cat','${key}',${ci})"
+      ondragleave="this.classList.remove('drag-over')">
       <div class="adm-group-head">
+        <span class="adm-drag-handle" title="Dra for å sortere">⠿</span>
         <input class="adm-inp" value="${esc(c.label)}" placeholder="Kategorinavn"
           onchange="getArr('${key}')[${ci}].label=this.value">
         ${hasPt?`<select class="adm-sel" onchange="getArr('${key}')[${ci}].pt=this.value">
@@ -689,14 +714,22 @@ function adminRenderCatList(key, ptOptions){
         <button class="adm-icon-btn adm-del" onclick="admDelCat('${key}',${ci})">✕</button>
       </div>
       ${(c.procs||[]).map((p,pi)=>`
-        <div class="adm-entry-row">
+        <div class="adm-entry-row" draggable="true"
+          ondragstart="dragStart(event,'proc','${key}',${ci},${pi})"
+          ondragover="dragOver(event)"
+          ondrop="dragDrop(event,'proc','${key}',${ci},${pi})"
+          ondragleave="this.classList.remove('drag-over')">
+          <span class="adm-drag-handle">⠿</span>
           <input class="adm-inp" value="${esc(p.name)}" placeholder="Navn"
             onchange="getArr('${key}')[${ci}].procs[${pi}].name=this.value">
           <input class="adm-inp adm-inp-url" value="${esc(p.url||'')}" placeholder="URL"
             onchange="getArr('${key}')[${ci}].procs[${pi}].url=this.value">
           <button class="adm-icon-btn adm-del" onclick="admDelProc('${key}',${ci},${pi})">✕</button>
         </div>`).join('')}
-      <button class="adm-add-btn" onclick="admAddProc('${key}',${ci})">+ Legg til prosedyre</button>
+      <div style="display:flex;gap:5px;margin-top:2px">
+        <button class="adm-add-btn" onclick="admAddProc('${key}',${ci})">+ Prosedyre</button>
+        <button class="adm-sort-btn" onclick="sortProcs('${key}',${ci})">A→Z</button>
+      </div>
     </div>`).join('') +
   `<button class="adm-add-group-btn" onclick="admAddCat('${key}'${hasPt?`,'${ptOptions[0]}'`:''})">+ Ny kategori</button>`;
 }
@@ -706,15 +739,23 @@ function admAddProc(key,ci){ getArr(key)[ci].procs.push({name:'',url:''}); admin
 function admAddCat(key,pt){
   const newCat={id:'cat-'+Date.now(),label:'Ny kategori',procs:[]};
   if(pt) newCat.pt=pt;
-  getArr(key).push(newCat);
-  adminRender();
+  getArr(key).push(newCat); adminRender();
 }
 
 // ── ADMIN: LOGGBØKER ──────────────────────────────────────────────────────
 function adminRenderLabList(key){
-  const labs = getArr(key);
-  return labs.map((l,li)=>`
-    <div class="adm-entry-row">
+  const labs=getArr(key);
+  const toolbar=`<div class="adm-toolbar">
+    <span class="adm-toolbar-title">${labs.length} loggbøker</span>
+    <button class="adm-sort-btn" onclick="sortAlpha('${key}','name')">A→Z</button>
+  </div>`;
+  return toolbar + labs.map((l,li)=>`
+    <div class="adm-entry-row" draggable="true"
+      ondragstart="dragStart(event,'lab','${key}',${li})"
+      ondragover="dragOver(event)"
+      ondrop="dragDrop(event,'lab','${key}',${li})"
+      ondragleave="this.classList.remove('drag-over')">
+      <span class="adm-drag-handle">⠿</span>
       <input class="adm-inp" value="${esc(l.name)}" placeholder="Navn"
         onchange="getArr('${key}')[${li}].name=this.value">
       <input class="adm-inp adm-inp-url" value="${esc(l.url)}" placeholder="URL"
@@ -725,22 +766,43 @@ function adminRenderLabList(key){
 }
 function admDelLab(key,li){ getArr(key).splice(li,1); adminRender(); }
 function admAddLab(key){ getArr(key).push({name:'',url:''}); adminRender(); }
-function adminRenderGroups(groups, ns){
-  return groups.map((g,gi)=>`
-    <div class="adm-group">
+
+// ── ADMIN: TELEFONIGRUPPER ────────────────────────────────────────────────
+function adminRenderGroups(ns){
+  const groups=admGroups(ns);
+  const toolbar=`<div class="adm-toolbar">
+    <span class="adm-toolbar-title">${groups.length} grupper</span>
+    <button class="adm-sort-btn" onclick="sortAlpha('grp_${ns}','group')">A→Z</button>
+  </div>`;
+  return toolbar + groups.map((g,gi)=>`
+    <div class="adm-group" draggable="true"
+      ondragstart="dragStart(event,'grp','${ns}',${gi})"
+      ondragover="dragOver(event)"
+      ondrop="dragDrop(event,'grp','${ns}',${gi})"
+      ondragleave="this.classList.remove('drag-over')">
       <div class="adm-group-head">
+        <span class="adm-drag-handle">⠿</span>
         <span class="adm-group-dot" style="background:${g.color}"></span>
-        <strong>${g.group}</strong>
-        <button class="adm-icon-btn adm-del" onclick="admDelGroup('${ns}',${gi})" title="Slett gruppe">✕</button>
+        <input class="adm-inp" value="${esc(g.group)}" placeholder="Gruppenavn"
+          onchange="admGroups('${ns}')[${gi}].group=this.value">
+        <input class="adm-inp adm-inp-sm" value="${esc(g.color)}" type="color"
+          style="width:28px;padding:1px 2px;cursor:pointer"
+          onchange="admGroups('${ns}')[${gi}].color=this.value;adminRender()">
+        <button class="adm-icon-btn adm-del" onclick="admDelGroup('${ns}',${gi})">✕</button>
       </div>
       ${g.entries.map((e,ei)=>`
-        <div class="adm-entry">
+        <div class="adm-entry" draggable="true"
+          ondragstart="dragStart(event,'entry','${ns}',${gi},${ei})"
+          ondragover="dragOver(event)"
+          ondrop="dragDrop(event,'entry','${ns}',${gi},${ei})"
+          ondragleave="this.classList.remove('drag-over')">
           <div class="adm-entry-row">
+            <span class="adm-drag-handle">⠿</span>
             <input class="adm-inp" value="${esc(e.name)}" placeholder="Navn"
               onchange="admSet('${ns}',${gi},'entries',${ei},'name',this.value)">
-            <input class="adm-inp adm-inp-sm" value="${esc(e.role)}" placeholder="Kode/rolle"
+            <input class="adm-inp adm-inp-sm" value="${esc(e.role)}" placeholder="Kode"
               onchange="admSet('${ns}',${gi},'entries',${ei},'role',this.value)">
-            <button class="adm-icon-btn adm-del" onclick="admDelEntry('${ns}',${gi},${ei})" title="Slett">✕</button>
+            <button class="adm-icon-btn adm-del" onclick="admDelEntry('${ns}',${gi},${ei})">✕</button>
           </div>
           ${e.nums.map((n,ni)=>`
             <div class="adm-num-row">
@@ -748,19 +810,20 @@ function adminRenderGroups(groups, ns){
                 onchange="admSetNum('${ns}',${gi},${ei},${ni},'num',this.value)">
               <input class="adm-inp adm-inp-sm" value="${esc(n.label)}" placeholder="Etikett"
                 onchange="admSetNum('${ns}',${gi},${ei},${ni},'label',this.value)">
-              <button class="adm-icon-btn adm-del" onclick="admDelNum('${ns}',${gi},${ei},${ni})" title="Slett">✕</button>
+              <button class="adm-icon-btn adm-del" onclick="admDelNum('${ns}',${gi},${ei},${ni})">✕</button>
             </div>`).join('')}
-          <button class="adm-add-btn" onclick="admAddNum('${ns}',${gi},${ei})">+ Legg til nummer</button>
+          <button class="adm-add-btn" onclick="admAddNum('${ns}',${gi},${ei})">+ Nummer</button>
         </div>`).join('')}
-      <button class="adm-add-btn" onclick="admAddEntry('${ns}',${gi})">+ Legg til person / sted</button>
+      <div style="display:flex;gap:5px">
+        <button class="adm-add-btn" onclick="admAddEntry('${ns}',${gi})">+ Person / sted</button>
+        <button class="adm-sort-btn" onclick="sortEntries('${ns}',${gi})">A→Z</button>
+      </div>
     </div>`).join('') +
   `<button class="adm-add-group-btn" onclick="admAddGroup('${ns}')">+ Ny gruppe</button>`;
 }
 
 function admGroups(ns){ return ns==='intern'?adminData.intern_groups:adminData.other_groups; }
-function admSet(ns,gi,field,ei,subfield,val){
-  admGroups(ns)[gi][field][ei][subfield]=val;
-}
+function admSet(ns,gi,f,ei,sf,v){ admGroups(ns)[gi][f][ei][sf]=v; }
 function admSetNum(ns,gi,ei,ni,f,v){ admGroups(ns)[gi].entries[ei].nums[ni][f]=v; }
 function admDelGroup(ns,gi){ admGroups(ns).splice(gi,1); adminRender(); }
 function admDelEntry(ns,gi,ei){ admGroups(ns)[gi].entries.splice(ei,1); adminRender(); }
@@ -768,6 +831,56 @@ function admDelNum(ns,gi,ei,ni){ admGroups(ns)[gi].entries[ei].nums.splice(ni,1)
 function admAddNum(ns,gi,ei){ admGroups(ns)[gi].entries[ei].nums.push({num:'',label:''}); adminRender(); }
 function admAddEntry(ns,gi){ admGroups(ns)[gi].entries.push({name:'',role:'',nums:[{num:'',label:''}]}); adminRender(); }
 function admAddGroup(ns){ admGroups(ns).push({group:'Ny gruppe',color:'#1a4f8a',entries:[]}); adminRender(); }
+
+// ── SORT ──────────────────────────────────────────────────────────────────
+function sortAlpha(key, field){
+  if(key.startsWith('grp_')){
+    const ns=key.slice(4);
+    admGroups(ns).sort((a,b)=>(a[field]||'').localeCompare(b[field]||'','nb'));
+  } else {
+    getArr(key).sort((a,b)=>(a[field]||'').localeCompare(b[field]||'','nb'));
+  }
+  adminRender();
+}
+function sortProcs(key,ci){ getArr(key)[ci].procs.sort((a,b)=>a.name.localeCompare(b.name,'nb')); adminRender(); }
+function sortEntries(ns,gi){ admGroups(ns)[gi].entries.sort((a,b)=>a.name.localeCompare(b.name,'nb')); adminRender(); }
+
+// ── DRAG & DROP ───────────────────────────────────────────────────────────
+function dragStart(e,type,key,i,j){
+  _drag={type,key,i,j};
+  e.dataTransfer.effectAllowed='move';
+  setTimeout(()=>e.target.style.opacity='0.4',0);
+}
+function dragOver(e){
+  e.preventDefault();
+  e.currentTarget.classList.add('drag-over');
+  e.dataTransfer.dropEffect='move';
+}
+function dragDrop(e,type,key,i,j){
+  e.preventDefault();
+  e.currentTarget.classList.remove('drag-over');
+  if(!_drag) return;
+  if(type==='cat'||type==='lab'){
+    if(_drag.key!==key||_drag.i===i) return _drag=null;
+    const arr=getArr(key);
+    const [item]=arr.splice(_drag.i,1); arr.splice(i,0,item);
+  } else if(type==='proc'){
+    if(_drag.key!==key||_drag.i!==i||_drag.j===j) return _drag=null;
+    const procs=getArr(key)[i].procs;
+    const [item]=procs.splice(_drag.j,1); procs.splice(j,0,item);
+  } else if(type==='grp'){
+    if(_drag.key!==key||_drag.i===i) return _drag=null;
+    const arr=admGroups(key);
+    const [item]=arr.splice(_drag.i,1); arr.splice(i,0,item);
+  } else if(type==='entry'){
+    if(_drag.key!==key||_drag.i!==i||_drag.j===j) return _drag=null;
+    const entries=admGroups(key)[i].entries;
+    const [item]=entries.splice(_drag.j,1); entries.splice(j,0,item);
+  }
+  _drag=null; adminRender();
+}
+
+
 
 // ── ADMIN: LAGRE TIL GITHUB ───────────────────────────────────────────────
 async function adminSave(){

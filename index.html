@@ -85,7 +85,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .mod-btn.on .mod-img-wrap{transform:translateY(-2px);box-shadow:0 4px 14px rgba(26,79,138,.45)}
 .mod-indicator{height:3px;border-radius:2px;background:transparent;margin-top:4px;width:70%;transition:background .2s,width .2s cubic-bezier(.34,1.56,.64,1)}
 .mod-btn.on .mod-indicator{background:var(--accent);width:100%}
-.mod-label{display:none}
 
 /* SUB TABS */
 .sub-tabs{display:flex;padding:7px 10px;border-bottom:1px solid var(--border);background:var(--surface)}
@@ -270,7 +269,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .adm-del:hover{background:#fde8e8;border-color:#e57373;color:#c0392b}
 .adm-add-btn{padding:4px 10px;border-radius:6px;border:1px dashed var(--border);background:transparent;color:var(--accent);font-size:11px;font-weight:600;cursor:pointer;text-align:left}
 .adm-add-group-btn{padding:7px;border-radius:8px;border:1px dashed var(--accent);background:var(--accent-light);color:var(--accent);font-size:11px;font-weight:700;cursor:pointer;text-align:center}
-.adm-section-head{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text3);padding:4px 2px 2px;border-bottom:1px solid var(--border)}
 
 @media(max-width:640px){
   body{height:auto;min-height:100vh;overflow:auto;max-width:100%}
@@ -295,7 +293,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <div class="admin-drawer-top">
       <span style="font-size:13px;font-weight:700;color:var(--text);flex:1">⚙ Admin</span>
       <div id="admin-status" class="admin-status"></div>
-      <button id="admin-save-btn" class="admin-save-btn" onclick="adminSave()" style="display:none">Lagre til GitHub</button>
       <button class="adm-icon-btn" onclick="closeAdmin()" style="margin-left:4px">✕</button>
     </div>
 
@@ -566,7 +563,6 @@ async function loadData(){
 // ── ADMIN ─────────────────────────────────────────────────────────────────
 let adminToken = localStorage.getItem('admin_token') || '';
 let adminSha   = '';
-let adminTab   = 'intern';
 let adminData  = null; // full parsed JSON
 let logoClicks = 0, logoTimer;
 
@@ -892,7 +888,6 @@ function dragDrop(e,type,key,i,j){
 // ── ADMIN: LAGRE TIL GITHUB ───────────────────────────────────────────────
 async function adminSave(){
   adminStatus('Lagrer…','');
-  document.getElementById('admin-save-btn').disabled=true;
   try {
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(adminData, null, 2))));
     const body = {message:'Oppdatert via admin-panel', content, sha: adminSha};
@@ -924,7 +919,6 @@ async function adminSave(){
   } catch(e){
     adminStatus('Feil: '+e.message,'err');
   }
-  document.getElementById('admin-save-btn').disabled=false;
 }
 
 function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }

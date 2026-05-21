@@ -774,11 +774,11 @@ const RG_CATS=[
     {name:'RG Totalskjelett ved dødfødsel/abort',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17202.pdf'}
   ]},
   {id:'annet-div',label:'Annet',pt:'annet',procs:[
-    {name:'Henvend deg i luken',url:'https://hsorhf.sharepoint.com/:w:/r/sites/SHF-O-461010BildediagnostikkAkuttKalnes/Shared%20Documents/R%C3%B8ntgen/Henvend%20deg%20i%20luken/A5%20Henvend%20deg%20i%20luken%20A5.docx?d=wb5c751b57ca5449d8e9bcad4dd5145e4&csf=1&web=1&e=ByqejD'},
+    {name:'BoneView - Kunstig intelligens på akutt skjelettrøntgen',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK53175.pdf'},
     {name:'Granskning eller flagging av ortopediske kontrollbilder',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK42987.pdf'},
-    {name:'Konstanskontroll Lab 4, 6 og 7',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK50556.pdf'},
     {name:'Henging av konvensjonelle røntgenbilder i PACS',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK42983.pdf'},
-    {name:'BoneView - Kunstig intelligens på akutt skjelettrøntgen',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK53175.pdf'}
+    {name:'Henvend deg i luken',url:'https://hsorhf.sharepoint.com/:w:/r/sites/SHF-O-461010BildediagnostikkAkuttKalnes/Shared%20Documents/R%C3%B8ntgen/Henvend%20deg%20i%20luken/A5%20Henvend%20deg%20i%20luken%20A5.docx?d=wb5c751b57ca5449d8e9bcad4dd5145e4&csf=1&web=1&e=ByqejD'},
+    {name:'Konstanskontroll Lab 4, 6 og 7',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK50556.pdf'}
   ]}
 ];
 
@@ -824,8 +824,36 @@ const root=document.documentElement;
 root.setAttribute('data-theme',localStorage.getItem('so-theme')||'dark');
 updateThemeIcon(root.getAttribute('data-theme'));
 function toggleTheme(){
-  const next=root.getAttribute('data-theme')==='light'?'dark':'light';
-  root.setAttribute('data-theme',next); localStorage.setItem('so-theme',next);
+  const current=root.getAttribute('data-theme');
+  const next=current==='light'?'dark':'light';
+  const newBg=next==='dark'?'#0c1520':'#f0f4f9';
+
+  const btn=document.querySelector('.btn-theme');
+  const rect=btn.getBoundingClientRect();
+  const x=Math.round(rect.left+rect.width/2);
+  const y=Math.round(rect.top+rect.height/2);
+
+  const ripple=document.createElement('div');
+  ripple.style.cssText=`position:fixed;inset:0;z-index:9999;pointer-events:none;
+    background:${newBg};
+    clip-path:circle(0px at ${x}px ${y}px);
+    transition:clip-path 0.55s cubic-bezier(0.4,0,0.15,1);`;
+  document.body.appendChild(ripple);
+
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    ripple.style.clipPath=`circle(200vmax at ${x}px ${y}px)`;
+  }));
+
+  setTimeout(()=>{
+    root.setAttribute('data-theme',next);
+    localStorage.setItem('so-theme',next);
+  },220);
+
+  setTimeout(()=>{
+    ripple.style.transition='opacity 0.18s ease';
+    ripple.style.opacity='0';
+    setTimeout(()=>ripple.remove(),200);
+  },560);
 }
 function updateThemeIcon(t){
   // handled purely via CSS data-theme attribute now

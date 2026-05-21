@@ -1458,7 +1458,7 @@
       "pt": "voksen",
       "procs": [
         {
-          "name": "RG Caput / RG Orbita ved spÃÂ¸rsmÃÂ¥l om fremmedlegeme",
+          "name": "RG Caput / RG Orbita ved spørsmål om fremmedlegeme",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17197.pdf"
         }
       ]
@@ -1485,7 +1485,7 @@
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK14398.pdf"
         },
         {
-          "name": "Oro-anal transittid (OATT) mÃÂ¥ling med pellets",
+          "name": "Oro-anal transittid (OATT) måling med pellets",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK12435.pdf"
         },
         {
@@ -1524,11 +1524,11 @@
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04177.pdf"
         },
         {
-          "name": "RG ScoliosemÃÂ¥ling LAB 4 Moss",
+          "name": "RG Scoliosemåling LAB 4 Moss",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK25941.pdf"
         },
         {
-          "name": "RG ScoliosemÃÂ¥ling LAB 3 Moss",
+          "name": "RG Scoliosemåling LAB 3 Moss",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK53606.pdf"
         }
       ]
@@ -1547,19 +1547,19 @@
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04226.pdf"
         },
         {
-          "name": "RG AksemÃÂ¥ling underekstremiteter LAB 4 Moss",
+          "name": "RG Aksemåling underekstremiteter LAB 4 Moss",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK48247.pdf"
         },
         {
-          "name": "RG AksemÃÂ¥ling underekstremiteter LAB 3 Moss",
+          "name": "RG Aksemåling underekstremiteter LAB 3 Moss",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK53607.pdf"
         },
         {
-          "name": "RG BenlengdemÃÂ¥ling LAB 4 Moss",
+          "name": "RG Benlengdemåling LAB 4 Moss",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK20356.pdf"
         },
         {
-          "name": "RG BenlengdemÃÂ¥ling LAB 3 Moss",
+          "name": "RG Benlengdemåling LAB 3 Moss",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK53605.pdf"
         }
       ]
@@ -1598,7 +1598,7 @@
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04220.pdf"
         },
         {
-          "name": "RG HÃÂ¥ndledd",
+          "name": "RG Håndledd",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04221.pdf"
         },
         {
@@ -1606,7 +1606,7 @@
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04222.pdf"
         },
         {
-          "name": "RG HÃÂ¥nd",
+          "name": "RG Hånd",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04223.pdf"
         },
         {
@@ -1641,7 +1641,7 @@
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04231.pdf"
         },
         {
-          "name": "RG Fot / tÃÂ¦r",
+          "name": "RG Fot / tær",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04232.pdf"
         }
       ]
@@ -1656,7 +1656,7 @@
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK14308.pdf"
         },
         {
-          "name": "RG Thorax / Abdomen pÃÂ¥ nyfÃÂ¸dtintensiv (NFI)",
+          "name": "RG Thorax / Abdomen på nyfødtintensiv (NFI)",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK12260.pdf"
         },
         {
@@ -1668,7 +1668,7 @@
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK18596.pdf"
         },
         {
-          "name": "RG Tarmpassasje pÃÂ¥ barn",
+          "name": "RG Tarmpassasje på barn",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK26576.pdf"
         }
       ]
@@ -1733,11 +1733,11 @@
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17977.pdf"
         },
         {
-          "name": "RG HÃÂ¥ndledd barn",
+          "name": "RG Håndledd barn",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK48348.pdf"
         },
         {
-          "name": "RG HÃÂ¥nd, fingre, skjelettalder av barn",
+          "name": "RG Hånd, fingre, skjelettalder av barn",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17954.pdf"
         }
       ]
@@ -1771,19 +1771,19 @@
     },
     {
       "id": "spesial",
-      "label": "SpesialundersÃÂ¸kelser",
+      "label": "Spesialundersøkelser",
       "pt": "barn",
       "procs": [
         {
-          "name": "RG UndersÃÂ¸kelse ved mistanke om barnemishandel / plutselig spedbarnsdÃÂ¸d",
+          "name": "RG Undersøkelse ved mistanke om barnemishandel / plutselig spedbarnsdÃÂ¸d",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK16285.pdf"
         },
         {
-          "name": "RG ved Skjelettdysplasier pÃÂ¥ barn",
+          "name": "RG ved Skjelettdysplasier på barn",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK16286.pdf"
         },
         {
-          "name": "RG Totalskjelett ved dÃÂ¸dfÃÂ¸dsel/abort",
+          "name": "RG Totalskjelett ved dødfødsel/abort",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17202.pdf"
         }
       ]
@@ -1794,7 +1794,7 @@
       "pt": "annet",
       "procs": [
         {
-          "name": "BoneView - Kunstig intelligens pÃÂ¥ akutt skjelettrÃÂ¸ntgen",
+          "name": "BoneView - Kunstig intelligens på akutt skjelettrøntgen",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK53175.pdf"
         },
         {
@@ -1802,7 +1802,7 @@
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK42987.pdf"
         },
         {
-          "name": "Henging av konvensjonelle rÃÂ¸ntgenbilder i PACS",
+          "name": "Henging av konvensjonelle røntgenbilder i PACS",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK42983.pdf"
         },
         {
@@ -1840,10 +1840,6 @@
     {
       "name": "Transportabel 4",
       "url": "https://hsorhf.sharepoint.com/:w:/r/sites/SHF-O-461010BildediagnostikkAkuttKalnes/_layouts/15/Doc.aspx?sourcedoc=%7B4E2EF88B-4AF1-4805-AD0A-AF7BF2826A4D%7D&file=LOGGBOK%20TRANSPORTABELT%204.docx&action=default&mobileredirect=true"
-    },
-    {
-      "name": "VG",
-      "url": "https://www.vg.no"
     }
   ],
   "ct_prot": {

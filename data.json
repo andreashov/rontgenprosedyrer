@@ -887,7 +887,7 @@
       "color": "#1a4f8a",
       "entries": [
         {
-          "name": "Døgnområde 1 Ã¢ÂÂ Hjerte",
+          "name": "Døgnområde 1 - Hjerte",
           "role": "08A02",
           "nums": [
             {
@@ -901,7 +901,7 @@
           ]
         },
         {
-          "name": "Døgnområde 2 Ã¢ÂÂ Infeksjonsmedisin",
+          "name": "Døgnområde 2 - Infeksjonsmedisin",
           "role": "03G02",
           "nums": [
             {
@@ -915,7 +915,7 @@
           ]
         },
         {
-          "name": "Døgnområde 3 Ã¢ÂÂ Lungemedisin",
+          "name": "Døgnområde 3 - Lungemedisin",
           "role": "03E02",
           "nums": [
             {
@@ -929,7 +929,7 @@
           ]
         },
         {
-          "name": "Døgnområde 4 Ã¢ÂÂ Nevrologi",
+          "name": "Døgnområde 4 - Nevrologi",
           "role": "03C02",
           "nums": [
             {
@@ -943,7 +943,7 @@
           ]
         },
         {
-          "name": "Døgnområde 6 Ã¢ÂÂ Ortopedi",
+          "name": "Døgnområde 6 - Ortopedi",
           "role": "03A03",
           "nums": [
             {
@@ -957,7 +957,7 @@
           ]
         },
         {
-          "name": "Døgnområde 7 Ã¢ÂÂ Gastrokir / Plastikk",
+          "name": "Døgnområde 7 - Gastrokir / Plastikk",
           "role": "03G04",
           "nums": [
             {
@@ -971,7 +971,7 @@
           ]
         },
         {
-          "name": "Døgnområde 8 Ã¢ÂÂ ÃÂNH / Kar / Uro",
+          "name": "Døgnområde 8 - ØNH / Kar / Uro",
           "role": "03E04",
           "nums": [
             {

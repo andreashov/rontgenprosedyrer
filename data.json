@@ -1814,17 +1814,6 @@
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK50556.pdf"
         }
       ]
-    },
-    {
-      "id": "cat-1779389722870",
-      "label": "Test",
-      "procs": [
-        {
-          "name": "VG",
-          "url": "https://www.vg.no/"
-        }
-      ],
-      "pt": "annet"
     }
   ],
   "rg_labs": [

@@ -1937,7 +1937,18 @@
       ]
     }
   ],
-  "gj_cats": [],
+  "gj_cats": [
+    {
+      "id": "cat-1779390180086",
+      "label": "Test",
+      "procs": [
+        {
+          "name": "Test",
+          "url": "https://www.tv2.no/"
+        }
+      ]
+    }
+  ],
   "an_cats": [],
   "ct_cats": [
     {

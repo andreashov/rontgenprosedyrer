@@ -35,20 +35,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 /* SHARED TOPBAR BUTTON BASE */
 .btn-phone,.btn-theme{
   position:relative;
-  width:34px;height:34px;border-radius:10px;border:none;
-  background:var(--accent);
-  box-shadow:0 1px 3px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.08);
+  width:34px;height:34px;border-radius:9px;
+  border:1px solid var(--border);
+  background:var(--surface2);
+  box-shadow:0 1px 2px rgba(0,0,0,.08);
   cursor:pointer;display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;color:#fff;
-  transition:transform .15s,box-shadow .15s,filter .15s;
+  flex-shrink:0;color:var(--accent);
+  transition:transform .15s,background .15s,border-color .15s,box-shadow .15s;
 }
-.btn-phone:hover,.btn-theme:hover{filter:brightness(1.1);box-shadow:0 3px 9px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.08)}
+.btn-phone:hover,.btn-theme:hover{
+  background:var(--accent-light);
+  border-color:var(--accent);
+  box-shadow:0 2px 6px rgba(0,0,0,.12);
+}
 .btn-phone:active,.btn-theme:active{transform:scale(.91)}
-.btn-phone svg,.btn-theme svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.btn-phone svg,.btn-theme svg{width:15px;height:15px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
 /* phone button wider for label */
 .btn-phone{width:auto;padding:0 10px;gap:6px}
-.btn-phone-label{font-size:10px;font-weight:700;letter-spacing:.07em;color:#fff;white-space:nowrap}
+.btn-phone-label{font-size:10px;font-weight:700;letter-spacing:.07em;color:var(--accent);white-space:nowrap}
 
 /* theme icon crossfade */
 .theme-icon-sun,.theme-icon-moon{
@@ -276,7 +281,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <button class="btn-phone" onclick="openContacts()" title="Telefonnummer">
       <svg viewBox="0 0 24 24">
         <rect x="7" y="2" width="10" height="20" rx="2.5"/>
-        <circle cx="12" cy="18.5" r="1" fill="#fff" stroke="none"/>
+        <circle cx="12" cy="18.5" r="1" fill="var(--accent)" stroke="none"/>
       </svg>
       <span class="btn-phone-label">TELEFONI</span>
     </button>
@@ -284,14 +289,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <button class="btn-theme" onclick="toggleTheme()" title="Bytt tema">
       <!-- Måne: fyllt crescent -->
       <span class="theme-icon-moon">
-        <svg viewBox="0 0 24 24" width="16" height="16" stroke="#fff" fill="none" stroke-width="2" stroke-linecap="round">
-          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z" fill="rgba(255,255,255,.15)"/>
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="var(--accent)" fill="none" stroke-width="2" stroke-linecap="round">
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/>
         </svg>
       </span>
       <!-- Sol: ring med 8 stråler -->
       <span class="theme-icon-sun">
-        <svg viewBox="0 0 24 24" width="16" height="16" stroke="#fff" fill="none" stroke-width="2" stroke-linecap="round">
-          <circle cx="12" cy="12" r="4" fill="rgba(255,255,255,.15)"/>
+        <svg viewBox="0 0 24 24" width="16" height="16" stroke="var(--accent)" fill="none" stroke-width="2" stroke-linecap="round">
+          <circle cx="12" cy="12" r="4"/>
           <line x1="12" y1="2"  x2="12" y2="5"/>
           <line x1="12" y1="19" x2="12" y2="22"/>
           <line x1="2"  y1="12" x2="5"  y2="12"/>

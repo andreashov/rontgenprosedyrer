@@ -35,7 +35,7 @@
           ]
         },
         {
-          "name": "LAB 5 Ã¢ÂÂ Gjennomlysning",
+          "name": "LAB 5 - Gjennomlysning",
           "role": "",
           "nums": [
             {
@@ -265,7 +265,7 @@
       "color": "#993556",
       "entries": [
         {
-          "name": "PrimÃÂ¦rvakt radiologi",
+          "name": "Primærvakt radiologi",
           "role": "",
           "nums": [
             {
@@ -285,7 +285,7 @@
           ]
         },
         {
-          "name": "RÃÂ¸ntgen granskning",
+          "name": "Røntgen granskning",
           "role": "",
           "nums": [
             {
@@ -325,7 +325,7 @@
           ]
         },
         {
-          "name": "NukleÃÂ¦r",
+          "name": "Nukleær",
           "role": "",
           "nums": [
             {
@@ -335,7 +335,7 @@
           ]
         },
         {
-          "name": "NukleÃÂ¦r granskning",
+          "name": "Nukleær granskning",
           "role": "",
           "nums": [
             {
@@ -405,7 +405,7 @@
           ]
         },
         {
-          "name": "Telefonslusa GrÃÂ¥lum",
+          "name": "Telefonslusa Grålum",
           "role": "",
           "nums": [
             {
@@ -415,7 +415,7 @@
           ]
         },
         {
-          "name": "CD-brenning GrÃÂ¥lum",
+          "name": "CD-brenning Grålum",
           "role": "",
           "nums": [
             {
@@ -425,7 +425,7 @@
           ]
         },
         {
-          "name": "CT akutt GrÃÂ¥lum (booking)",
+          "name": "CT akutt Grålum (booking)",
           "role": "",
           "nums": [
             {
@@ -435,7 +435,7 @@
           ]
         },
         {
-          "name": "CT GrÃÂ¥lum",
+          "name": "CT Grålum",
           "role": "",
           "nums": [
             {
@@ -445,7 +445,7 @@
           ]
         },
         {
-          "name": "Ultralyd GrÃÂ¥lum (booking)",
+          "name": "Ultralyd Grålum (booking)",
           "role": "",
           "nums": [
             {
@@ -455,7 +455,7 @@
           ]
         },
         {
-          "name": "RÃÂ¸ntgen GrÃÂ¥lum",
+          "name": "Røntgen Grålum",
           "role": "",
           "nums": [
             {
@@ -465,7 +465,7 @@
           ]
         },
         {
-          "name": "MR GrÃÂ¥lum",
+          "name": "MR Grålum",
           "role": "",
           "nums": [
             {
@@ -475,7 +475,7 @@
           ]
         },
         {
-          "name": "Henvisninger GrÃÂ¥lum",
+          "name": "Henvisninger Grålum",
           "role": "",
           "nums": [
             {
@@ -485,7 +485,7 @@
           ]
         },
         {
-          "name": "Skriving GrÃÂ¥lum",
+          "name": "Skriving Grålum",
           "role": "",
           "nums": [
             {
@@ -545,7 +545,7 @@
           ]
         },
         {
-          "name": "VeslemÃÂ¸y BÃÂ¸hn",
+          "name": "Veslemøy Bøhn",
           "role": "Driftskoordinator akutt",
           "nums": [
             {
@@ -565,7 +565,7 @@
           ]
         },
         {
-          "name": "Cecilie StrÃÂ¸mÃÂ¸",
+          "name": "Cecilie Strømø",
           "role": "Seksjonsleder nukleÃÂ¦r og BDS",
           "nums": [
             {
@@ -589,7 +589,7 @@
       "color": "#156d8a",
       "entries": [
         {
-          "name": "RÃÂ¸ntgen",
+          "name": "Røntgen",
           "role": "Moss",
           "nums": [
             {
@@ -599,7 +599,7 @@
           ]
         },
         {
-          "name": "CT 1",
+          "name": "CT 1 Moss",
           "role": "Moss",
           "nums": [
             {
@@ -609,7 +609,7 @@
           ]
         },
         {
-          "name": "CT 2",
+          "name": "CT 2 Moss",
           "role": "Moss",
           "nums": [
             {
@@ -619,7 +619,7 @@
           ]
         },
         {
-          "name": "Ultralyd",
+          "name": "Ultralyd Moss",
           "role": "Moss",
           "nums": [
             {
@@ -629,7 +629,7 @@
           ]
         },
         {
-          "name": "MR",
+          "name": "MR Moss",
           "role": "Moss",
           "nums": [
             {
@@ -645,7 +645,7 @@
       "color": "#854F0B",
       "entries": [
         {
-          "name": "PET CT Ã¢ÂÂ SPECT CT",
+          "name": "PET CT / SPECT CT",
           "role": "NukleÃÂ¦r",
           "nums": [
             {
@@ -711,7 +711,7 @@
           ]
         },
         {
-          "name": "SekretÃÂ¦r BDS",
+          "name": "Sekretær BDS",
           "role": "",
           "nums": [
             {
@@ -747,7 +747,7 @@
           ]
         },
         {
-          "name": "Telefaks GrÃÂ¥lum",
+          "name": "Telefaks Grålum",
           "role": "",
           "nums": [
             {

@@ -887,7 +887,7 @@
       "color": "#1a4f8a",
       "entries": [
         {
-          "name": "DÃÂ¸gnomrÃÂ¥de 1 - Hjerte",
+          "name": "Døgnområde 1 - Hjerte",
           "role": "08A02",
           "nums": [
             {
@@ -901,7 +901,7 @@
           ]
         },
         {
-          "name": "DÃÂ¸gnomrÃÂ¥de 2 - Infeksjonsmedisin",
+          "name": "Døgnområde 2 - Infeksjonsmedisin",
           "role": "03G02",
           "nums": [
             {
@@ -915,7 +915,7 @@
           ]
         },
         {
-          "name": "DÃÂ¸gnomrÃÂ¥de 3 - Lungemedisin",
+          "name": "Døgnområde 3 - Lungemedisin",
           "role": "03E02",
           "nums": [
             {

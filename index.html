@@ -224,6 +224,40 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .contact-num:hover{text-decoration:underline}
 .no-contact-results{padding:2rem 10px;text-align:center;font-size:12px;color:var(--text3)}
 
+/* ADMIN */
+.admin-overlay{position:fixed;inset:0;z-index:500;pointer-events:none}
+.admin-overlay.open{pointer-events:all}
+.admin-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.45);opacity:0;transition:opacity .25s}
+.admin-overlay.open .admin-backdrop{opacity:1}
+.admin-drawer{position:fixed;top:0;bottom:0;left:50%;width:100%;max-width:480px;transform:translateX(-50%) translateX(100%);background:var(--surface);display:flex;flex-direction:column;transition:transform .28s cubic-bezier(.2,.8,.3,1);box-shadow:-4px 0 24px rgba(0,0,0,.2);visibility:hidden}
+.admin-overlay.open .admin-drawer{transform:translateX(-50%) translateX(0);visibility:visible;transition:transform .28s cubic-bezier(.2,.8,.3,1),visibility 0s}
+.admin-drawer-top{display:flex;align-items:center;gap:8px;padding:0 12px;height:48px;background:var(--surface2);border-bottom:1px solid var(--border);flex-shrink:0}
+.admin-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--surface2);flex-shrink:0;overflow-x:auto}
+.admin-tab{flex:1;padding:9px 4px;border:none;background:transparent;font-size:10px;font-weight:700;color:var(--text3);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:color .15s,border-color .15s}
+.admin-tab.on{color:var(--accent);border-bottom-color:var(--accent)}
+.admin-content{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:10px}
+.admin-bottom{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-top:1px solid var(--border);background:var(--surface2);flex-shrink:0;gap:8px}
+.admin-save-btn{padding:8px 14px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-size:12px;font-weight:700;cursor:pointer;transition:filter .15s}
+.admin-save-btn:hover{filter:brightness(1.12)}
+.admin-save-btn:disabled{opacity:.5;cursor:default}
+.adm-logout-btn{padding:7px 12px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text2);font-size:11px;font-weight:600;cursor:pointer}
+.admin-status{font-size:11px;font-weight:600;color:var(--text3)}.admin-status.ok{color:#0f7a5a}.admin-status.err{color:#c0392b}
+.adm-group{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:7px}
+.adm-group-head{display:flex;align-items:center;gap:7px;margin-bottom:2px}
+.adm-group-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.adm-entry{background:var(--surface);border:1px solid var(--border);border-radius:7px;padding:8px;display:flex;flex-direction:column;gap:5px}
+.adm-entry-row{display:flex;align-items:center;gap:5px}
+.adm-num-row{display:flex;align-items:center;gap:5px;padding-left:8px}
+.adm-inp{flex:1;padding:5px 8px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:11px;min-width:0}
+.adm-inp:focus{outline:none;border-color:var(--accent)}
+.adm-inp-sm{max-width:80px;flex:none}
+.adm-inp-url{font-size:10px}
+.adm-sel{padding:5px 6px;border-radius:6px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:11px}
+.adm-icon-btn{width:26px;height:26px;border-radius:6px;border:1px solid var(--border);background:var(--surface);color:var(--text3);cursor:pointer;font-size:11px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.adm-del:hover{background:#fde8e8;border-color:#e57373;color:#c0392b}
+.adm-add-btn{padding:4px 10px;border-radius:6px;border:1px dashed var(--border);background:transparent;color:var(--accent);font-size:11px;font-weight:600;cursor:pointer;text-align:left}
+.adm-add-group-btn{padding:8px;border-radius:8px;border:1px dashed var(--accent);background:var(--accent-light);color:var(--accent);font-size:12px;font-weight:700;cursor:pointer;text-align:center}
+
 @media(max-width:640px){
   body{height:auto;min-height:100vh;overflow:auto;max-width:100%}
   .panel-section.active{min-height:200px}
@@ -232,7 +266,51 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 </head>
 <body>
 
-<!-- CONTACT DRAWER -->
+<!-- LOAD ERROR -->
+<div id="load-error" style="display:none;position:fixed;inset:0;z-index:5000;background:var(--bg);flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:2rem;text-align:center">
+  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--text3)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="16" r="1" fill="var(--text3)"/></svg>
+  <p style="font-size:14px;font-weight:600;color:var(--text)">Kunne ikke laste data</p>
+  <p style="font-size:12px;color:var(--text3)">Sjekk internett-tilkoblingen og last siden på nytt.</p>
+  <button onclick="location.reload()" style="padding:8px 16px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--accent);font-weight:600;cursor:pointer">Last på nytt</button>
+</div>
+
+<!-- ADMIN OVERLAY -->
+<div id="admin-overlay" class="admin-overlay">
+  <div class="admin-backdrop" onclick="closeAdmin()"></div>
+  <div class="admin-drawer">
+    <div class="admin-drawer-top">
+      <span style="font-size:13px;font-weight:700;color:var(--text);flex:1">⚙ Admin</span>
+      <div id="admin-status" class="admin-status"></div>
+      <button id="admin-save-btn" class="admin-save-btn" onclick="adminSave()" style="display:none">Lagre til GitHub</button>
+      <button class="adm-icon-btn" onclick="closeAdmin()" style="margin-left:4px">✕</button>
+    </div>
+
+    <!-- LOGIN -->
+    <div id="admin-login" style="display:flex;flex-direction:column;gap:14px;padding:20px">
+      <p style="font-size:12px;color:var(--text2);line-height:1.6">Lim inn et GitHub Personal Access Token med <strong>repo</strong>-tilgang. Tokenet lagres lokalt i nettleseren.</p>
+      <input id="admin-token-input" type="password" class="adm-inp" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" style="width:100%">
+      <button class="admin-save-btn" onclick="adminDoLogin()">Logg inn</button>
+      <p style="font-size:10px;color:var(--text3)">Opprett token på: github.com → Settings → Developer settings → Personal access tokens</p>
+    </div>
+
+    <!-- PANEL -->
+    <div id="admin-panel" style="display:none;flex-direction:column;flex:1;overflow:hidden">
+      <div class="admin-tabs">
+        <button class="admin-tab on" data-tab="intern" onclick="adminSetTab('intern')">Bildediagnostikk</button>
+        <button class="admin-tab" data-tab="other" onclick="adminSetTab('other')">Sykehuset</button>
+        <button class="admin-tab" data-tab="procs" onclick="adminSetTab('procs')">Prosedyrer</button>
+        <button class="admin-tab" data-tab="labs" onclick="adminSetTab('labs')">Loggbøker</button>
+      </div>
+      <div id="admin-content" class="admin-content"></div>
+      <div class="admin-bottom">
+        <button class="adm-logout-btn" onclick="adminLogout()">Logg ut</button>
+        <button id="admin-save-btn2" class="admin-save-btn" onclick="adminSave()">💾 Lagre til GitHub</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <div class="contact-overlay" id="contact-overlay">
   <div class="contact-backdrop" onclick="closeContacts()"></div>
   <div class="contact-drawer">
@@ -272,7 +350,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 </div>
 
 <div class="topbar">
-  <div class="logo-wrap">
+  <div class="logo-wrap" onclick="logoClick()" style="cursor:default">
     <svg width="26" height="26" viewBox="0 0 34 34" fill="none">
       <circle cx="8" cy="8" r="5.5" fill="#5bb3e8"/>
       <circle cx="22" cy="8" r="4.5" fill="#5bb3e8" opacity=".6"/>
@@ -433,207 +511,254 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 </div>
 
 <script>
-// ── CONTACT DATA ──────────────────────────────────────────────────────────
-// Each entry: {name, role, nums:[{num, label}]}
-const INTERN_GROUPS=[
-  {group:'Røntgen Kalnes',color:'#1a4f8a',entries:[
-    {name:'Radiograf Vaktansvarlig',role:'',nums:[{num:'96 09 09 44',label:''}]},
-    {name:'Radiograf Stuetelefon',role:'',nums:[{num:'41 70 88 88',label:''}]},
-    {name:'LAB 4',role:'',nums:[{num:'69 86 88 34',label:''}]},
-    {name:'LAB 5 – Gjennomlysning',role:'',nums:[{num:'69 86 88 22',label:''}]},
-    {name:'LAB 6',role:'',nums:[{num:'69 86 88 59',label:''}]},
-    {name:'LAB 7',role:'',nums:[{num:'69 86 88 61',label:''}]},
-    {name:'Gjennomlysning mobiltelefon',role:'',nums:[{num:'96 09 04 42',label:''}]},
-    {name:'Pauserom 2. etg',role:'',nums:[{num:'69 86 88 52',label:''}]},
-    {name:'Beredskapstelefon',role:'',nums:[{num:'91 00 20 37',label:''}]},
-  ]},
-  {group:'CT Kalnes',color:'#1e6fa0',entries:[
-    {name:'CT Radiograf',role:'',nums:[{num:'41 70 83 62',label:''}]},
-    {name:'CT 1 Kalnes',role:'',nums:[{num:'69 86 88 53',label:''}]},
-    {name:'CT 2 Kalnes',role:'',nums:[{num:'69 86 88 54',label:''}]},
-    {name:'CT 3 Kalnes',role:'',nums:[{num:'69 86 88 06',label:''}]},
-    {name:'CT3 mobiltelefon',role:'',nums:[{num:'96 09 04 41',label:''}]},
-  ]},
-  {group:'Ultralyd Kalnes',color:'#156d8a',entries:[
-    {name:'Ultralyd radiograf',role:'',nums:[{num:'41 70 83 64',label:''}]},
-    {name:'Ultralyd akuttmottak',role:'',nums:[{num:'96 09 04 45',label:''}]},
-    {name:'ULTRALYD 1',role:'',nums:[{num:'69 86 88 55',label:''}]},
-    {name:'ULTRALYD 2',role:'',nums:[{num:'69 86 88 35',label:''}]},
-    {name:'ULTRALYD 3',role:'',nums:[{num:'69 86 88 38',label:''}]},
-  ]},
-  {group:'Angio Kalnes',color:'#0f5975',entries:[
-    {name:'Radiograf angio',role:'',nums:[{num:'41 70 83 63',label:''}]},
-    {name:'Angiolab',role:'',nums:[{num:'69 86 88 57',label:''}]},
-  ]},
-  {group:'MR Kalnes',color:'#0f7a5a',entries:[
-    {name:'MR Radiograf',role:'',nums:[{num:'96 09 04 40',label:''}]},
-    {name:'MR Kalnes',role:'',nums:[{num:'69 86 88 37',label:''}]},
-  ]},
-  {group:'Radiolog',color:'#993556',entries:[
-    {name:'Primærvakt radiologi',role:'',nums:[{num:'96 09 09 43',label:''}]},
-    {name:'Vaktrom',role:'',nums:[{num:'69 86 80 17',label:''}]},
-    {name:'Røntgen granskning',role:'',nums:[{num:'69 86 88 56',label:''}]},
-    {name:'CT Helpdesk',role:'',nums:[{num:'41 70 83 55',label:''}]},
-    {name:'MR Helpdesk',role:'',nums:[{num:'41 70 83 56',label:''}]},
-    {name:'Intervensjonsvakt',role:'',nums:[{num:'96 09 04 43',label:''}]},
-    {name:'Nukleær',role:'',nums:[{num:'41 70 83 58',label:''}]},
-    {name:'Nukleær granskning',role:'',nums:[{num:'69 86 88 42',label:''}]},
-    {name:'BDS',role:'',nums:[{num:'41 70 83 53',label:''}]},
-  ]},
-  {group:'Kontor',color:'#5a4f8a',entries:[
-    {name:'Ekspedisjon Kalnes pol',role:'1. etg',nums:[{num:'69 86 88 40',label:''}]},
-    {name:'Ekspedisjon Kalnes akutt',role:'2. etg',nums:[{num:'69 86 88 51',label:''}]},
-    {name:'Ekspedisjon Moss',role:'',nums:[{num:'69 86 66 00',label:''},{num:'69 86 66 01',label:''}]},
-    {name:'Telerad / CD-brenning',role:'Man–fre 08–21, Lør 08–15:30, Søn 09–16:30',nums:[{num:'69 86 82 98',label:''}]},
-    {name:'Telefonslusa Grålum',role:'',nums:[{num:'69 86 53 30',label:''}]},
-    {name:'CD-brenning Grålum',role:'',nums:[{num:'69 86 54 38',label:''}]},
-    {name:'CT akutt Grålum (booking)',role:'',nums:[{num:'69 86 54 57',label:''}]},
-    {name:'CT Grålum',role:'',nums:[{num:'69 86 54 39',label:''}]},
-    {name:'Ultralyd Grålum (booking)',role:'',nums:[{num:'69 86 54 54',label:''}]},
-    {name:'Røntgen Grålum',role:'',nums:[{num:'69 86 54 53',label:''}]},
-    {name:'MR Grålum',role:'',nums:[{num:'69 86 54 58',label:''}]},
-    {name:'Henvisninger Grålum',role:'',nums:[{num:'69 86 54 52',label:''}]},
-    {name:'Skriving Grålum',role:'',nums:[{num:'69 86 54 50',label:''}]},
-    {name:'BDS',role:'',nums:[{num:'69 86 80 93',label:''}]},
-  ]},
-  {group:'Ledere',color:'#3C3489',entries:[
-    {name:'Eivind Reitan',role:'Avdelingssjef',nums:[{num:'90 95 74 59',label:''}]},
-    {name:'Beate Mangseth',role:'Seksjonsleder akutt',nums:[{num:'69 86 88 62',label:''},{num:'95 06 40 64',label:'Mobil'}]},
-    {name:'Markus A. Jaworski',role:'Assisterende seksjonsleder akutt',nums:[{num:'97 400 200',label:''}]},
-    {name:'Veslemøy Bøhn',role:'Driftskoordinator akutt',nums:[{num:'91 71 58 70',label:''}]},
-    {name:'Christin Larsen',role:'Seksjonsleder kontor',nums:[{num:'99 01 95 69',label:''}]},
-    {name:'Cecilie Strømø',role:'Seksjonsleder nukleær og BDS',nums:[{num:'69 86 88 25',label:''},{num:'69 86 88 26',label:''},{num:'93 09 75 87',label:'Mobil'}]},
-  ]},
-  {group:'Moss',color:'#156d8a',entries:[
-    {name:'Røntgen',role:'Moss',nums:[{num:'69 86 66 13',label:''}]},
-    {name:'CT 1',role:'Moss',nums:[{num:'69 86 66 07',label:''}]},
-    {name:'CT 2',role:'Moss',nums:[{num:'69 86 66 12',label:''}]},
-    {name:'Ultralyd',role:'Moss',nums:[{num:'69 86 66 09',label:''}]},
-    {name:'MR',role:'Moss',nums:[{num:'69 86 66 28',label:''}]},
-  ]},
-  {group:'Nukleærmedisin',color:'#854F0B',entries:[
-    {name:'PET CT – SPECT CT',role:'Nukleær',nums:[{num:'69 86 88 11',label:''}]},
-    {name:'Injeksjonsrom 1',role:'Nukleær',nums:[{num:'69 86 88 12',label:''}]},
-    {name:'Injeksjonsrom 2',role:'Nukleær',nums:[{num:'69 86 88 09',label:''}]},
-  ]},
-  {group:'BDS / Screening',color:'#993556',entries:[
-    {name:'Mammografiscreening',role:'',nums:[{num:'69 86 81 70',label:''}]},
-    {name:'Arbeidsrom Mammografiscreening',role:'',nums:[{num:'69 86 88 03',label:''}]},
-    {name:'Radiograf BDS',role:'',nums:[{num:'96 09 04 38',label:''}]},
-    {name:'Sekretær BDS',role:'',nums:[{num:'96 09 04 34',label:''}]},
-  ]},
-  {group:'Telefaks',color:'#4a5a72',entries:[
-    {name:'Kalnes ekspedisjon',role:'1. etg',nums:[{num:'69 86 48 83',label:''}]},
-    {name:'Kalnes ekspedisjon akutt',role:'2. etg',nums:[{num:'69 86 48 51',label:''}]},
-    {name:'Telefaks Grålum',role:'',nums:[{num:'69 14 09 63',label:''}]},
-  ]},
-];
+// ── CONFIG ────────────────────────────────────────────────────────────────
+const GITHUB_OWNER = 'andreashov';
+const GITHUB_REPO  = 'rontgenprosedyrer';
+const GITHUB_FILE  = 'data.json';
+const RAW_URL = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/${GITHUB_FILE}`;
+const API_URL = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FILE}`;
 
-const OTHER_GROUPS=[
-  {group:'Akuttmottak og OBS-post',color:'#993C1D',entries:[
-    {name:'Akuttmottak',role:'08B02',nums:[{num:'69 86 82 50',label:'Resepsjon'}]},
-    {name:'OBS-post',role:'08B02-2',nums:[{num:'69 86 82 94',label:'Resepsjon'},{num:'96 09 09 50',label:'Vaktsykepleier'}]},
-    {name:'Akuttkirurgisk',role:'08B02-3',nums:[{num:'96 09 09 59',label:'Vaktsykepleier'}]},
-  ]},
-  {group:'Ambulanse',color:'#7a4010',entries:[
-    {name:'Ambulansebestilling / kontroll',role:'',nums:[{num:'64 89 57 03',label:'Resepsjon'},{num:'22 93 22 19',label:'Vaktsykepleier'}]},
-  ]},
-  {group:'INT / MOV / PO / Operasjon',color:'#7a2020',entries:[
-    {name:'Intensiv',role:'08A03-2',nums:[{num:'69 86 83 91',label:'Resepsjon'},{num:'96 09 09 87',label:'Vaktsykepleier'}]},
-    {name:'Overvåkning',role:'08A03',nums:[{num:'69 86 83 10',label:'Resepsjon'},{num:'96 09 09 86',label:'Vaktsykepleier'}]},
-    {name:'Operasjon',role:'08C03',nums:[{num:'69 86 83 20',label:'Resepsjon'},{num:'96 09 09 25',label:'Vaktsykepleier'}]},
-    {name:'Postoperativ',role:'08B03',nums:[{num:'69 86 83 97',label:'Resepsjon'},{num:'96 09 08 01',label:'Vaktsykepleier'}]},
-  ]},
-  {group:'Døgnområder',color:'#1a4f8a',entries:[
-    {name:'Døgnområde 1 – Hjerte',role:'08A02',nums:[{num:'69 86 82 10',label:'Resepsjon'},{num:'96 09 09 69',label:'Vaktsykepleier'}]},
-    {name:'Døgnområde 2 – Infeksjonsmedisin',role:'03G02',nums:[{num:'69 86 32 40',label:'Resepsjon'},{num:'96 09 09 70',label:'Vaktsykepleier'}]},
-    {name:'Døgnområde 3 – Lungemedisin',role:'03E02',nums:[{num:'69 86 32 30',label:'Resepsjon'},{num:'96 09 09 71',label:'Vaktsykepleier'}]},
-    {name:'Døgnområde 4 – Nevrologi',role:'03C02',nums:[{num:'69 86 32 20',label:'Resepsjon'},{num:'96 09 09 72',label:'Vaktsykepleier'}]},
-    {name:'Døgnområde 6 – Ortopedi',role:'03A03',nums:[{num:'69 86 33 10',label:'Resepsjon'},{num:'96 09 09 74',label:'Vaktsykepleier'}]},
-    {name:'Døgnområde 7 – Gastrokir / Plastikk',role:'03G04',nums:[{num:'69 86 34 41',label:'Resepsjon'},{num:'96 09 09 75',label:'Vaktsykepleier'}]},
-    {name:'Døgnområde 8 – ØNH / Kar / Uro',role:'03E04',nums:[{num:'69 86 34 30',label:'Resepsjon'},{num:'69 86 34 32',label:'Resepsjon 2'},{num:'96 09 09 76',label:'Vaktsykepleier'}]},
-    {name:'Døgnområde 9 – Gastro / Nyre',role:'03C04',nums:[{num:'69 86 34 92',label:'Resepsjon'},{num:'96 09 09 77',label:'Vaktsykepleier'}]},
-    {name:'Døgnområde 9 – Geriatri / Endokrin',role:'03C04-2',nums:[{num:'69 86 34 20',label:'Resepsjon'},{num:'96 09 00 19',label:'Vaktsykepleier'}]},
-    {name:'Døgnområde 10 – Kreft',role:'03A04',nums:[{num:'69 86 34 10',label:'Resepsjon'},{num:'96 09 00 17',label:'Vaktsykepleier'}]},
-    {name:'Døgnområde 11 – Akuttmedisin',role:'',nums:[{num:'69 86 32 12',label:'Resepsjon'}]},
-  ]},
-  {group:'Føde og barn',color:'#0f7a5a',entries:[
-    {name:'Nyfødtintensiv',role:'03G03',nums:[{num:'69 86 33 40',label:'Resepsjon'},{num:'96 09 09 33',label:'Vaktsykepleier'}]},
-    {name:'Barne- og ungdomsavdelingen',role:'',nums:[{num:'69 86 30 52',label:'Resepsjon'},{num:'69 86 30 51',label:'Resepsjon 2'}]},
-    {name:'Barn og ungdom – poliklinikk',role:'03CU1',nums:[{num:'69 86 30 19',label:'Resepsjon'}]},
-    {name:'Føde og barsel',role:'03E03',nums:[{num:'69 86 33 30',label:'Resepsjon'}]},
-    {name:'Jordmor – telefonvakt',role:'',nums:[{num:'41 70 86 77',label:'Vaktsykepleier'}]},
-    {name:'Føde og barsel Gynekologi',role:'03C03',nums:[{num:'69 86 33 20',label:'Resepsjon'},{num:'96 09 06 91',label:'Vaktsykepleier'}]},
-  ]},
-  {group:'Poliklinikker',color:'#156d8a',entries:[
-    {name:'Poliklinikk 1 – Nevrologi, infeksjon, geriatri',role:'08A01',nums:[{num:'69 86 81 30',label:'Resepsjon'}]},
-    {name:'Poliklinikk 2 – Dialyse, nyrepoliklinikk',role:'03D01',nums:[{num:'69 86 31 10',label:'Resepsjon'},{num:'96 09 04 23',label:'Vaktsykepleier'}]},
-    {name:'Poliklinikk 3 – Kirurgi, ort, skadepol',role:'08B01',nums:[{num:'69 86 81 50',label:'Resepsjon'},{num:'41 70 86 22',label:'Vaktsykepleier'},{num:'41 70 86 23',label:'Vaktsykepleier 2'}]},
-    {name:'Poliklinikk 4 – Føde, barsel, gyn, kreft',role:'03E01',nums:[{num:'69 86 31 20',label:'Resepsjon'}]},
-    {name:'Poliklinikk 5 – Gastro',role:'08B01',nums:[{num:'69 86 81 93',label:'Resepsjon'}]},
-    {name:'Poliklinikk 6 – ØNH, Hjerte, lunge',role:'03G01',nums:[{num:'90 25 39 74',label:'Resepsjon'},{num:'96 09 00 26',label:'Vaktsykepleier'}]},
-  ]},
-  {group:'Psykiatri',color:'#534AB7',entries:[
-    {name:'Psykiatrisk akuttmottak (PAM)',role:'04F01',nums:[{num:'69 86 41 50',label:'Resepsjon'}]},
-    {name:'Psykisk helsevern',role:'04B01',nums:[{num:'69 86 41 10',label:'Resepsjon'}]},
-    {name:'Affektive lidelser',role:'04B01',nums:[{num:'69 86 42 10',label:'Resepsjon'}]},
-    {name:'Psykose utredning',role:'04C03',nums:[{num:'69 86 43 20',label:'Resepsjon'}]},
-    {name:'Psykosebehandling 1',role:'04F02',nums:[{num:'69 86 42 40',label:'Resepsjon'}]},
-    {name:'Psykosebehandling 2',role:'04D02',nums:[{num:'69 86 42 30',label:'Resepsjon'}]},
-    {name:'Psykosebehandling 3',role:'04C02',nums:[{num:'69 86 42 20',label:'Resepsjon'}]},
-    {name:'Psykosebehandling 4',role:'04D01',nums:[{num:'69 86 41 40',label:'Resepsjon'},{num:'41 70 89 01',label:'Vaktsykepleier'}]},
-    {name:'Ungdomspsyk. poliklinikk',role:'04E01',nums:[{num:'69 86 41 40',label:'Resepsjon'}]},
-    {name:'Ungdomspsyk. seksjon',role:'04C01',nums:[{num:'69 86 41 30',label:'Resepsjon'}]},
-    {name:'Sikkerhetsseksjon 1',role:'04FU1',nums:[{num:'69 86 40 20',label:'Resepsjon'}]},
-    {name:'Sikkerhetsseksjon 2',role:'04EU1',nums:[{num:'69 86 40 10',label:'Resepsjon'}]},
-    {name:'Alderspsykiatrisk seksjon',role:'04B03',nums:[{num:'69 86 43 10',label:'Resepsjon'}]},
-  ]},
-  {group:'Støttefunksjoner',color:'#3C3489',entries:[
-    {name:'Sentralbord',role:'',nums:[{num:'69 86 00 00',label:'Resepsjon'}]},
-    {name:'Hovedresepsjon vestibyle',role:'03C01',nums:[{num:'69 86 31 00',label:'Resepsjon'}]},
-    {name:'Portørtjeneste',role:'08BU1',nums:[{num:'69 86 80 30',label:'Resepsjon'},{num:'96 09 00 70',label:'Vaktsykepleier'}]},
-    {name:'Drift og vedlikehold',role:'Teknisk – døgnbemanning 08BU1',nums:[{num:'69 86 80 10',label:'Resepsjon'}]},
-    {name:'Medisinsk teknisk avdeling',role:'',nums:[{num:'69 86 30 95',label:'Resepsjon'},{num:'90 15 19 61',label:'Vaktsykepleier'}]},
-    {name:'Renhold',role:'08BU1',nums:[{num:'69 86 80 20',label:'Resepsjon'},{num:'96 09 00 90',label:'Vaktsykepleier'}]},
-    {name:'Vektertjenesten',role:'03C01',nums:[{num:'69 86 30 00',label:'Resepsjon'}]},
-    {name:'Senter for laboratoriemedisin',role:'Prøvesvar',nums:[{num:'69 86 84 10',label:'Resepsjon'}]},
-    {name:'Sykehuspartner',role:'Døgnåpen',nums:[{num:'32 23 53 30',label:'Vaktsykepleier'}]},
-  ]},
-];
+// ── DATA (populated by loadData) ──────────────────────────────────────────
+let INTERN_GROUPS=[], OTHER_GROUPS=[], RG_CATS=[], RG_LABS=[], CT_PROT={voksen:[],barn:[]};
 
-const openGroupsIntern={};
-INTERN_GROUPS.forEach(g=>openGroupsIntern[g.group]=false);
-const openGroupsOther={};
-OTHER_GROUPS.forEach(g=>openGroupsOther[g.group]=false);
+async function loadData(){
+  try {
+    const res = await fetch(RAW_URL + '?v=' + Date.now());
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    const d = await res.json();
+    INTERN_GROUPS = d.intern_groups || [];
+    OTHER_GROUPS  = d.other_groups  || [];
+    RG_CATS       = d.rg_cats       || [];
+    RG_LABS       = d.rg_labs       || [];
+    CT_PROT       = d.ct_prot       || {voksen:[],barn:[]};
+  } catch(e) {
+    console.error('Kunne ikke laste data:', e);
+    document.getElementById('load-error').style.display = 'flex';
+    return false;
+  }
+  return true;
+}
 
+// ── ADMIN ─────────────────────────────────────────────────────────────────
+let adminToken = localStorage.getItem('admin_token') || '';
+let adminSha   = '';
+let adminTab   = 'intern';
+let adminData  = null; // full parsed JSON
+let logoClicks = 0, logoTimer;
+
+function logoClick(){
+  logoClicks++;
+  clearTimeout(logoTimer);
+  logoTimer = setTimeout(()=>logoClicks=0, 1200);
+  if(logoClicks >= 5){ logoClicks=0; openAdmin(); }
+}
+
+function openAdmin(){
+  document.getElementById('admin-overlay').classList.add('open');
+  if(adminToken) adminShowPanel();
+  else adminShowLogin();
+}
+function closeAdmin(){
+  document.getElementById('admin-overlay').classList.remove('open');
+}
+
+function adminShowLogin(){
+  document.getElementById('admin-login').style.display='flex';
+  document.getElementById('admin-panel').style.display='none';
+}
+async function adminDoLogin(){
+  const tok = document.getElementById('admin-token-input').value.trim();
+  if(!tok){ adminStatus('Lim inn GitHub-token','err'); return; }
+  adminStatus('Verifiserer…','');
+  try {
+    const r = await fetch(API_URL, {headers:{Authorization:'token '+tok, Accept:'application/vnd.github.v3+json'}});
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const j = await r.json();
+    adminSha = j.sha;
+    adminData = JSON.parse(atob(j.content.replace(/\n/g,'')));
+    adminToken = tok;
+    localStorage.setItem('admin_token', tok);
+    document.getElementById('admin-login').style.display='none';
+    adminShowPanel();
+  } catch(e){
+    adminStatus('Feil – sjekk tokenet og prøv igjen','err');
+  }
+}
+function adminLogout(){
+  adminToken=''; localStorage.removeItem('admin_token');
+  adminData=null; adminSha='';
+  adminShowLogin();
+  document.getElementById('admin-token-input').value='';
+}
+function adminStatus(msg, cls){
+  const el=document.getElementById('admin-status');
+  el.textContent=msg; el.className='admin-status '+(cls||'');
+}
+
+function adminShowPanel(){
+  document.getElementById('admin-login').style.display='none';
+  document.getElementById('admin-panel').style.display='flex';
+  adminRender();
+}
+function adminSetTab(t){
+  adminTab=t;
+  document.querySelectorAll('.admin-tab').forEach(b=>b.classList.toggle('on',b.dataset.tab===t));
+  adminRender();
+}
+
+function adminRender(){
+  const out = document.getElementById('admin-content');
+  if(adminTab==='intern')  out.innerHTML = adminRenderGroups(adminData.intern_groups,'intern');
+  if(adminTab==='other')   out.innerHTML = adminRenderGroups(adminData.other_groups,'other');
+  if(adminTab==='procs')   out.innerHTML = adminRenderProcs();
+  if(adminTab==='labs')    out.innerHTML = adminRenderLabs();
+}
+
+// ── ADMIN: TELEFONI ───────────────────────────────────────────────────────
+function adminRenderGroups(groups, ns){
+  return groups.map((g,gi)=>`
+    <div class="adm-group">
+      <div class="adm-group-head">
+        <span class="adm-group-dot" style="background:${g.color}"></span>
+        <strong>${g.group}</strong>
+        <button class="adm-icon-btn adm-del" onclick="admDelGroup('${ns}',${gi})" title="Slett gruppe">✕</button>
+      </div>
+      ${g.entries.map((e,ei)=>`
+        <div class="adm-entry">
+          <div class="adm-entry-row">
+            <input class="adm-inp" value="${esc(e.name)}" placeholder="Navn"
+              onchange="admSet('${ns}',${gi},'entries',${ei},'name',this.value)">
+            <input class="adm-inp adm-inp-sm" value="${esc(e.role)}" placeholder="Kode/rolle"
+              onchange="admSet('${ns}',${gi},'entries',${ei},'role',this.value)">
+            <button class="adm-icon-btn adm-del" onclick="admDelEntry('${ns}',${gi},${ei})" title="Slett">✕</button>
+          </div>
+          ${e.nums.map((n,ni)=>`
+            <div class="adm-num-row">
+              <input class="adm-inp" value="${esc(n.num)}" placeholder="Nummer"
+                onchange="admSetNum('${ns}',${gi},${ei},${ni},'num',this.value)">
+              <input class="adm-inp adm-inp-sm" value="${esc(n.label)}" placeholder="Etikett"
+                onchange="admSetNum('${ns}',${gi},${ei},${ni},'label',this.value)">
+              <button class="adm-icon-btn adm-del" onclick="admDelNum('${ns}',${gi},${ei},${ni})" title="Slett">✕</button>
+            </div>`).join('')}
+          <button class="adm-add-btn" onclick="admAddNum('${ns}',${gi},${ei})">+ Legg til nummer</button>
+        </div>`).join('')}
+      <button class="adm-add-btn" onclick="admAddEntry('${ns}',${gi})">+ Legg til person / sted</button>
+    </div>`).join('') +
+  `<button class="adm-add-group-btn" onclick="admAddGroup('${ns}')">+ Ny gruppe</button>`;
+}
+
+function admGroups(ns){ return ns==='intern'?adminData.intern_groups:adminData.other_groups; }
+function admSet(ns,gi,field,ei,subfield,val){
+  admGroups(ns)[gi][field][ei][subfield]=val;
+}
+function admSetNum(ns,gi,ei,ni,f,v){ admGroups(ns)[gi].entries[ei].nums[ni][f]=v; }
+function admDelGroup(ns,gi){ admGroups(ns).splice(gi,1); adminRender(); }
+function admDelEntry(ns,gi,ei){ admGroups(ns)[gi].entries.splice(ei,1); adminRender(); }
+function admDelNum(ns,gi,ei,ni){ admGroups(ns)[gi].entries[ei].nums.splice(ni,1); adminRender(); }
+function admAddNum(ns,gi,ei){ admGroups(ns)[gi].entries[ei].nums.push({num:'',label:''}); adminRender(); }
+function admAddEntry(ns,gi){ admGroups(ns)[gi].entries.push({name:'',role:'',nums:[{num:'',label:''}]}); adminRender(); }
+function admAddGroup(ns){ admGroups(ns).push({group:'Ny gruppe',color:'#1a4f8a',entries:[]}); adminRender(); }
+
+// ── ADMIN: PROSEDYRER ─────────────────────────────────────────────────────
+function adminRenderProcs(){
+  const cats = adminData.rg_cats;
+  return cats.map((c,ci)=>`
+    <div class="adm-group">
+      <div class="adm-group-head">
+        <input class="adm-inp" value="${esc(c.label)}" placeholder="Kategorinavn"
+          onchange="adminData.rg_cats[${ci}].label=this.value">
+        <select class="adm-sel" onchange="adminData.rg_cats[${ci}].pt=this.value">
+          <option value="voksen"${c.pt==='voksen'?' selected':''}>Voksen</option>
+          <option value="barn"${c.pt==='barn'?' selected':''}>Barn</option>
+          <option value="annet"${c.pt==='annet'?' selected':''}>Annet</option>
+        </select>
+        <button class="adm-icon-btn adm-del" onclick="admDelCat(${ci})" title="Slett kategori">✕</button>
+      </div>
+      ${c.procs.map((p,pi)=>`
+        <div class="adm-entry-row">
+          <input class="adm-inp" value="${esc(p.name)}" placeholder="Prosedyrenavn"
+            onchange="adminData.rg_cats[${ci}].procs[${pi}].name=this.value">
+          <input class="adm-inp adm-inp-url" value="${esc(p.url||'')}" placeholder="URL"
+            onchange="adminData.rg_cats[${ci}].procs[${pi}].url=this.value">
+          <button class="adm-icon-btn adm-del" onclick="admDelProc(${ci},${pi})">✕</button>
+        </div>`).join('')}
+      <button class="adm-add-btn" onclick="admAddProc(${ci})">+ Legg til prosedyre</button>
+    </div>`).join('') +
+  `<button class="adm-add-group-btn" onclick="admAddCat()">+ Ny kategori</button>`;
+}
+function admDelCat(ci){ adminData.rg_cats.splice(ci,1); adminRender(); }
+function admDelProc(ci,pi){ adminData.rg_cats[ci].procs.splice(pi,1); adminRender(); }
+function admAddProc(ci){ adminData.rg_cats[ci].procs.push({name:'',url:''}); adminRender(); }
+function admAddCat(){ adminData.rg_cats.push({id:'cat-'+Date.now(),label:'Ny kategori',pt:'voksen',procs:[]}); adminRender(); }
+
+// ── ADMIN: LOGGBØKER ──────────────────────────────────────────────────────
+function adminRenderLabs(){
+  return adminData.rg_labs.map((l,li)=>`
+    <div class="adm-entry-row">
+      <input class="adm-inp" value="${esc(l.name)}" placeholder="Navn"
+        onchange="adminData.rg_labs[${li}].name=this.value">
+      <input class="adm-inp adm-inp-url" value="${esc(l.url)}" placeholder="URL"
+        onchange="adminData.rg_labs[${li}].url=this.value">
+      <button class="adm-icon-btn adm-del" onclick="admDelLab(${li})">✕</button>
+    </div>`).join('') +
+  `<button class="adm-add-group-btn" onclick="admAddLab()">+ Legg til loggbok</button>`;
+}
+function admDelLab(li){ adminData.rg_labs.splice(li,1); adminRender(); }
+function admAddLab(){ adminData.rg_labs.push({name:'',url:''}); adminRender(); }
+
+// ── ADMIN: LAGRE TIL GITHUB ───────────────────────────────────────────────
+async function adminSave(){
+  adminStatus('Lagrer…','');
+  document.getElementById('admin-save-btn').disabled=true;
+  try {
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(adminData, null, 2))));
+    const body = {message:'Oppdatert via admin-panel', content, sha: adminSha};
+    const r = await fetch(API_URL, {
+      method:'PUT',
+      headers:{Authorization:'token '+adminToken, Accept:'application/vnd.github.v3+json', 'Content-Type':'application/json'},
+      body: JSON.stringify(body)
+    });
+    if(!r.ok){ const e=await r.json(); throw new Error(e.message||'HTTP '+r.status); }
+    const j = await r.json();
+    adminSha = j.content.sha;
+    // Reload live data
+    INTERN_GROUPS = adminData.intern_groups;
+    OTHER_GROUPS  = adminData.other_groups;
+    RG_CATS       = adminData.rg_cats;
+    RG_LABS       = adminData.rg_labs;
+    CT_PROT       = adminData.ct_prot;
+    renderCatGrid();
+    el('logg-grid-rg').innerHTML=RG_LABS.map(l=>`<div class="lab-card" onclick="window.open('${l.url}','_blank')"><div class="lab-card-name">${l.name}</div></div>`).join('');
+    adminStatus('✓ Lagret og publisert!','ok');
+  } catch(e){
+    adminStatus('Feil: '+e.message,'err');
+  }
+  document.getElementById('admin-save-btn').disabled=false;
+}
+
+function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+
+// ── CONTACT FUNCTIONS ─────────────────────────────────────────────────────
 function openContacts(){
   document.getElementById('contact-overlay').classList.add('open');
   document.getElementById('contact-q').value='';
   renderContacts('');
 }
-function closeContacts(){
-  document.getElementById('contact-overlay').classList.remove('open');
-}
-function searchContacts(){
-  renderContacts(document.getElementById('contact-q').value.trim());
-}
-
+function closeContacts(){ document.getElementById('contact-overlay').classList.remove('open'); }
+function searchContacts(){ renderContacts(document.getElementById('contact-q').value.trim()); }
 function telLink(n){ return 'tel:+47'+n.replace(/\s/g,''); }
 
 function contactRowHtml(e){
   return `<div class="contact-row">
     <div class="contact-name">${e.name}</div>
     ${e.role?`<div class="contact-role">${e.role}</div>`:''}
-    ${e.nums.map(n=>`
-      <div class="contact-num-row">
-        ${n.label?`<span class="contact-num-label">${n.label}</span>`:'<span></span>'}
-        <a class="contact-num" href="${telLink(n.num)}">${n.num}</a>
-      </div>`).join('')}
+    ${e.nums.map(n=>`<div class="contact-num-row">
+      ${n.label?`<span class="contact-num-label">${n.label}</span>`:'<span></span>'}
+      <a class="contact-num" href="${telLink(n.num)}">${n.num}</a>
+    </div>`).join('')}
   </div>`;
 }
-
-function groupHtml(g, openMap, prefix){
-  const key=prefix+g.group;
+function groupHtml(g,openMap,prefix){
   const isOpen=openMap[g.group]||false;
   return `<div class="contact-group">
     <div class="contact-group-header" onclick="toggleGroup('${g.group.replace(/'/g,"\\'")}','${prefix}')">
@@ -646,182 +771,43 @@ function groupHtml(g, openMap, prefix){
     </div>
   </div>`;
 }
-
 function renderContacts(q){
+  const oI=window._openGroupsIntern||{};
+  const oO=window._openGroupsOther||{};
   if(q){
     const ql=q.toLowerCase().replace(/\s/g,'');
-    const filterEntries=(groups)=>groups.flatMap(g=>
+    const filter=groups=>groups.flatMap(g=>
       g.entries.filter(e=>
         e.name.toLowerCase().includes(q.toLowerCase())||
         e.role.toLowerCase().includes(q.toLowerCase())||
         e.nums.some(n=>n.num.replace(/\s/g,'').includes(ql))
       ).map(e=>contactRowHtml(e))
     ).join('');
-    const internHtml=filterEntries(INTERN_GROUPS);
-    const otherHtml=filterEntries(OTHER_GROUPS);
-    document.getElementById('contact-scroll-intern').innerHTML=internHtml||`<div class="no-contact-results">Ingen treff</div>`;
-    document.getElementById('contact-scroll-other').innerHTML=otherHtml||`<div class="no-contact-results">Ingen treff</div>`;
+    document.getElementById('contact-scroll-intern').innerHTML=filter(INTERN_GROUPS)||`<div class="no-contact-results">Ingen treff</div>`;
+    document.getElementById('contact-scroll-other').innerHTML=filter(OTHER_GROUPS)||`<div class="no-contact-results">Ingen treff</div>`;
     return;
   }
-  document.getElementById('contact-scroll-intern').innerHTML=INTERN_GROUPS.map(g=>groupHtml(g,openGroupsIntern,'intern-')).join('');
-  document.getElementById('contact-scroll-other').innerHTML=OTHER_GROUPS.map(g=>groupHtml(g,openGroupsOther,'other-')).join('');
+  document.getElementById('contact-scroll-intern').innerHTML=INTERN_GROUPS.map(g=>groupHtml(g,oI,'intern-')).join('');
+  document.getElementById('contact-scroll-other').innerHTML=OTHER_GROUPS.map(g=>groupHtml(g,oO,'other-')).join('');
 }
-
-function toggleGroup(group, prefix){
-  const map=prefix==='intern-'?openGroupsIntern:openGroupsOther;
+function toggleGroup(group,prefix){
+  const map=prefix==='intern-'?(window._openGroupsIntern||{}):(window._openGroupsOther||{});
   const scrollId=prefix==='intern-'?'contact-scroll-intern':'contact-scroll-other';
   const scroll=document.getElementById(scrollId);
-  const isCurrentlyOpen=map[group];
-
-  // Close all groups in this column first
+  const wasOpen=map[group];
   Object.keys(map).forEach(g=>map[g]=false);
   scroll.querySelectorAll('.contact-group-arr').forEach(a=>a.classList.remove('open'));
   scroll.querySelectorAll('.contact-rows').forEach(r=>r.style.maxHeight='0');
-
-  // Open clicked group if it was closed
-  if(!isCurrentlyOpen){
+  if(!wasOpen){
     map[group]=true;
-    const headers=[...scroll.querySelectorAll('.contact-group-header')];
-    headers.forEach(h=>{
+    [...scroll.querySelectorAll('.contact-group-header')].forEach(h=>{
       if(h.querySelector('.contact-group-label')?.textContent===group){
         h.querySelector('.contact-group-arr')?.classList.add('open');
-        const rows=h.nextElementSibling;
-        if(rows) rows.style.maxHeight='9999px';
+        const rows=h.nextElementSibling; if(rows) rows.style.maxHeight='9999px';
       }
     });
   }
 }
-
-// ── PROSEDYRE DATA ────────────────────────────────────────────────────────
-const RG_CATS=[
-  {id:'caput',label:'Caput',pt:'voksen',procs:[
-    {name:'RG Caput / RG Orbita ved spørsmål om fremmedlegeme',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17197.pdf'}
-  ]},
-  {id:'thorax-v',label:'Thorax / Abdomen',pt:'voksen',procs:[
-    {name:'RG Thorax / Cor',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK14399.pdf'},
-    {name:'RG Costa',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04179.pdf'},
-    {name:'RG Sternum / sternoclavicularledd',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04188.pdf'},
-    {name:'RG Abdomen',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK14398.pdf'},
-    {name:'Oro-anal transittid (OATT) måling med pellets',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK12435.pdf'},
-    {name:'RG Urinveier',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK25005.pdf'},
-    {name:'RG Shuntoversikt Caput / Thorax / abdomen',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17262.pdf'}
-  ]},
-  {id:'columna-v',label:'Columna',pt:'voksen',procs:[
-    {name:'RG Cervicalcolumna',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04167.pdf'},
-    {name:'RG Thoracalcolumna',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04168.pdf'},
-    {name:'RG Lumbosacralcolumna',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04169.pdf'},
-    {name:'RG Ileosacralledd',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04176.pdf'},
-    {name:'RG Os Sacrum / Os Coccygis',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04177.pdf'},
-    {name:'RG Scoliosemåling LAB 4 Moss',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK25941.pdf'},
-    {name:'RG Scoliosemåling LAB 3 Moss',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK53606.pdf'}
-  ]},
-  {id:'bekken-v',label:'Bekken',pt:'voksen',procs:[
-    {name:'RG Bekken',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04225.pdf'},
-    {name:'RG Hofte',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04226.pdf'},
-    {name:'RG Aksemåling underekstremiteter LAB 4 Moss',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK48247.pdf'},
-    {name:'RG Aksemåling underekstremiteter LAB 3 Moss',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK53607.pdf'},
-    {name:'RG Benlengdemåling LAB 4 Moss',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK20356.pdf'},
-    {name:'RG Benlengdemåling LAB 3 Moss',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK53605.pdf'}
-  ]},
-  {id:'over-v',label:'Overekstremitet',pt:'voksen',procs:[
-    {name:'RG Skulder',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04212.pdf'},
-    {name:'RG Scapula',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04213.pdf'},
-    {name:'RG Clavicula',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04214.pdf'},
-    {name:'RG Acromio-clavicularledd',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04215.pdf'},
-    {name:'RG Humerus',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04216.pdf'},
-    {name:'RG Albue',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04219.pdf'},
-    {name:'RG Underarm',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04220.pdf'},
-    {name:'RG Håndledd',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04221.pdf'},
-    {name:'RG Os scaphoideum',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04222.pdf'},
-    {name:'RG Hånd',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04223.pdf'},
-    {name:'RG Fingre',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04224.pdf'}
-  ]},
-  {id:'under-v',label:'Underekstremitet',pt:'voksen',procs:[
-    {name:'RG Femur',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04227.pdf'},
-    {name:'RG Kne',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04228.pdf'},
-    {name:'RG Legg',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04229.pdf'},
-    {name:'RG Ankel',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04230.pdf'},
-    {name:'RG Calcaneus',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04231.pdf'},
-    {name:'RG Fot / tær',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04232.pdf'}
-  ]},
-  {id:'thorax-b',label:'Thorax / Abdomen',pt:'barn',procs:[
-    {name:'RG Epipharynx barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK14308.pdf'},
-    {name:'RG Thorax / Abdomen på nyfødtintensiv (NFI)',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK12260.pdf'},
-    {name:'RG Thorax barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK14414.pdf'},
-    {name:'RG Abdomen barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK18596.pdf'},
-    {name:'RG Tarmpassasje på barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK26576.pdf'}
-  ]},
-  {id:'columna-b',label:'Columna',pt:'barn',procs:[
-    {name:'RG Cervicalcolumna av barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17956.pdf'},
-    {name:'RG Thoracalcolumna av barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK49424.pdf'},
-    {name:'RG Lumbosacralcolumna av barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK49425.pdf'},
-    {name:'RG Os Sacrum / Os Coccygis av barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK49426.pdf'}
-  ]},
-  {id:'bekken-b',label:'Bekken',pt:'barn',procs:[
-    {name:'RG Bekken og hofter av barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17958.pdf'}
-  ]},
-  {id:'over-b',label:'Overekstremitet',pt:'barn',procs:[
-    {name:'RG Skulder av barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17950.pdf'},
-    {name:'RG Clavicula av barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17952.pdf'},
-    {name:'RG Humerus barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK47990.pdf'},
-    {name:'RG Albue av barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17953.pdf'},
-    {name:'RG Underarm av barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17977.pdf'},
-    {name:'RG Håndledd barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK48348.pdf'},
-    {name:'RG Hånd, fingre, skjelettalder av barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17954.pdf'}
-  ]},
-  {id:'under-b',label:'Underekstremitet',pt:'barn',procs:[
-    {name:'RG Femur barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK47991.pdf'},
-    {name:'RG Kne av barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17959.pdf'},
-    {name:'RG Legg barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK47992.pdf'},
-    {name:'RG Ankel barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17960.pdf'},
-    {name:'RG Fot barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK18166.pdf'}
-  ]},
-  {id:'spesial',label:'Spesialundersøkelser',pt:'barn',procs:[
-    {name:'RG Undersøkelse ved mistanke om barnemishandel / plutselig spedbarnsdød',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK16285.pdf'},
-    {name:'RG ved Skjelettdysplasier på barn',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK16286.pdf'},
-    {name:'RG Totalskjelett ved dødfødsel/abort',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17202.pdf'}
-  ]},
-  {id:'annet-div',label:'Annet',pt:'annet',procs:[
-    {name:'BoneView - Kunstig intelligens på akutt skjelettrøntgen',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK53175.pdf'},
-    {name:'Granskning eller flagging av ortopediske kontrollbilder',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK42987.pdf'},
-    {name:'Henging av konvensjonelle røntgenbilder i PACS',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK42983.pdf'},
-    {name:'Henvend deg i luken',url:'https://hsorhf.sharepoint.com/:w:/r/sites/SHF-O-461010BildediagnostikkAkuttKalnes/Shared%20Documents/R%C3%B8ntgen/Henvend%20deg%20i%20luken/A5%20Henvend%20deg%20i%20luken%20A5.docx?d=wb5c751b57ca5449d8e9bcad4dd5145e4&csf=1&web=1&e=ByqejD'},
-    {name:'Konstanskontroll Lab 4, 6 og 7',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK50556.pdf'}
-  ]}
-];
-
-const RG_LABS=[
-  {name:'Lab 4',url:'https://hsorhf.sharepoint.com/:w:/r/sites/SHF-O-461010BildediagnostikkAkuttKalnes/_layouts/15/Doc.aspx?sourcedoc=%7B780AFDDC-BA02-483E-9558-0FFA0A00C2EB%7D&file=LOGGBOK%20LAB%204.docx&action=default&mobileredirect=true'},
-  {name:'Transportabel 2',url:'https://hsorhf.sharepoint.com/:w:/r/sites/SHF-O-461010BildediagnostikkAkuttKalnes/_layouts/15/Doc.aspx?sourcedoc=%7B8A8BD90B-4F3F-458B-85DA-29BBBAB184A5%7D&file=LOGGBOK%20TRANSPORTABELT%202.docx&action=default&mobileredirect=true'},
-  {name:'Lab 6',url:'https://hsorhf.sharepoint.com/:w:/r/sites/SHF-O-461010BildediagnostikkAkuttKalnes/_layouts/15/Doc.aspx?sourcedoc=%7B5F8BC542-D898-4F64-83F1-FE17A14005DC%7D&file=LOGGBOK%20LAB%206.docx&action=default&mobileredirect=true'},
-  {name:'Transportabel 3',url:'https://hsorhf.sharepoint.com/:w:/r/sites/SHF-O-461010BildediagnostikkAkuttKalnes/_layouts/15/Doc.aspx?sourcedoc=%7B1D402204-E145-472F-A71C-22B79BE00FA2%7D&file=LOGGBOK%20TRANSPORTABELT%203.docx&action=default&mobileredirect=true'},
-  {name:'Lab 7',url:'https://hsorhf.sharepoint.com/:w:/r/sites/SHF-O-461010BildediagnostikkAkuttKalnes/_layouts/15/Doc.aspx?sourcedoc=%7B39A87826-9A24-4233-8DEB-F0EC5DDDA673%7D&file=LOGGBOK%20LAB%207.docx&action=default&mobileredirect=true'},
-  {name:'Transportabel 4',url:'https://hsorhf.sharepoint.com/:w:/r/sites/SHF-O-461010BildediagnostikkAkuttKalnes/_layouts/15/Doc.aspx?sourcedoc=%7B4E2EF88B-4AF1-4805-AD0A-AF7BF2826A4D%7D&file=LOGGBOK%20TRANSPORTABELT%204.docx&action=default&mobileredirect=true'}
-];
-
-const CT_PROT={
-  voksen:[
-    {id:'prot-caput',label:'Caput',procs:[
-      {name:'111 CT Caput uten IVK',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK53734.pdf'},
-      {name:'111 a CT Caput Axial',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK48577.pdf'},
-      {name:'112 CT Caput med IVK',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK34079.pdf'},
-      {name:'114 CT Perfusjon',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK36466.pdf'}
-    ]},
-    {id:'prot-collum',label:'Collum',procs:[]},
-    {id:'prot-thorax',label:'Thorax',procs:[]},
-    {id:'prot-abdomen',label:'Abdomen',procs:[]},
-    {id:'prot-skjelett',label:'Skjelett',procs:[]},
-    {id:'prot-angio',label:'Angio',procs:[]}
-  ],
-  barn:[
-    {id:'prot-barn-caput',label:'Caput',procs:[]},
-    {id:'prot-barn-collum',label:'Collum',procs:[]},
-    {id:'prot-barn-thorax',label:'Thorax',procs:[]},
-    {id:'prot-barn-abdomen',label:'Abdomen',procs:[]},
-    {id:'prot-barn-skjelett',label:'Skjelett',procs:[]},
-    {id:'prot-barn-angio',label:'Angio',procs:[]}
-  ]
-};
 
 // ── STATE ─────────────────────────────────────────────────────────────────
 let activeMod='rg', pt='voksen', protPt='voksen', activeCatId=null, activeProc=null, activeProtId=null;
@@ -1093,25 +1079,39 @@ function openProt(id){
 }
 function goBackProt(){ activeProtId=null; renderProtGrid(); }
 
-// ── LOGG ──────────────────────────────────────────────────────────────────
-el('logg-grid-rg').innerHTML=RG_LABS.map(l=>`
-  <div class="lab-card" onclick="window.open('${l.url}','_blank')">
-    <div class="lab-card-name">${l.name}</div>
-  </div>`).join('');
-
 // ── INIT ──────────────────────────────────────────────────────────────────
-setHeaderState(true,false,true);
-renderCatGrid();
-setTimeout(()=>{
-  const rgTabs=document.querySelectorAll('#rg-slider-track .ptab');
-  moveThumb('rg-slider-track','rg-slider-thumb',rgTabs[0],false);
-  const ctTabs=document.querySelectorAll('#ct-slider-track .ptab');
-  moveThumb('ct-slider-track','ct-slider-thumb',ctTabs[0],false);
-  ['rg','ct','other'].forEach(bar=>{
-    const track=document.getElementById('sub-track-'+bar);
-    if(track){ const first=track.querySelector('.sub-tab.on')||track.querySelector('.sub-tab'); if(first) moveSubThumb('sub-track-'+bar,'sub-thumb-'+bar,first); }
-  });
-},0);
+async function init(){
+  const ok = await loadData();
+  if(!ok) return;
+
+  // Init contact group state
+  const openGroupsIntern={};
+  INTERN_GROUPS.forEach(g=>openGroupsIntern[g.group]=false);
+  window._openGroupsIntern = openGroupsIntern;
+  const openGroupsOther={};
+  OTHER_GROUPS.forEach(g=>openGroupsOther[g.group]=false);
+  window._openGroupsOther = openGroupsOther;
+
+  // Loggbøker
+  el('logg-grid-rg').innerHTML=RG_LABS.map(l=>`
+    <div class="lab-card" onclick="window.open('${l.url}','_blank')">
+      <div class="lab-card-name">${l.name}</div>
+    </div>`).join('');
+
+  setHeaderState(true,false,true);
+  renderCatGrid();
+  setTimeout(()=>{
+    const rgTabs=document.querySelectorAll('#rg-slider-track .ptab');
+    moveThumb('rg-slider-track','rg-slider-thumb',rgTabs[0],false);
+    const ctTabs=document.querySelectorAll('#ct-slider-track .ptab');
+    moveThumb('ct-slider-track','ct-slider-thumb',ctTabs[0],false);
+    ['rg','ct','other'].forEach(bar=>{
+      const track=document.getElementById('sub-track-'+bar);
+      if(track){ const first=track.querySelector('.sub-tab.on')||track.querySelector('.sub-tab'); if(first) moveSubThumb('sub-track-'+bar,'sub-thumb-'+bar,first); }
+    });
+  },0);
+}
+init();
 </script>
 </body>
 </html>

@@ -352,6 +352,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .adm-dash-card:active{transform:scale(.97)}
 .adm-dash-card::after{content:'›';position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:18px;color:rgba(255,255,255,.5)}
 .adm-dash-emoji{font-size:22px;line-height:1;margin-bottom:2px}
+.adm-dash-img{width:44px;height:44px;object-fit:contain;margin-bottom:4px;filter:brightness(10) drop-shadow(0 1px 3px rgba(0,0,0,.3))}
+
+/* Phone card (flat entry within group) */
+.adm-phone-settings{display:flex;align-items:center;gap:6px;padding:6px 0 8px;border-bottom:1px solid var(--border);margin-bottom:6px}
+.adm-phone-card{background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:10px;display:flex;flex-direction:column;gap:7px;transition:border-color .15s}
+.adm-phone-card.drag-over{border-color:var(--accent)}
+.adm-phone-card-hdr{display:flex;align-items:center;gap:7px}
+.adm-phone-card-name{flex:1;font-size:12px;font-weight:700;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.adm-add-entry-btn{margin-top:4px;width:100%;text-align:center;border-style:dashed}
+
+/* Content body padding */
+.adm-content-body{padding:10px;display:flex;flex-direction:column;gap:7px}
 .adm-dash-label{font-size:13px;font-weight:800;color:#fff;line-height:1.2}
 .adm-dash-count{font-size:10px;color:rgba(255,255,255,.7);line-height:1.4}
 .adm-unsaved-dot{width:6px;height:6px;border-radius:50%;background:#f39c12;position:absolute;top:8px;right:8px}
@@ -732,35 +744,43 @@ function adminStatus(msg, cls){
 
 
 // ── ADMIN NAVIGATION ─────────────────────────────────────────────────────
+const IMG = 'https://andreashov.github.io/rontgenprosedyrer/modalitet-symbol/';
 const ADMIN_SECTIONS = [
-  { id:'telefoni',      label:'Telefoni',       emoji:'📞', color:'linear-gradient(135deg,#1a5faa,#1a4f8a)',
+  { id:'telefoni', label:'Telefoni', emoji:'📞', color:'linear-gradient(135deg,#1a5faa,#1a4f8a)',
     items:[
-      {label:'Bildediagnostikk', view:'intern',  type:'groups', emoji:'🏥'},
-      {label:'Sykehuset øvrig',  view:'other',   type:'groups', emoji:'🏨'}
+      {label:'Bildediagnostikk', view:'intern', type:'groups', emoji:'🏥'},
+      {label:'Sykehuset øvrig',  view:'other',  type:'groups', emoji:'🏨'}
     ]},
-  { id:'rg',            label:'Røntgen',         emoji:'🩻', color:'linear-gradient(135deg,#2060aa,#1a4f8a)',
+  { id:'rg', label:'Røntgen', emoji:'🩻', color:'linear-gradient(135deg,#2060aa,#1a4f8a)',
+    img: IMG+'røntgen.png',
     items:[
-      {label:'Prosedyrer', view:'rg_cats', type:'cats', pt:['voksen','barn','annet'], emoji:'📋'},
-      {label:'Loggbøker',  view:'rg_labs', type:'labs', emoji:'📒'}
+      {label:'Prosedyrer – Voksen', view:'rg_cats__voksen', type:'cats_f', ptFilter:'voksen', emoji:'👤'},
+      {label:'Prosedyrer – Barn',   view:'rg_cats__barn',   type:'cats_f', ptFilter:'barn',   emoji:'🧒'},
+      {label:'Prosedyrer – Annet',  view:'rg_cats__annet',  type:'cats_f', ptFilter:'annet',  emoji:'📋'},
+      {label:'Loggbøker',           view:'rg_labs',         type:'labs',                      emoji:'📒'}
     ]},
-  { id:'ct',            label:'CT',              emoji:'🖥', color:'linear-gradient(135deg,#1e7aaa,#1e6fa0)',
+  { id:'ct', label:'CT', emoji:'🖥', color:'linear-gradient(135deg,#1e7aaa,#1e6fa0)',
+    img: IMG+'ct.png',
     items:[
       {label:'Prosedyrer',           view:'ct_cats',        type:'cats', emoji:'📋'},
       {label:'Protokoller – Voksen', view:'ct_prot_voksen', type:'cats', emoji:'👤'},
       {label:'Protokoller – Barn',   view:'ct_prot_barn',   type:'cats', emoji:'🧒'},
       {label:'Loggbøker',            view:'ct_labs',        type:'labs', emoji:'📒'}
     ]},
-  { id:'ul',            label:'Ultralyd',        emoji:'🔊', color:'linear-gradient(135deg,#20859a,#156d8a)',
+  { id:'ul', label:'Ultralyd', emoji:'🔊', color:'linear-gradient(135deg,#20859a,#156d8a)',
+    img: IMG+'ultralyd.png',
     items:[
       {label:'Prosedyrer', view:'ul_cats', type:'cats', emoji:'📋'},
       {label:'Loggbøker',  view:'ul_labs', type:'labs', emoji:'📒'}
     ]},
-  { id:'gj',            label:'Gjennomlysning',  emoji:'💡', color:'linear-gradient(135deg,#157090,#0f5975)',
+  { id:'gj', label:'Gjennomlysning', emoji:'💡', color:'linear-gradient(135deg,#157090,#0f5975)',
+    img: IMG+'gjennomlysning.png',
     items:[
       {label:'Prosedyrer', view:'gj_cats', type:'cats', emoji:'📋'},
       {label:'Loggbøker',  view:'gj_labs', type:'labs', emoji:'📒'}
     ]},
-  { id:'an',            label:'Angio',           emoji:'🩺', color:'linear-gradient(135deg,#149070,#0f7a5a)',
+  { id:'an', label:'Angio', emoji:'🩺', color:'linear-gradient(135deg,#149070,#0f7a5a)',
+    img: IMG+'angio.png',
     items:[
       {label:'Prosedyrer', view:'an_cats', type:'cats', emoji:'📋'},
       {label:'Loggbøker',  view:'an_labs', type:'labs', emoji:'📒'}
@@ -846,14 +866,20 @@ function adminGetItemCount(item){
   if(!adminData) return '';
   try {
     if(item.type==='groups'){
-      const g = adminData[item.view==='intern'?'intern_groups':'other_groups'];
-      const entries = g.reduce((s,gr)=>s+gr.entries.length,0);
+      const g=adminData[item.view==='intern'?'intern_groups':'other_groups'];
+      const entries=g.reduce((s,gr)=>s+gr.entries.length,0);
       return `${g.length} grupper · ${entries} oppføringer`;
     }
-    const arr = getArr(item.view);
-    if(item.type==='labs') return arr.length ? `${arr.length} loggbøker` : 'Tom';
-    const procs = arr.reduce((s,c)=>s+(c.procs||[]).length,0);
-    return arr.length ? `${arr.length} kat. · ${procs} prosedyrer` : 'Tom';
+    if(item.type==='cats_f'){
+      const key=item.view.split('__')[0];
+      const arr=getArr(key).filter(c=>c.pt===item.ptFilter);
+      const procs=arr.reduce((s,c)=>s+(c.procs||[]).length,0);
+      return arr.length?`${arr.length} kat. · ${procs} prosedyrer`:'Tom';
+    }
+    const arr=getArr(item.view);
+    if(item.type==='labs') return arr.length?`${arr.length} loggbøker`:'Tom';
+    const procs=arr.reduce((s,c)=>s+(c.procs||[]).length,0);
+    return arr.length?`${arr.length} kat. · ${procs} prosedyrer`:'Tom';
   } catch(e){ return ''; }
 }
 
@@ -864,14 +890,14 @@ function adminRender(){
   if(adminPath.length === 0){
     // Dashboard
     out.innerHTML = `<div class="adm-dashboard">${
-      ADMIN_SECTIONS.map(s=>{
-        const counts = s.items.map(i=>adminGetItemCount(i)).filter(Boolean);
-        return `<div class="adm-dash-card" style="background:${s.color}" onclick="adminNavigate('${s.id}')">
-          <div class="adm-dash-emoji">${s.emoji}</div>
+      ADMIN_SECTIONS.map(s=>`
+        <div class="adm-dash-card" style="background:${s.color}" onclick="adminNavigate('${s.id}')">
+          ${s.img
+            ? `<img src="${s.img}" class="adm-dash-img" onerror="this.style.display='none'" alt="">`
+            : `<div class="adm-dash-emoji">${s.emoji}</div>`}
           <div class="adm-dash-label">${s.label}</div>
           <div class="adm-dash-count">${s.items.length} seksjoner</div>
-        </div>`;
-      }).join('')
+        </div>`).join('')
     }</div>`;
     return;
   }
@@ -883,7 +909,11 @@ function adminRender(){
     out.innerHTML = `<div class="adm-section-items">${
       sec.items.map(item=>`
         <div class="adm-nav-row" onclick="adminNavigate('${item.view}')">
-          <div class="adm-nav-row-icon" style="background:${sec.color}">${item.emoji}</div>
+          <div class="adm-nav-row-icon" style="background:${sec.color}">
+            ${sec.img
+              ? `<img src="${sec.img}" style="width:22px;height:22px;object-fit:contain;filter:brightness(10)" onerror="this.style.display='none'" alt="">`
+              : item.emoji}
+          </div>
           <div class="adm-nav-row-body">
             <div class="adm-nav-row-label">${item.label}</div>
             <div class="adm-nav-row-count">${adminGetItemCount(item)}</div>
@@ -898,9 +928,19 @@ function adminRender(){
   // Editor
   const item = sec.items.find(i=>i.view===adminPath[1]);
   const labViews={rg_labs:1,ct_labs:1,ul_labs:1,gj_labs:1,an_labs:1};
-  if(item.type==='groups') out.innerHTML = adminRenderGroups(item.view);
-  else if(labViews[item.view]) out.innerHTML = adminRenderLabList(item.view);
-  else out.innerHTML = adminRenderCatList(item.view, item.pt||[]);
+  let html;
+  if(item.type==='groups'){
+    html = adminRenderGroups(item.view);
+  } else if(item.type==='cats_f'){
+    // Filtered view (e.g. rg_cats__voksen)
+    const realKey = item.view.split('__')[0];
+    html = adminRenderCatListFiltered(realKey, item.ptFilter);
+  } else if(labViews[item.view]){
+    html = adminRenderLabList(item.view);
+  } else {
+    html = adminRenderCatList(item.view, item.pt||[]);
+  }
+  out.innerHTML = `<div class="adm-content-body">${html}</div>`;
 }
 
 
@@ -931,13 +971,17 @@ function admToggleEntry(key,i){
 // ── ADMIN: TELEFONIGRUPPER ─────────────────────────────────────────────────
 function adminRenderGroups(ns){
   const groups=admGroups(ns);
-  if(!groups.length) return `<div class="adm-empty"><div class="adm-empty-icon">📭</div>Ingen grupper ennå</div>
+  if(!groups.length) return `
+    <div class="adm-empty"><div class="adm-empty-icon">📭</div>Ingen grupper ennå</div>
     <button class="adm-add-group-btn" onclick="admAddGroup('${ns}')">+ Ny gruppe</button>`;
+
   return groups.map((g,gi)=>`
     <div class="adm-group${admIsOpen(ns,gi)?' is-open':''}" draggable="true"
       ondragstart="dragStart(event,'grp','${ns}',${gi})"
       ondragover="dragOver(event)" ondrop="dragDrop(event,'grp','${ns}',${gi})"
       ondragleave="this.classList.remove('drag-over')">
+
+      <!-- Group header (click to expand/collapse) -->
       <div class="adm-group-head" onclick="admToggle('${ns}',${gi})">
         <span class="adm-drag-handle" onclick="event.stopPropagation()">⠿</span>
         <span class="adm-group-dot" style="background:${g.color}"></span>
@@ -945,49 +989,52 @@ function adminRenderGroups(ns){
         <span class="adm-group-meta">${g.entries.length} stk</span>
         <span class="adm-chevron">▶</span>
       </div>
+
+      <!-- Group body (flat - no nested accordion) -->
       <div class="adm-group-body">
-        <div class="adm-group-toolbar">
+        <!-- Group settings row -->
+        <div class="adm-phone-settings">
           <input class="adm-inp" value="${esc(g.group)}" placeholder="Gruppenavn"
-            onchange="admGroups('${ns}')[${gi}].group=this.value;markDirty();buildAdminNav()">
-          <input type="color" value="${g.color}" style="width:30px;height:30px;padding:2px;border-radius:6px;border:1px solid var(--border);cursor:pointer;flex-shrink:0"
+            onchange="admGroups('${ns}')[${gi}].group=this.value;markDirty()">
+          <input type="color" value="${g.color}"
+            style="width:36px;height:36px;padding:2px;border-radius:8px;border:1px solid var(--border);cursor:pointer;flex-shrink:0"
             onchange="admGroups('${ns}')[${gi}].color=this.value;markDirty();adminRender()">
           <button class="adm-sort-btn" onclick="sortEntries('${ns}',${gi})">A→Z</button>
-          <button class="adm-icon-btn adm-del" onclick="admDelGroup('${ns}',${gi})">✕</button>
+          <button class="adm-icon-btn adm-del" onclick="admDelGroup('${ns}',${gi})" title="Slett gruppe">✕</button>
         </div>
-        ${g.entries.map((e,ei)=>{
-          const eid=`${ns}-${gi}-${ei}`;
-          const eOpen=admIsOpen('entry-'+ns+gi, ei);
-          return `<div class="adm-entry${eOpen?' is-open':''}" data-eid="entry-${ns}-${gi}-${ei}" draggable="true"
+
+        <!-- Entries as flat cards -->
+        ${g.entries.map((e,ei)=>`
+          <div class="adm-phone-card" draggable="true"
             ondragstart="dragStart(event,'entry','${ns}',${gi},${ei})"
             ondragover="dragOver(event)" ondrop="dragDrop(event,'entry','${ns}',${gi},${ei})"
             ondragleave="this.classList.remove('drag-over')">
-            <div class="adm-entry-head" onclick="admToggleEntry('entry-${ns}${gi}',${ei})">
-              <span class="adm-drag-handle" onclick="event.stopPropagation()">⠿</span>
-              <span class="adm-entry-label">${esc(e.name)||'(uten navn)'}</span>
-              <span class="adm-group-meta" style="font-size:9px">${e.nums.length} nr</span>
-              <span class="adm-chevron">▶</span>
-              <button class="adm-icon-btn adm-del" onclick="event.stopPropagation();admDelEntry('${ns}',${gi},${ei})">✕</button>
+            <div class="adm-phone-card-hdr">
+              <span class="adm-drag-handle">⠿</span>
+              <span class="adm-phone-card-name">${esc(e.name)||'(uten navn)'}</span>
+              <button class="adm-icon-btn adm-del" onclick="admDelEntry('${ns}',${gi},${ei})">✕</button>
             </div>
-            <div class="adm-entry-body">
-              <div class="adm-entry-row">
-                <input class="adm-inp" value="${esc(e.name)}" placeholder="Navn"
-                  onchange="admSet('${ns}',${gi},'entries',${ei},'name',this.value);markDirty()">
-                <input class="adm-inp adm-inp-sm" value="${esc(e.role)}" placeholder="Kode"
-                  onchange="admSet('${ns}',${gi},'entries',${ei},'role',this.value);markDirty()">
-              </div>
-              ${e.nums.map((n,ni)=>`
-                <div class="adm-num-row">
-                  <input class="adm-inp" value="${esc(n.num)}" placeholder="Nummer"
-                    onchange="admSetNum('${ns}',${gi},${ei},${ni},'num',this.value);markDirty()">
-                  <input class="adm-inp adm-inp-sm" value="${esc(n.label)}" placeholder="Etikett"
-                    onchange="admSetNum('${ns}',${gi},${ei},${ni},'label',this.value);markDirty()">
-                  <button class="adm-icon-btn adm-del" onclick="admDelNum('${ns}',${gi},${ei},${ni})">✕</button>
-                </div>`).join('')}
-              <button class="adm-add-btn" onclick="admAddNum('${ns}',${gi},${ei})">+ Nummer</button>
+            <div class="adm-entry-row">
+              <input class="adm-inp" value="${esc(e.name)}" placeholder="Navn"
+                onchange="admSet('${ns}',${gi},'entries',${ei},'name',this.value);markDirty();
+                  this.closest('.adm-phone-card').querySelector('.adm-phone-card-name').textContent=this.value||'(uten navn)'">
+              <input class="adm-inp adm-inp-sm" value="${esc(e.role)}" placeholder="Kode"
+                onchange="admSet('${ns}',${gi},'entries',${ei},'role',this.value);markDirty()">
             </div>
-          </div>`;
-        }).join('')}
-        <button class="adm-add-btn" onclick="admAddEntry('${ns}',${gi})">+ Person / sted</button>
+            ${e.nums.map((n,ni)=>`
+              <div class="adm-num-row">
+                <input class="adm-inp" value="${esc(n.num)}" placeholder="Telefonnummer"
+                  onchange="admSetNum('${ns}',${gi},${ei},${ni},'num',this.value);markDirty()">
+                <input class="adm-inp adm-inp-sm" value="${esc(n.label)}" placeholder="Etikett"
+                  onchange="admSetNum('${ns}',${gi},${ei},${ni},'label',this.value);markDirty()">
+                <button class="adm-icon-btn adm-del" onclick="admDelNum('${ns}',${gi},${ei},${ni})">✕</button>
+              </div>`).join('')}
+            <button class="adm-add-btn" onclick="admAddNum('${ns}',${gi},${ei})">+ Nummer</button>
+          </div>`).join('')}
+
+        <button class="adm-add-btn adm-add-entry-btn" onclick="admAddEntry('${ns}',${gi})">
+          + Legg til person / sted
+        </button>
       </div>
     </div>`).join('') +
   `<button class="adm-add-group-btn" onclick="admAddGroup('${ns}')">+ Ny gruppe</button>`;
@@ -1059,27 +1106,79 @@ function adminRenderLabList(key){
   `<button class="adm-add-group-btn" onclick="admAddLab('${key}')">+ Legg til loggbok</button>`;
 }
 
-// ── DATA MUTATION HELPERS ──────────────────────────────────────────────────
 // ── DATA ACCESSORS ────────────────────────────────────────────────────────
 function getArr(key){
+  const init = k => { if(!adminData[k]) adminData[k]=[]; return adminData[k]; };
   const map={
-    rg_cats:()=>adminData.rg_cats, ct_cats:()=>adminData.ct_cats,
-    ct_prot_voksen:()=>adminData.ct_prot.voksen, ct_prot_barn:()=>adminData.ct_prot.barn,
-    ul_cats:()=>adminData.ul_cats, gj_cats:()=>adminData.gj_cats, an_cats:()=>adminData.an_cats,
-    rg_labs:()=>adminData.rg_labs, ct_labs:()=>adminData.ct_labs,
-    ul_labs:()=>adminData.ul_labs, gj_labs:()=>adminData.gj_labs, an_labs:()=>adminData.an_labs,
+    rg_cats:        ()=>init('rg_cats'),
+    ct_cats:        ()=>init('ct_cats'),
+    ct_prot_voksen: ()=>{ if(!adminData.ct_prot) adminData.ct_prot={voksen:[],barn:[]}; if(!adminData.ct_prot.voksen) adminData.ct_prot.voksen=[]; return adminData.ct_prot.voksen; },
+    ct_prot_barn:   ()=>{ if(!adminData.ct_prot) adminData.ct_prot={voksen:[],barn:[]}; if(!adminData.ct_prot.barn)   adminData.ct_prot.barn=[];   return adminData.ct_prot.barn;   },
+    ul_cats:        ()=>init('ul_cats'),
+    gj_cats:        ()=>init('gj_cats'),
+    an_cats:        ()=>init('an_cats'),
+    rg_labs:        ()=>init('rg_labs'),
+    ct_labs:        ()=>init('ct_labs'),
+    ul_labs:        ()=>init('ul_labs'),
+    gj_labs:        ()=>init('gj_labs'),
+    an_labs:        ()=>init('an_labs'),
   };
   return map[key]?map[key]():[];
+}
+
+// Filtered category view (e.g. rg_cats filtered by pt='voksen')
+function adminRenderCatListFiltered(key, ptFilter){
+  const all = getArr(key);
+  // get items with original indices
+  const filtered = all.map((c,i)=>({c,i})).filter(({c})=>c.pt===ptFilter);
+  if(!filtered.length) return `
+    <div class="adm-empty"><div class="adm-empty-icon">📂</div>Ingen kategorier ennå</div>
+    <button class="adm-add-group-btn" onclick="admAddCat('${key}','${ptFilter}')">+ Ny kategori</button>`;
+  return filtered.map(({c,ci:_unused,i:ci})=>`
+    <div class="adm-group${admIsOpen(key+ptFilter,ci)?' is-open':''}" draggable="true"
+      ondragstart="dragStart(event,'cat','${key}',${ci})"
+      ondragover="dragOver(event)" ondrop="dragDrop(event,'cat','${key}',${ci})"
+      ondragleave="this.classList.remove('drag-over')">
+      <div class="adm-group-head" onclick="admToggle('${key+ptFilter}',${ci})">
+        <span class="adm-drag-handle" onclick="event.stopPropagation()">⠿</span>
+        <span class="adm-group-name">${esc(c.label)}</span>
+        <span class="adm-group-meta">${(c.procs||[]).length} stk</span>
+        <span class="adm-chevron">▶</span>
+      </div>
+      <div class="adm-group-body">
+        <div class="adm-group-toolbar">
+          <input class="adm-inp" value="${esc(c.label)}" placeholder="Kategorinavn"
+            onchange="getArr('${key}')[${ci}].label=this.value;markDirty()">
+          <button class="adm-sort-btn" onclick="sortProcs('${key}',${ci})">A→Z</button>
+          <button class="adm-icon-btn adm-del" onclick="admDelCat('${key}',${ci})">✕</button>
+        </div>
+        ${!(c.procs||[]).length?`<div class="adm-empty" style="padding:8px 0"><div class="adm-empty-icon" style="font-size:18px">📝</div>Tom kategori</div>`:''}
+        ${(c.procs||[]).map((p,pi)=>`
+          <div class="adm-entry-row" draggable="true"
+            ondragstart="dragStart(event,'proc','${key}',${ci},${pi})"
+            ondragover="dragOver(event)" ondrop="dragDrop(event,'proc','${key}',${ci},${pi})"
+            ondragleave="this.classList.remove('drag-over')">
+            <span class="adm-drag-handle">⠿</span>
+            <input class="adm-inp" value="${esc(p.name)}" placeholder="Navn"
+              onchange="getArr('${key}')[${ci}].procs[${pi}].name=this.value;markDirty()">
+            <input class="adm-inp adm-inp-url" value="${esc(p.url||'')}" placeholder="URL"
+              onchange="getArr('${key}')[${ci}].procs[${pi}].url=this.value;markDirty()">
+            <button class="adm-icon-btn adm-del" onclick="admDelProc('${key}',${ci},${pi})">✕</button>
+          </div>`).join('')}
+        <button class="adm-add-btn" onclick="admAddProc('${key}',${ci})">+ Prosedyre</button>
+      </div>
+    </div>`).join('') +
+  `<button class="adm-add-group-btn" onclick="admAddCat('${key}','${ptFilter}')">+ Ny kategori</button>`;
 }
 function admGroups(ns){ return ns==='intern'?adminData.intern_groups:adminData.other_groups; }
 function admSet(ns,gi,f,ei,sf,v){ admGroups(ns)[gi][f][ei][sf]=v; }
 function admSetNum(ns,gi,ei,ni,f,v){ admGroups(ns)[gi].entries[ei].nums[ni][f]=v; }
-function admDelGroup(ns,gi){ admGroups(ns).splice(gi,1); adminRender(); buildAdminNav(); }
-function admDelEntry(ns,gi,ei){ admGroups(ns)[gi].entries.splice(ei,1); adminRender(); }
-function admDelNum(ns,gi,ei,ni){ admGroups(ns)[gi].entries[ei].nums.splice(ni,1); adminRender(); }
+function admDelGroup(ns,gi){ admGroups(ns).splice(gi,1); markDirty(); adminRender(); }
+function admDelEntry(ns,gi,ei){ admGroups(ns)[gi].entries.splice(ei,1); markDirty(); adminRender(); }
+function admDelNum(ns,gi,ei,ni){ admGroups(ns)[gi].entries[ei].nums.splice(ni,1); markDirty(); adminRender(); }
 function admAddNum(ns,gi,ei){ admGroups(ns)[gi].entries[ei].nums.push({num:'',label:''}); markDirty(); adminRender(); }
 function admAddEntry(ns,gi){ admGroups(ns)[gi].entries.push({name:'',role:'',nums:[{num:'',label:''}]}); markDirty(); adminRender(); }
-function admAddGroup(ns){ admGroups(ns).push({group:'Ny gruppe',color:'#1a4f8a',entries:[]}); markDirty(); adminRender(); buildAdminNav(); }
+function admAddGroup(ns){ admGroups(ns).push({group:'Ny gruppe',color:'#1a4f8a',entries:[]}); markDirty(); adminRender(); }
 function admDelCat(key,ci){ getArr(key).splice(ci,1); markDirty(); adminRender(); buildAdminNav(); }
 function admDelProc(key,ci,pi){ getArr(key)[ci].procs.splice(pi,1); markDirty(); adminRender(); }
 function admAddProc(key,ci){ getArr(key)[ci].procs.push({name:'',url:''}); markDirty(); adminRender(); }

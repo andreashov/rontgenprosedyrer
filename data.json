@@ -1932,10 +1932,5 @@
   "ct_labs": [],
   "ul_labs": [],
   "gj_labs": [],
-  "an_labs": [
-    {
-      "name": "Vg",
-      "url": "https://www.vg.no/"
-    }
-  ]
+  "an_labs": []
 }

@@ -1,7 +1,7 @@
 {
   "intern_groups": [
     {
-      "group": "RÃ¸ntgen Kalnes",
+      "group": "Røntgen Kalnes",
       "color": "#1a4f8a",
       "entries": [
         {
@@ -35,7 +35,7 @@
           ]
         },
         {
-          "name": "LAB 5 - Gjennomlysning",
+          "name": "LAB 5 – Gjennomlysning",
           "role": "",
           "nums": [
             {
@@ -265,7 +265,7 @@
       "color": "#993556",
       "entries": [
         {
-          "name": "PrimÃ¦rvakt radiologi",
+          "name": "Primærvakt radiologi",
           "role": "",
           "nums": [
             {
@@ -285,7 +285,7 @@
           ]
         },
         {
-          "name": "RÃ¸ntgen granskning",
+          "name": "Røntgen granskning",
           "role": "",
           "nums": [
             {
@@ -325,7 +325,7 @@
           ]
         },
         {
-          "name": "NukleÃÂ¦r",
+          "name": "Nukleær",
           "role": "",
           "nums": [
             {
@@ -335,7 +335,7 @@
           ]
         },
         {
-          "name": "NukleÃ¦r granskning",
+          "name": "Nukleær granskning",
           "role": "",
           "nums": [
             {
@@ -396,7 +396,7 @@
         },
         {
           "name": "Telerad / CD-brenning",
-          "role": "ManÃÂÃÂ¢ÃÂÃÂÃÂÃÂfre 08ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ21, LÃÂÃÂÃÂÃÂ¸r 08ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ15:30, SÃÂÃÂÃÂÃÂ¸n 09ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ16:30",
+          "role": "Man–fre 08–21, Lør 08–15:30, Søn 09–16:30",
           "nums": [
             {
               "num": "69 86 82 98",
@@ -405,7 +405,7 @@
           ]
         },
         {
-          "name": "Telefonslusa GrÃ¥lum",
+          "name": "Telefonslusa Grålum",
           "role": "",
           "nums": [
             {
@@ -415,7 +415,7 @@
           ]
         },
         {
-          "name": "CD-brenning GrÃ¥lum",
+          "name": "CD-brenning Grålum",
           "role": "",
           "nums": [
             {
@@ -425,7 +425,7 @@
           ]
         },
         {
-          "name": "CT akutt GrÃ¥lum (booking)",
+          "name": "CT akutt Grålum (booking)",
           "role": "",
           "nums": [
             {
@@ -435,7 +435,7 @@
           ]
         },
         {
-          "name": "CT GrÃ¥lum",
+          "name": "CT Grålum",
           "role": "",
           "nums": [
             {
@@ -445,7 +445,7 @@
           ]
         },
         {
-          "name": "Ultralyd GrÃ¥lum (booking)",
+          "name": "Ultralyd Grålum (booking)",
           "role": "",
           "nums": [
             {
@@ -455,7 +455,7 @@
           ]
         },
         {
-          "name": "RÃ¸ntgen GrÃ¥lum",
+          "name": "Røntgen Grålum",
           "role": "",
           "nums": [
             {
@@ -465,7 +465,7 @@
           ]
         },
         {
-          "name": "MR GrÃ¥lum",
+          "name": "MR Grålum",
           "role": "",
           "nums": [
             {
@@ -475,7 +475,7 @@
           ]
         },
         {
-          "name": "Henvisninger GrÃ¥lum",
+          "name": "Henvisninger Grålum",
           "role": "",
           "nums": [
             {
@@ -485,7 +485,7 @@
           ]
         },
         {
-          "name": "Skriving GrÃ¥lum",
+          "name": "Skriving Grålum",
           "role": "",
           "nums": [
             {
@@ -545,7 +545,7 @@
           ]
         },
         {
-          "name": "VeslemÃ¸y BÃ¸hn",
+          "name": "Veslemøy Bøhn",
           "role": "Driftskoordinator akutt",
           "nums": [
             {
@@ -565,8 +565,8 @@
           ]
         },
         {
-          "name": "Cecilie StrÃ¸mÃ¸",
-          "role": "Seksjonsleder nukleÃÂ¦r og BDS",
+          "name": "Cecilie Strømø",
+          "role": "Seksjonsleder nukleær og BDS",
           "nums": [
             {
               "num": "69 86 88 25",
@@ -589,7 +589,7 @@
       "color": "#156d8a",
       "entries": [
         {
-          "name": "RÃ¸ntgen",
+          "name": "Røntgen",
           "role": "Moss",
           "nums": [
             {
@@ -599,7 +599,7 @@
           ]
         },
         {
-          "name": "CT 1 Moss",
+          "name": "CT 1",
           "role": "Moss",
           "nums": [
             {
@@ -609,7 +609,7 @@
           ]
         },
         {
-          "name": "CT 2 Moss",
+          "name": "CT 2",
           "role": "Moss",
           "nums": [
             {
@@ -619,7 +619,7 @@
           ]
         },
         {
-          "name": "Ultralyd Moss",
+          "name": "Ultralyd",
           "role": "Moss",
           "nums": [
             {
@@ -629,7 +629,7 @@
           ]
         },
         {
-          "name": "MR Moss",
+          "name": "MR",
           "role": "Moss",
           "nums": [
             {
@@ -641,12 +641,12 @@
       ]
     },
     {
-      "group": "NukleÃÂ¦rmedisin",
+      "group": "Nukleærmedisin",
       "color": "#854F0B",
       "entries": [
         {
-          "name": "PET CT / SPECT CT",
-          "role": "NukleÃÂ¦r",
+          "name": "PET CT – SPECT CT",
+          "role": "Nukleær",
           "nums": [
             {
               "num": "69 86 88 11",
@@ -656,7 +656,7 @@
         },
         {
           "name": "Injeksjonsrom 1",
-          "role": "NukleÃÂ¦r",
+          "role": "Nukleær",
           "nums": [
             {
               "num": "69 86 88 12",
@@ -666,7 +666,7 @@
         },
         {
           "name": "Injeksjonsrom 2",
-          "role": "NukleÃÂ¦r",
+          "role": "Nukleær",
           "nums": [
             {
               "num": "69 86 88 09",
@@ -711,7 +711,7 @@
           ]
         },
         {
-          "name": "SekretÃ¦r BDS",
+          "name": "Sekretær BDS",
           "role": "",
           "nums": [
             {
@@ -747,7 +747,7 @@
           ]
         },
         {
-          "name": "Telefaks GrÃÂ¥lum",
+          "name": "Telefaks Grålum",
           "role": "",
           "nums": [
             {
@@ -839,7 +839,7 @@
           ]
         },
         {
-          "name": "OvervÃÂ¥kning",
+          "name": "Overvåkning",
           "role": "08A03",
           "nums": [
             {
@@ -883,11 +883,11 @@
       ]
     },
     {
-      "group": "DÃ¸gnomrÃ¥der",
+      "group": "Døgnområder",
       "color": "#1a4f8a",
       "entries": [
         {
-          "name": "DÃÂ¸gnomrÃÂ¥de 1 - Hjerte",
+          "name": "Døgnområde 1 – Hjerte",
           "role": "08A02",
           "nums": [
             {
@@ -901,7 +901,7 @@
           ]
         },
         {
-          "name": "DÃÂ¸gnomrÃÂ¥de 2 - Infeksjonsmedisin",
+          "name": "Døgnområde 2 – Infeksjonsmedisin",
           "role": "03G02",
           "nums": [
             {
@@ -915,7 +915,7 @@
           ]
         },
         {
-          "name": "DÃÂ¸gnomrÃÂ¥de 3 - Lungemedisin",
+          "name": "Døgnområde 3 – Lungemedisin",
           "role": "03E02",
           "nums": [
             {
@@ -929,7 +929,7 @@
           ]
         },
         {
-          "name": "DÃÂ¸gnomrÃÂ¥de 4 - Nevrologi",
+          "name": "Døgnområde 4 – Nevrologi",
           "role": "03C02",
           "nums": [
             {
@@ -943,7 +943,7 @@
           ]
         },
         {
-          "name": "DÃÂ¸gnomrÃÂ¥de 6 - Ortopedi",
+          "name": "Døgnområde 6 – Ortopedi",
           "role": "03A03",
           "nums": [
             {
@@ -957,7 +957,7 @@
           ]
         },
         {
-          "name": "DÃÂ¸gnomrÃÂ¥de 7 - Gastrokir / Plastikk",
+          "name": "Døgnområde 7 – Gastrokir / Plastikk",
           "role": "03G04",
           "nums": [
             {
@@ -971,7 +971,7 @@
           ]
         },
         {
-          "name": "DÃÂ¸gnomrÃÂ¥de 8 - ÃÂNH / Kar / Uro",
+          "name": "Døgnområde 8 – ØNH / Kar / Uro",
           "role": "03E04",
           "nums": [
             {
@@ -989,7 +989,7 @@
           ]
         },
         {
-          "name": "DÃÂ¸gnomrÃÂ¥de 9 - Gastro / Nyre",
+          "name": "Døgnområde 9 – Gastro / Nyre",
           "role": "03C04",
           "nums": [
             {
@@ -1003,7 +1003,7 @@
           ]
         },
         {
-          "name": "DÃÂ¸gnomrÃÂ¥de 9 - Geriatri / Endokrin",
+          "name": "Døgnområde 9 – Geriatri / Endokrin",
           "role": "03C04-2",
           "nums": [
             {
@@ -1017,7 +1017,7 @@
           ]
         },
         {
-          "name": "DÃÂ¸gnomrÃÂ¥de 10 - Kreft",
+          "name": "Døgnområde 10 – Kreft",
           "role": "03A04",
           "nums": [
             {
@@ -1031,7 +1031,7 @@
           ]
         },
         {
-          "name": "DÃÂ¸gnomrÃÂ¥de 11 - Akuttmedisin",
+          "name": "Døgnområde 11 – Akuttmedisin",
           "role": "",
           "nums": [
             {
@@ -1043,11 +1043,11 @@
       ]
     },
     {
-      "group": "FÃÂ¸de og barn",
+      "group": "Føde og barn",
       "color": "#0f7a5a",
       "entries": [
         {
-          "name": "NyfÃÂ¸dtintensiv",
+          "name": "Nyfødtintensiv",
           "role": "03G03",
           "nums": [
             {
@@ -1075,7 +1075,7 @@
           ]
         },
         {
-          "name": "Barn og ungdom - Poliklinikk",
+          "name": "Barn og ungdom – poliklinikk",
           "role": "03CU1",
           "nums": [
             {
@@ -1085,7 +1085,7 @@
           ]
         },
         {
-          "name": "FÃÂ¸de og barsel",
+          "name": "Føde og barsel",
           "role": "03E03",
           "nums": [
             {
@@ -1095,7 +1095,7 @@
           ]
         },
         {
-          "name": "Jordmor - Telefonvakt",
+          "name": "Jordmor – telefonvakt",
           "role": "",
           "nums": [
             {
@@ -1105,7 +1105,7 @@
           ]
         },
         {
-          "name": "FÃÂ¸de og barsel - Gynekologi",
+          "name": "Føde og barsel Gynekologi",
           "role": "03C03",
           "nums": [
             {
@@ -1125,7 +1125,7 @@
       "color": "#156d8a",
       "entries": [
         {
-          "name": "PoliklinikkomrÃÂ¥de 1 - Nevrologi, infeksjon, geriatri",
+          "name": "Poliklinikk 1 – Nevrologi, infeksjon, geriatri",
           "role": "08A01",
           "nums": [
             {
@@ -1135,7 +1135,7 @@
           ]
         },
         {
-          "name": "PoliklinikkomrÃÂ¥de 2 - Dialyse, nyrepoliklinikk",
+          "name": "Poliklinikk 2 – Dialyse, nyrepoliklinikk",
           "role": "03D01",
           "nums": [
             {
@@ -1149,7 +1149,7 @@
           ]
         },
         {
-          "name": "PoliklinikkomrÃÂ¥de 3 - Kirurgi, ort, skadepol",
+          "name": "Poliklinikk 3 – Kirurgi, ort, skadepol",
           "role": "08B01",
           "nums": [
             {
@@ -1167,7 +1167,7 @@
           ]
         },
         {
-          "name": "PoliklinikkomrÃÂ¥de 4 - FÃÂ¸de, barsel, gyn, kreft",
+          "name": "Poliklinikk 4 – Føde, barsel, gyn, kreft",
           "role": "03E01",
           "nums": [
             {
@@ -1177,7 +1177,7 @@
           ]
         },
         {
-          "name": "PoliklinikkomrÃÂ¥de 5 - Gastro",
+          "name": "Poliklinikk 5 – Gastro",
           "role": "08B01",
           "nums": [
             {
@@ -1187,7 +1187,7 @@
           ]
         },
         {
-          "name": "PoliklinikkomrÃÂ¥de 6 - ÃÂNH, Hjerte, lunge",
+          "name": "Poliklinikk 6 – ØNH, Hjerte, lunge",
           "role": "03G01",
           "nums": [
             {
@@ -1343,7 +1343,7 @@
       ]
     },
     {
-      "group": "StÃÂ¸ttefunksjoner",
+      "group": "Støttefunksjoner",
       "color": "#3C3489",
       "entries": [
         {
@@ -1367,7 +1367,7 @@
           ]
         },
         {
-          "name": "Portørtjenesten",
+          "name": "Portørtjeneste",
           "role": "08BU1",
           "nums": [
             {
@@ -1382,7 +1382,7 @@
         },
         {
           "name": "Drift og vedlikehold",
-          "role": "Teknisk ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ dÃÂÃÂÃÂÃÂ¸gnbemanning 08BU1",
+          "role": "Teknisk – døgnbemanning 08BU1",
           "nums": [
             {
               "num": "69 86 80 10",
@@ -1430,7 +1430,7 @@
         },
         {
           "name": "Senter for laboratoriemedisin",
-          "role": "PrÃÂ¸vesvar",
+          "role": "Prøvesvar",
           "nums": [
             {
               "num": "69 86 84 10",
@@ -1440,7 +1440,7 @@
         },
         {
           "name": "Sykehuspartner",
-          "role": "DÃÂ¸gnÃÂ¥pen",
+          "role": "Døgnåpen",
           "nums": [
             {
               "num": "32 23 53 30",
@@ -1458,7 +1458,7 @@
       "pt": "voksen",
       "procs": [
         {
-          "name": "RG Caput / RG Orbita ved spÃÂ¸rsmÃÂ¥l om fremmedlegeme",
+          "name": "RG Caput / RG Orbita ved spørsmål om fremmedlegeme",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17197.pdf"
         }
       ]
@@ -1485,7 +1485,7 @@
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK14398.pdf"
         },
         {
-          "name": "Oro-anal transittid (OATT) mÃÂ¥ling med pellets",
+          "name": "Oro-anal transittid (OATT) måling med pellets",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK12435.pdf"
         },
         {
@@ -1524,11 +1524,11 @@
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04177.pdf"
         },
         {
-          "name": "RG ScoliosemÃÂ¥ling LAB 4 Moss",
+          "name": "RG Scoliosemåling LAB 4 Moss",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK25941.pdf"
         },
         {
-          "name": "RG ScoliosemÃÂ¥ling LAB 3 Moss",
+          "name": "RG Scoliosemåling LAB 3 Moss",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK53606.pdf"
         }
       ]
@@ -1547,19 +1547,19 @@
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04226.pdf"
         },
         {
-          "name": "RG AksemÃÂ¥ling underekstremiteter LAB 4 Moss",
+          "name": "RG Aksemåling underekstremiteter LAB 4 Moss",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK48247.pdf"
         },
         {
-          "name": "RG AksemÃÂ¥ling underekstremiteter LAB 3 Moss",
+          "name": "RG Aksemåling underekstremiteter LAB 3 Moss",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK53607.pdf"
         },
         {
-          "name": "RG BenlengdemÃÂ¥ling LAB 4 Moss",
+          "name": "RG Benlengdemåling LAB 4 Moss",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK20356.pdf"
         },
         {
-          "name": "RG BenlengdemÃÂ¥ling LAB 3 Moss",
+          "name": "RG Benlengdemåling LAB 3 Moss",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK53605.pdf"
         }
       ]
@@ -1598,7 +1598,7 @@
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04220.pdf"
         },
         {
-          "name": "RG HÃÂ¥ndledd",
+          "name": "RG Håndledd",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04221.pdf"
         },
         {
@@ -1606,7 +1606,7 @@
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04222.pdf"
         },
         {
-          "name": "RG HÃÂ¥nd",
+          "name": "RG Hånd",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04223.pdf"
         },
         {
@@ -1641,7 +1641,7 @@
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04231.pdf"
         },
         {
-          "name": "RG Fot / tÃÂ¦r",
+          "name": "RG Fot / tær",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK04232.pdf"
         }
       ]
@@ -1656,7 +1656,7 @@
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK14308.pdf"
         },
         {
-          "name": "RG Thorax / Abdomen pÃÂ¥ nyfÃÂ¸dtintensiv (NFI)",
+          "name": "RG Thorax / Abdomen på nyfødtintensiv (NFI)",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK12260.pdf"
         },
         {
@@ -1668,7 +1668,7 @@
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK18596.pdf"
         },
         {
-          "name": "RG Tarmpassasje pÃÂ¥ barn",
+          "name": "RG Tarmpassasje på barn",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK26576.pdf"
         }
       ]
@@ -1733,11 +1733,11 @@
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17977.pdf"
         },
         {
-          "name": "RG HÃÂ¥ndledd barn",
+          "name": "RG Håndledd barn",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK48348.pdf"
         },
         {
-          "name": "RG HÃÂ¥nd, fingre, skjelettalder av barn",
+          "name": "RG Hånd, fingre, skjelettalder av barn",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17954.pdf"
         }
       ]
@@ -1771,19 +1771,19 @@
     },
     {
       "id": "spesial",
-      "label": "SpesialundersÃÂ¸kelser",
+      "label": "Spesialundersøkelser",
       "pt": "barn",
       "procs": [
         {
-          "name": "RG UndersÃÂ¸kelse ved mistanke om barnemishandel / plutselig spedbarnsdÃÂÃÂÃÂÃÂ¸d",
+          "name": "RG Undersøkelse ved mistanke om barnemishandel / plutselig spedbarnsdød",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK16285.pdf"
         },
         {
-          "name": "RG ved Skjelettdysplasier pÃÂ¥ barn",
+          "name": "RG ved Skjelettdysplasier på barn",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK16286.pdf"
         },
         {
-          "name": "RG Totalskjelett ved dÃÂ¸dfÃÂ¸dsel/abort",
+          "name": "RG Totalskjelett ved dødfødsel/abort",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17202.pdf"
         }
       ]
@@ -1794,7 +1794,7 @@
       "pt": "annet",
       "procs": [
         {
-          "name": "BoneView - Kunstig intelligens pÃÂ¥ akutt skjelettrÃÂ¸ntgen",
+          "name": "BoneView - Kunstig intelligens på akutt skjelettrøntgen",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK53175.pdf"
         },
         {
@@ -1802,7 +1802,7 @@
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK42987.pdf"
         },
         {
-          "name": "Henging av konvensjonelle rÃÂ¸ntgenbilder i PACS",
+          "name": "Henging av konvensjonelle røntgenbilder i PACS",
           "url": "https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK42983.pdf"
         },
         {

@@ -1,7 +1,7 @@
 {
   "intern_groups": [
     {
-      "group": "RÃÂ¸ntgen Kalnes",
+      "group": "Røntgen Kalnes",
       "color": "#1a4f8a",
       "entries": [
         {
@@ -566,7 +566,7 @@
         },
         {
           "name": "Cecilie Strømø",
-          "role": "Seksjonsleder nukleÃÂ¦r og BDS",
+          "role": "Seksjonsleder nukleær og BDS",
           "nums": [
             {
               "num": "69 86 88 25",
@@ -641,12 +641,12 @@
       ]
     },
     {
-      "group": "NukleÃÂ¦rmedisin",
+      "group": "Nukleærmedisin",
       "color": "#854F0B",
       "entries": [
         {
           "name": "PET CT / SPECT CT",
-          "role": "NukleÃÂ¦r",
+          "role": "Nukleær",
           "nums": [
             {
               "num": "69 86 88 11",
@@ -656,7 +656,7 @@
         },
         {
           "name": "Injeksjonsrom 1",
-          "role": "NukleÃÂ¦r",
+          "role": "Nukleær",
           "nums": [
             {
               "num": "69 86 88 12",
@@ -666,7 +666,7 @@
         },
         {
           "name": "Injeksjonsrom 2",
-          "role": "NukleÃÂ¦r",
+          "role": "Nukleær",
           "nums": [
             {
               "num": "69 86 88 09",

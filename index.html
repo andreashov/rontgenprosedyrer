@@ -36,13 +36,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .btn-phone,.btn-theme{
   position:relative;
   width:34px;height:34px;border-radius:10px;border:none;
-  background:linear-gradient(150deg,#3b8de0 0%,#1a5faa 55%,#163d7a 100%);
-  box-shadow:0 1px 4px rgba(26,79,138,.35),inset 0 1px 0 rgba(255,255,255,.14);
+  background:var(--accent);
+  box-shadow:0 1px 3px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.08);
   cursor:pointer;display:flex;align-items:center;justify-content:center;
   flex-shrink:0;color:#fff;
   transition:transform .15s,box-shadow .15s,filter .15s;
 }
-.btn-phone:hover,.btn-theme:hover{filter:brightness(1.13);box-shadow:0 4px 12px rgba(26,79,138,.5),inset 0 1px 0 rgba(255,255,255,.14)}
+.btn-phone:hover,.btn-theme:hover{filter:brightness(1.1);box-shadow:0 3px 9px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.08)}
 .btn-phone:active,.btn-theme:active{transform:scale(.91)}
 .btn-phone svg,.btn-theme svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
@@ -517,69 +517,74 @@ const INTERN_GROUPS=[
 ];
 
 const OTHER_GROUPS=[
-  {group:'Akutt / Intensiv',color:'#993C1D',entries:[
-    {name:'Akuttmottak',role:'',nums:[{num:'69 86 82 50',label:'Resepsjon'}]},
-    {name:'Akutt kirurgi',role:'',nums:[{num:'96 09 09 59',label:'Vaktspl'}]},
-    {name:'Intensiv',role:'',nums:[{num:'69 86 83 91',label:'Resepsjon'},{num:'96 09 09 87',label:'Vaktspl'}]},
-    {name:'OBS-post',role:'',nums:[{num:'69 86 82 94',label:'Resepsjon'},{num:'96 09 09 50',label:'Vaktspl'}]},
-    {name:'Overvåkning',role:'',nums:[{num:'69 86 83 10',label:'Resepsjon'},{num:'96 09 09 86',label:'Vaktspl'}]},
-    {name:'Postoperativ',role:'',nums:[{num:'69 86 83 97',label:'Resepsjon'},{num:'96 09 08 01',label:'Vaktspl'}]},
-    {name:'Operasjon',role:'',nums:[{num:'69 86 83 20',label:'Resepsjon'},{num:'96 09 09 25',label:'Vaktspl'}]},
-    {name:'SDI',role:'Samme Dag Innleggelse',nums:[{num:'69 86 83 94',label:'Resepsjon'},{num:'96 09 08 04',label:'Vaktspl'}]},
-    {name:'Nyfødtintensiv',role:'',nums:[{num:'69 86 33 40',label:'Resepsjon'},{num:'96 09 09 33',label:'Vaktspl'}]},
+  {group:'Akuttmottak og OBS-post',color:'#993C1D',entries:[
+    {name:'Akuttmottak',role:'08B02',nums:[{num:'69 86 82 50',label:'Resepsjon'}]},
+    {name:'OBS-post',role:'08B02-2',nums:[{num:'69 86 82 94',label:'Resepsjon'},{num:'96 09 09 50',label:'Vaktsykepleier'}]},
+    {name:'Akuttkirurgisk',role:'08B02-3',nums:[{num:'96 09 09 59',label:'Vaktsykepleier'}]},
+  ]},
+  {group:'Ambulanse',color:'#7a4010',entries:[
+    {name:'Ambulansebestilling / kontroll',role:'',nums:[{num:'64 89 57 03',label:'Resepsjon'},{num:'22 93 22 19',label:'Vaktsykepleier'}]},
+  ]},
+  {group:'INT / MOV / PO / Operasjon',color:'#7a2020',entries:[
+    {name:'Intensiv',role:'08A03-2',nums:[{num:'69 86 83 91',label:'Resepsjon'},{num:'96 09 09 87',label:'Vaktsykepleier'}]},
+    {name:'Overvåkning',role:'08A03',nums:[{num:'69 86 83 10',label:'Resepsjon'},{num:'96 09 09 86',label:'Vaktsykepleier'}]},
+    {name:'Operasjon',role:'08C03',nums:[{num:'69 86 83 20',label:'Resepsjon'},{num:'96 09 09 25',label:'Vaktsykepleier'}]},
+    {name:'Postoperativ',role:'08B03',nums:[{num:'69 86 83 97',label:'Resepsjon'},{num:'96 09 08 01',label:'Vaktsykepleier'}]},
   ]},
   {group:'Døgnområder',color:'#1a4f8a',entries:[
-    {name:'Døgnområde 1 – Hjerte',role:'',nums:[{num:'69 86 82 10',label:'Resepsjon'},{num:'96 09 09 69',label:'Vaktspl'}]},
-    {name:'Døgnområde 2 – Infeksjonsmedisin',role:'',nums:[{num:'69 86 32 40',label:'Resepsjon'},{num:'96 09 09 70',label:'Vaktspl'}]},
-    {name:'Døgnområde 3 – Lungemedisin',role:'',nums:[{num:'69 86 32 30',label:'Resepsjon'},{num:'96 09 09 71',label:'Vaktspl'}]},
-    {name:'Døgnområde 4 – Nevrologi',role:'',nums:[{num:'69 86 32 20',label:'Resepsjon'},{num:'96 09 09 72',label:'Vaktspl'}]},
-    {name:'Døgnområde 6 – Ortopedi',role:'',nums:[{num:'69 86 33 10',label:'Resepsjon'},{num:'96 09 09 74',label:'Vaktspl'}]},
-    {name:'Døgnområde 7 – Gastrokir/Plastikk',role:'',nums:[{num:'69 86 34 41',label:'Resepsjon'},{num:'96 09 09 75',label:'Vaktspl'}]},
-    {name:'Døgnområde 8 – ØNH/Kar/Uro',role:'',nums:[{num:'69 86 34 30',label:'Resepsjon'},{num:'96 09 09 76',label:'Vaktspl'}]},
-    {name:'Døgnområde 9 – Gastro/Nyre',role:'',nums:[{num:'69 86 34 92',label:'Resepsjon'},{num:'96 09 09 77',label:'Vaktspl'}]},
-    {name:'Døgnområde 9 – Geriatri/Endokrin',role:'',nums:[{num:'69 86 34 20',label:'Resepsjon'},{num:'96 09 00 19',label:'Vaktspl'}]},
-    {name:'Døgnområde 10 – Kreft',role:'',nums:[{num:'69 86 34 10',label:'Resepsjon'},{num:'96 09 00 17',label:'Vaktspl'}]},
+    {name:'Døgnområde 1 – Hjerte',role:'08A02',nums:[{num:'69 86 82 10',label:'Resepsjon'},{num:'96 09 09 69',label:'Vaktsykepleier'}]},
+    {name:'Døgnområde 2 – Infeksjonsmedisin',role:'03G02',nums:[{num:'69 86 32 40',label:'Resepsjon'},{num:'96 09 09 70',label:'Vaktsykepleier'}]},
+    {name:'Døgnområde 3 – Lungemedisin',role:'03E02',nums:[{num:'69 86 32 30',label:'Resepsjon'},{num:'96 09 09 71',label:'Vaktsykepleier'}]},
+    {name:'Døgnområde 4 – Nevrologi',role:'03C02',nums:[{num:'69 86 32 20',label:'Resepsjon'},{num:'96 09 09 72',label:'Vaktsykepleier'}]},
+    {name:'Døgnområde 6 – Ortopedi',role:'03A03',nums:[{num:'69 86 33 10',label:'Resepsjon'},{num:'96 09 09 74',label:'Vaktsykepleier'}]},
+    {name:'Døgnområde 7 – Gastrokir / Plastikk',role:'03G04',nums:[{num:'69 86 34 41',label:'Resepsjon'},{num:'96 09 09 75',label:'Vaktsykepleier'}]},
+    {name:'Døgnområde 8 – ØNH / Kar / Uro',role:'03E04',nums:[{num:'69 86 34 30',label:'Resepsjon'},{num:'69 86 34 32',label:'Resepsjon 2'},{num:'96 09 09 76',label:'Vaktsykepleier'}]},
+    {name:'Døgnområde 9 – Gastro / Nyre',role:'03C04',nums:[{num:'69 86 34 92',label:'Resepsjon'},{num:'96 09 09 77',label:'Vaktsykepleier'}]},
+    {name:'Døgnområde 9 – Geriatri / Endokrin',role:'03C04-2',nums:[{num:'69 86 34 20',label:'Resepsjon'},{num:'96 09 00 19',label:'Vaktsykepleier'}]},
+    {name:'Døgnområde 10 – Kreft',role:'03A04',nums:[{num:'69 86 34 10',label:'Resepsjon'},{num:'96 09 00 17',label:'Vaktsykepleier'}]},
+    {name:'Døgnområde 11 – Akuttmedisin',role:'',nums:[{num:'69 86 32 12',label:'Resepsjon'}]},
+  ]},
+  {group:'Føde og barn',color:'#0f7a5a',entries:[
+    {name:'Nyfødtintensiv',role:'03G03',nums:[{num:'69 86 33 40',label:'Resepsjon'},{num:'96 09 09 33',label:'Vaktsykepleier'}]},
+    {name:'Barne- og ungdomsavdelingen',role:'',nums:[{num:'69 86 30 52',label:'Resepsjon'},{num:'69 86 30 51',label:'Resepsjon 2'}]},
+    {name:'Barn og ungdom – poliklinikk',role:'03CU1',nums:[{num:'69 86 30 19',label:'Resepsjon'}]},
+    {name:'Føde og barsel',role:'03E03',nums:[{num:'69 86 33 30',label:'Resepsjon'}]},
+    {name:'Jordmor – telefonvakt',role:'',nums:[{num:'41 70 86 77',label:'Vaktsykepleier'}]},
+    {name:'Føde og barsel Gynekologi',role:'03C03',nums:[{num:'69 86 33 20',label:'Resepsjon'},{num:'96 09 06 91',label:'Vaktsykepleier'}]},
   ]},
   {group:'Poliklinikker',color:'#156d8a',entries:[
-    {name:'Poliklinikk 1',role:'Nevrologi, infeksjon, geriatri',nums:[{num:'69 86 81 30',label:'Resepsjon'}]},
-    {name:'Poliklinikk 2',role:'Dialyse, nyrepoliklinikk',nums:[{num:'69 86 31 10',label:'Resepsjon'},{num:'96 09 04 23',label:'Vaktspl'}]},
-    {name:'Poliklinikk 3',role:'Kirurgi, ort, skadepol',nums:[{num:'69 86 81 50',label:'Resepsjon'},{num:'41 70 86 22',label:'Vaktspl'}]},
-    {name:'Poliklinikk 4',role:'Føde, barsel, gyn, kreft',nums:[{num:'69 86 31 20',label:'Resepsjon'}]},
-    {name:'Poliklinikk 5',role:'Gastro',nums:[{num:'69 86 81 93',label:'Resepsjon'}]},
-    {name:'Poliklinikk 6',role:'ØNH, Hjerte, lunge',nums:[{num:'90 25 39 74',label:'Resepsjon'},{num:'96 09 00 26',label:'Vaktspl'}]},
-  ]},
-  {group:'Fødeavdeling',color:'#0f7a5a',entries:[
-    {name:'Føde og Barsel',role:'',nums:[{num:'69 86 33 30',label:'Resepsjon'},{num:'41 70 86 77',label:'Jordmor vakt'}]},
-    {name:'Føde-Barsel Gynekologi',role:'',nums:[{num:'69 86 33 20',label:'Resepsjon'},{num:'96 09 06 91',label:'Vaktspl'}]},
-    {name:'Barne- og ungdomsavd.',role:'Ak.mottak barn og ung',nums:[{num:'69 86 30 52',label:'Resepsjon'},{num:'96 09 09 83',label:'Vaktspl'}]},
+    {name:'Poliklinikk 1 – Nevrologi, infeksjon, geriatri',role:'08A01',nums:[{num:'69 86 81 30',label:'Resepsjon'}]},
+    {name:'Poliklinikk 2 – Dialyse, nyrepoliklinikk',role:'03D01',nums:[{num:'69 86 31 10',label:'Resepsjon'},{num:'96 09 04 23',label:'Vaktsykepleier'}]},
+    {name:'Poliklinikk 3 – Kirurgi, ort, skadepol',role:'08B01',nums:[{num:'69 86 81 50',label:'Resepsjon'},{num:'41 70 86 22',label:'Vaktsykepleier'},{num:'41 70 86 23',label:'Vaktsykepleier 2'}]},
+    {name:'Poliklinikk 4 – Føde, barsel, gyn, kreft',role:'03E01',nums:[{num:'69 86 31 20',label:'Resepsjon'}]},
+    {name:'Poliklinikk 5 – Gastro',role:'08B01',nums:[{num:'69 86 81 93',label:'Resepsjon'}]},
+    {name:'Poliklinikk 6 – ØNH, Hjerte, lunge',role:'03G01',nums:[{num:'90 25 39 74',label:'Resepsjon'},{num:'96 09 00 26',label:'Vaktsykepleier'}]},
   ]},
   {group:'Psykiatri',color:'#534AB7',entries:[
-    {name:'Psykiatrisk akuttmottak (PAM)',role:'',nums:[{num:'69 86 41 50',label:'Resepsjon'}]},
-    {name:'Psykisk helsevern',role:'',nums:[{num:'69 86 41 10',label:'Resepsjon'}]},
-    {name:'Affektive lidelser',role:'',nums:[{num:'69 86 42 10',label:'Resepsjon'}]},
-    {name:'Alderspsykiatrisk seksjon',role:'',nums:[{num:'69 86 43 10',label:'Resepsjon'}]},
-    {name:'Psykose utredning',role:'',nums:[{num:'69 86 43 20',label:'Resepsjon'}]},
-    {name:'Psykosebehandling 1',role:'',nums:[{num:'69 86 42 40',label:'Resepsjon'}]},
-    {name:'Psykosebehandling 2',role:'',nums:[{num:'69 86 42 30',label:'Resepsjon'}]},
-    {name:'Psykosebehandling 3',role:'',nums:[{num:'69 86 42 20',label:'Resepsjon'}]},
-    {name:'Psykosebehandling 4',role:'',nums:[{num:'69 86 41 40',label:'Resepsjon'},{num:'41 70 89 01',label:'Vaktspl'}]},
-    {name:'Ungdomspsyk. poliklinikk',role:'',nums:[{num:'69 86 41 40',label:'Resepsjon'}]},
-    {name:'Ungdomspsyk. seksjon',role:'',nums:[{num:'69 86 41 30',label:'Resepsjon'}]},
+    {name:'Psykiatrisk akuttmottak (PAM)',role:'04F01',nums:[{num:'69 86 41 50',label:'Resepsjon'}]},
+    {name:'Psykisk helsevern',role:'04B01',nums:[{num:'69 86 41 10',label:'Resepsjon'}]},
+    {name:'Affektive lidelser',role:'04B01',nums:[{num:'69 86 42 10',label:'Resepsjon'}]},
+    {name:'Psykose utredning',role:'04C03',nums:[{num:'69 86 43 20',label:'Resepsjon'}]},
+    {name:'Psykosebehandling 1',role:'04F02',nums:[{num:'69 86 42 40',label:'Resepsjon'}]},
+    {name:'Psykosebehandling 2',role:'04D02',nums:[{num:'69 86 42 30',label:'Resepsjon'}]},
+    {name:'Psykosebehandling 3',role:'04C02',nums:[{num:'69 86 42 20',label:'Resepsjon'}]},
+    {name:'Psykosebehandling 4',role:'04D01',nums:[{num:'69 86 41 40',label:'Resepsjon'},{num:'41 70 89 01',label:'Vaktsykepleier'}]},
+    {name:'Ungdomspsyk. poliklinikk',role:'04E01',nums:[{num:'69 86 41 40',label:'Resepsjon'}]},
+    {name:'Ungdomspsyk. seksjon',role:'04C01',nums:[{num:'69 86 41 30',label:'Resepsjon'}]},
+    {name:'Sikkerhetsseksjon 1',role:'04FU1',nums:[{num:'69 86 40 20',label:'Resepsjon'}]},
+    {name:'Sikkerhetsseksjon 2',role:'04EU1',nums:[{num:'69 86 40 10',label:'Resepsjon'}]},
+    {name:'Alderspsykiatrisk seksjon',role:'04B03',nums:[{num:'69 86 43 10',label:'Resepsjon'}]},
   ]},
   {group:'Støttefunksjoner',color:'#3C3489',entries:[
-    {name:'Ambulansebestilling',role:'',nums:[{num:'64 89 57 03',label:'Resepsjon'},{num:'22 93 22 19',label:'Kontroll'}]},
-    {name:'Portørtjeneste',role:'',nums:[{num:'69 86 80 30',label:'Resepsjon'},{num:'96 09 00 70',label:'Vaktspl'}]},
-    {name:'Drift og vedlikehold',role:'Teknisk – døgnbemanning',nums:[{num:'69 86 80 10',label:'Resepsjon'}]},
-    {name:'Medtek',role:'',nums:[{num:'69 86 30 95',label:'Resepsjon'},{num:'90 15 19 61',label:'Vaktspl'}]},
-    {name:'Renhold',role:'',nums:[{num:'69 86 80 20',label:'Resepsjon'},{num:'96 09 00 90',label:'Vaktspl'}]},
-    {name:'Vektertjenesten',role:'',nums:[{num:'69 86 30 00',label:'Resepsjon'}]},
-    {name:'Sentralt kjøkken',role:'',nums:[{num:'69 86 31 01',label:'Resepsjon'}]},
-    {name:'Trombolysesykepleier',role:'',nums:[{num:'96 09 09 79',label:'Vaktspl'}]},
+    {name:'Sentralbord',role:'',nums:[{num:'69 86 00 00',label:'Resepsjon'}]},
+    {name:'Hovedresepsjon vestibyle',role:'03C01',nums:[{num:'69 86 31 00',label:'Resepsjon'}]},
+    {name:'Portørtjeneste',role:'08BU1',nums:[{num:'69 86 80 30',label:'Resepsjon'},{num:'96 09 00 70',label:'Vaktsykepleier'}]},
+    {name:'Drift og vedlikehold',role:'Teknisk – døgnbemanning 08BU1',nums:[{num:'69 86 80 10',label:'Resepsjon'}]},
+    {name:'Medisinsk teknisk avdeling',role:'',nums:[{num:'69 86 30 95',label:'Resepsjon'},{num:'90 15 19 61',label:'Vaktsykepleier'}]},
+    {name:'Renhold',role:'08BU1',nums:[{num:'69 86 80 20',label:'Resepsjon'},{num:'96 09 00 90',label:'Vaktsykepleier'}]},
+    {name:'Vektertjenesten',role:'03C01',nums:[{num:'69 86 30 00',label:'Resepsjon'}]},
     {name:'Senter for laboratoriemedisin',role:'Prøvesvar',nums:[{num:'69 86 84 10',label:'Resepsjon'}]},
-    {name:'Sykehuspartner',role:'Døgnåpen',nums:[{num:'32 23 53 30',label:'Vaktspl'}]},
-    {name:'Hovedresepsjon',role:'',nums:[{num:'69 86 31 00',label:'Resepsjon'}]},
-    {name:'Sikkerhetsseksjon 1',role:'',nums:[{num:'69 86 40 20',label:'Resepsjon'}]},
-    {name:'Sikkerhetsseksjon 2',role:'',nums:[{num:'69 86 40 10',label:'Resepsjon'}]},
+    {name:'Sykehuspartner',role:'Døgnåpen',nums:[{num:'32 23 53 30',label:'Vaktsykepleier'}]},
   ]},
 ];
 
@@ -764,6 +769,7 @@ const RG_CATS=[
     {name:'RG Totalskjelett ved dødfødsel/abort',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK17202.pdf'}
   ]},
   {id:'annet-div',label:'Annet',pt:'annet',procs:[
+    {name:'Henvend deg i luken',url:'https://hsorhf.sharepoint.com/:w:/r/sites/SHF-O-461010BildediagnostikkAkuttKalnes/Shared%20Documents/R%C3%B8ntgen/Henvend%20deg%20i%20luken/A5%20Henvend%20deg%20i%20luken%20A5.docx?d=wb5c751b57ca5449d8e9bcad4dd5145e4&csf=1&web=1&e=ByqejD'},
     {name:'Granskning eller flagging av ortopediske kontrollbilder',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK42987.pdf'},
     {name:'Konstanskontroll Lab 4, 6 og 7',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK50556.pdf'},
     {name:'Henging av konvensjonelle røntgenbilder i PACS',url:'https://ek-sohf.sikt.sykehuspartner.no/docs/pub/DOK42983.pdf'},

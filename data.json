@@ -1927,7 +1927,18 @@
   },
   "ul_cats": [],
   "gj_cats": [],
-  "an_cats": [],
+  "an_cats": [
+    {
+      "id": "cat-1779399332474",
+      "label": "Ny ka",
+      "procs": [
+        {
+          "name": "Vg ",
+          "url": "https://www.vg.no/"
+        }
+      ]
+    }
+  ],
   "ct_cats": [],
   "ct_labs": [],
   "ul_labs": [],
